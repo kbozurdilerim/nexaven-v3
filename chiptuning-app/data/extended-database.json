@@ -1,0 +1,50 @@
+{
+  "additional_vehicles": [
+    {
+      "id": 16,
+      "brand": "Subaru",
+      "model": "WRX STI",
+      "year": 2020,
+      "engine": "2.5 Turbo Boxer",
+      "displacement": 2457,
+      "fuel_type": "Benzin",
+      "original_specs": {
+        "hp": 310,
+        "torque": 393,
+        "fuel_consumption": 10.5
+      },
+      "tuning_stages": {
+        "stage1": {
+          "hp": 360,
+          "torque": 450,
+          "price": 9500,
+          "fuel_improvement": 5,
+          "estimated_time": "3-4 saat",
+          "required_mods": []
+        },
+        "stage2": {
+          "hp": 420,
+          "torque": 520,
+          "price": 18000,
+          "fuel_improvement": 2,
+          "estimated_time": "6-7 saat",
+          "required_mods": ["Downpipe", "Intercooler", "Intake"]
+        },
+        "stage3": {
+          "hp": 500,
+          "torque": 600,
+          "price": 35000,
+          "fuel_improvement": -2,
+          "estimated_time": "10-12 saat",
+          "required_mods": ["Turbo Upgrade", "Injectors", "Fuel System", "Clutch"]
+        }
+      },
+      "ecu_info": {
+        "type": "Denso",
+        "difficulty": "Medium",
+        "read_method": "OBD"
+      },
+      "notes": "Rally efsanesi, boxer motor Force tuning"
+    }
+  ]
+}

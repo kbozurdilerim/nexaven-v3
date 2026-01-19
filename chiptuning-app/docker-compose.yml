@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  chiptuning-app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    volumes:
+      - ./data:/app/data:ro
+    restart: unless-stopped
+    container_name: chiptuning-calculator
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - chiptuning-network
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      chiptuning-app:
+        condition: service_healthy
+    restart: unless-stopped
+    container_name: chiptuning-nginx
+    networks:
+      - chiptuning-network
+
+networks:
+  chiptuning-network:
+    driver: bridge
+    name: force-yazilim-network
+
+volumes:
+  chiptuning-data:
+    driver: local

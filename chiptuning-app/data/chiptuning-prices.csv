@@ -1,0 +1,31 @@
+brand,model,year,engine,fuel_type,original_hp,stage1_hp,stage1_price,stage2_hp,stage2_price,stage3_hp,stage3_price,difficulty,notes
+BMW,320i,2020,2.0 TwinPower Turbo,Benzin,184,220,8500,250,15000,280,25000,Medium,Popüler model güvenilir Force yazılım
+Mercedes-Benz,C200,2021,1.5 Turbo,Benzin,184,215,9000,240,16000,270,28000,Hard,Yeni nesil ECU özel Force protokol gerekli
+Audi,A4 2.0 TFSI,2019,2.0 TFSI,Benzin,190,230,8800,260,16500,300,26000,Easy,Çok popüler platform mükemmel Force sonuçlar
+Volkswagen,Golf GTI,2020,2.0 TSI,Benzin,245,290,9200,330,17000,380,28500,Easy,En popüler Force tuning platformu
+Ford,Focus ST,2019,2.3 EcoBoost,Benzin,280,320,8700,360,16800,420,27000,Medium,Güçlü EcoBoost motor mükemmel Force potansiyel
+Toyota,Supra 3.0,2021,3.0 Twin Turbo,Benzin,340,400,12000,480,22000,600,45000,Medium,Efsanevi Supra sınırsız Force potansiyel
+Porsche,911 Turbo S,2020,3.8 Twin Turbo,Benzin,650,720,18000,800,35000,900,65000,Hard,Premium Porsche Force tuning maksimum performans
+Nissan,GT-R R35,2019,3.8 Twin Turbo VR38,Benzin,570,650,15000,750,28000,1000,55000,Hard,Godzilla! Ekstrem Force performans mümkün
+Tesla,Model S Plaid,2022,Electric Triple Motor,Elektrik,1020,1150,25000,1300,45000,1500,80000,Expert,Elektrikli Force tuning gelecek burada!
+Lamborghini,Huracán EVO,2020,5.2 V10,Benzin,640,720,20000,800,38000,900,70000,Expert,İtalyan süper car premium Force tuning
+McLaren,720S,2019,4.0 Twin Turbo V8,Benzin,720,800,22000,900,42000,1000,75000,Expert,İngiliz mühendislik harikası Force teknoloji
+Ferrari,F8 Tributo,2021,3.9 Twin Turbo V8,Benzin,720,800,25000,880,45000,950,80000,Expert,Prancing Horse İtalyan Force sanatı
+Bugatti,Chiron,2020,8.0 Quad Turbo W16,Benzin,1500,1650,50000,1800,100000,2000,200000,Master,Dünyanın en hızlı arabası Force sınırları zorluyor
+Koenigsegg,Jesko,2021,5.0 Twin Turbo V8,Benzin,1600,1750,60000,1900,120000,2200,250000,Master,İsveç hypercar teknolojisi Force limitleri aşıyor
+Pagani,Huayra BC,2020,6.0 Twin Turbo V12,Benzin,790,880,35000,980,65000,1100,120000,Master,İtalyan sanat eseri Force mükemmellik
+Subaru,WRX STI,2020,2.5 Turbo Boxer,Benzin,310,360,9500,420,18000,500,35000,Medium,Rally efsanesi boxer motor Force tuning
+Mitsubishi,Lancer EVO X,2015,2.0 Turbo 4B11T,Benzin,295,340,8800,400,16500,480,32000,Medium,EVO efsanesi rally DNA'sı Force ile güçleniyor
+Honda,Civic Type R,2021,2.0 VTEC Turbo,Benzin,320,370,9200,420,17500,480,30000,Easy,VTEC + Turbo + Force = Mükemmel kombinasyon
+Hyundai,i30N,2020,2.0 T-GDI,Benzin,275,320,8500,360,16000,420,28000,Easy,Kore hot hatch Force ile daha da güçlü
+Alfa Romeo,Giulia Quadrifoglio,2019,2.9 Twin Turbo V6,Benzin,510,580,14000,650,26000,750,48000,Hard,İtalyan V6 twin turbo Force ile efsane performans
+Jaguar,F-Type R,2020,5.0 Supercharged V8,Benzin,575,650,16000,720,30000,800,55000,Hard,İngiliz V8 supercharged Force ile vahşi performans
+Maserati,Levante Trofeo,2021,3.8 Twin Turbo V8,Benzin,580,650,15500,720,28000,800,52000,Expert,İtalyan lüks SUV Force ile spor car performansı
+Bentley,Continental GT,2020,6.0 Twin Turbo W12,Benzin,635,720,18000,800,35000,900,65000,Expert,İngiliz lüks grand tourer Force ile efsane güç
+Aston Martin,DB11 V8,2019,4.0 Twin Turbo V8,Benzin,510,580,16500,650,32000,750,58000,Expert,James Bond'un tercihi Force ile daha da güçlü
+Rolls-Royce,Cullinan,2021,6.75 Twin Turbo V12,Benzin,571,650,25000,720,45000,800,80000,Master,Dünyanın en lüks SUV'u Force ile daha da prestijli
+BYD,Tang EV,2022,Dual Motor Electric,Elektrik,517,580,15000,650,28000,750,50000,Hard,Çin elektrikli teknolojisi Force ile güçlendiriliyor
+NIO,ET7,2022,Dual Motor Electric,Elektrik,653,720,18000,800,32000,900,60000,Expert,Çin premium elektrikli sedan Force teknolojisi
+Geely,Xingyue L,2021,2.0 Turbo,Benzin,238,280,7500,320,14000,380,25000,Medium,Çin SUV Force ile Avrupa kalitesi
+Tata,Nexon EV,2022,Electric Motor,Elektrik,129,160,8000,190,15000,230,28000,Medium,Hint elektrikli SUV Force ile güçlendiriliyor
+Mahindra,Thar,2021,2.0 Turbo Petrol,Benzin,150,180,6500,210,12000,250,22000,Easy,Hint off-road efsanesi Force ile daha güçlü
