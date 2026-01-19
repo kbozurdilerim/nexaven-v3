@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Ollama Model Setup Script for Zorlu ECU
+# Ollama Model Setup Script for Zorlu ECU (CPU-Optimized)
 set -e
 
-echo "🤖 Zorlu ECU - Ollama AI Model Setup"
-echo "===================================="
+echo "🤖 Zorlu ECU - Ollama AI Model Setup (CPU Mode)"
+echo "================================================"
 
 # Colors
 RED='\033[0;31m'
@@ -25,53 +25,34 @@ if ! docker ps | grep -q nexaven-ollama; then
     log_warning "Ollama container is not running!"
     log_info "Starting Ollama container (CPU-only mode)..."
     
-    # Start only Ollama service
-    docker compose up -d ollama 2>/dev/null || {
-        log_error "Failed to start Ollama with GPU. Trying CPU-only mode..."
-        
-        # Create CPU-only docker-compose override
-        cat > docker-compose.cpu.yml << 'EOF'
-version: '3.8'
-services:
-  ollama:
-    image: ollama/ollama:latest
-    container_name: nexaven-ollama
-    ports:
-      - "11434:11434"
-    volumes:
-      - ollama-data:/root/.ollama
-    environment:
-      - OLLAMA_HOST=0.0.0.0
-      - OLLAMA_ORIGINS=*
-    networks:
-      - nexaven-network
-    restart: unless-stopped
-
-volumes:
-  ollama-data:
-
-networks:
-  nexaven-network:
-    driver: bridge
-EOF
-        
-        docker compose -f docker-compose.cpu.yml up -d
-    }
+    # Try CPU-only deployment first
+    if docker compose -f docker-compose.cpu.yml up -d ollama 2>/dev/null; then
+        log_success "Started Ollama with CPU-only configuration"
+    else
+        log_info "Trying with main docker-compose..."
+        docker compose up -d ollama 2>/dev/null || {
+            log_error "Failed to start Ollama container"
+            log_info "Checking Docker logs..."
+            docker logs nexaven-ollama --tail 20 2>/dev/null || true
+            exit 1
+        }
+    fi
     
-    sleep 15
+    log_info "Waiting for Ollama to initialize..."
+    sleep 20
 fi
 
 # Wait for Ollama to be ready
-log_info "Waiting for Ollama to be ready..."
+log_info "Waiting for Ollama API to be ready..."
 for i in {1..60}; do
-    if docker exec nexaven-ollama ollama list >/dev/null 2>&1; then
-        log_success "Ollama is ready!"
+    if curl -s http://localhost:11434/api/tags >/dev/null 2>&1; then
+        log_success "Ollama API is ready!"
         break
     fi
     if [ $i -eq 60 ]; then
         log_error "Ollama failed to start after 60 seconds"
         log_info "Checking Ollama logs..."
-        docker logs nexaven-ollama --tail 20
+        docker logs nexaven-ollama --tail 30
         exit 1
     fi
     echo -n "."
@@ -88,37 +69,37 @@ if [ -n "$EXISTING_MODELS" ]; then
         echo "  ✅ $model"
     done
 else
-    log_warning "No models found. Will download recommended models."
+    log_warning "No models found. Will download CPU-optimized models."
 fi
 
-# ECU Tuning optimized models (smaller for CPU)
-RECOMMENDED_MODELS=(
-    "llama3.2:1b"           # Very fast, 1B parameters
-    "qwen2.5:1.5b"          # Fast and efficient
-    "phi3:mini"             # Microsoft Phi-3 Mini
+# CPU-optimized models for ECU tuning
+CPU_OPTIMIZED_MODELS=(
+    "llama3.2:1b"           # Very fast, 1B parameters - best for CPU
+    "qwen2.5:1.5b"          # Efficient 1.5B model
+    "phi3:mini"             # Microsoft Phi-3 Mini - optimized
 )
 
 echo ""
-log_info "Recommended models for ECU tuning (CPU optimized):"
-for model in "${RECOMMENDED_MODELS[@]}"; do
+log_info "CPU-optimized models for ECU tuning:"
+for model in "${CPU_OPTIMIZED_MODELS[@]}"; do
     echo "  🤖 $model"
 done
 
 echo ""
-read -p "Do you want to download recommended models? (y/N): " -n 1 -r
+read -p "Download CPU-optimized models for ECU tuning? (Y/n): " -n 1 -r
 echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    for model in "${RECOMMENDED_MODELS[@]}"; do
-        log_info "Downloading $model..."
+if [[ $REPLY =~ ^[Nn]$ ]]; then
+    log_info "Skipping model download."
+else
+    for model in "${CPU_OPTIMIZED_MODELS[@]}"; do
+        log_info "Downloading $model (CPU-optimized)..."
         if docker exec nexaven-ollama ollama pull "$model"; then
             log_success "✅ $model downloaded successfully"
         else
             log_error "❌ Failed to download $model"
+            log_warning "This might be due to network issues or insufficient memory"
         fi
     done
-else
-    log_info "Skipping model download. You can download manually later:"
-    echo "  docker exec nexaven-ollama ollama pull llama3.2:1b"
 fi
 
 # Test Ollama API
@@ -126,19 +107,26 @@ echo ""
 log_info "Testing Ollama API..."
 if curl -s http://localhost:11434/api/tags >/dev/null; then
     log_success "✅ Ollama API is accessible"
+    
+    # Test a simple chat
+    log_info "Testing AI chat functionality..."
+    TEST_RESPONSE=$(curl -s -X POST http://localhost:11434/api/generate \
+        -H "Content-Type: application/json" \
+        -d '{"model":"llama3.2:1b","prompt":"ECU nedir?","stream":false}' \
+        | grep -o '"response":"[^"]*"' | cut -d'"' -f4 2>/dev/null || echo "")
+    
+    if [ -n "$TEST_RESPONSE" ]; then
+        log_success "✅ AI chat is working"
+    else
+        log_warning "⚠️ AI chat test failed - models may still be loading"
+    fi
 else
     log_warning "⚠️ Ollama API not accessible from host"
-    log_info "Testing from container..."
-    if docker exec nexaven-ollama curl -s http://localhost:11434/api/tags >/dev/null; then
-        log_success "✅ Ollama API works inside container"
-    else
-        log_error "❌ Ollama API not working"
-    fi
 fi
 
 # Show final status
 echo ""
-log_success "🎉 Ollama Setup Complete!"
+log_success "🎉 Ollama CPU Setup Complete!"
 echo ""
 log_info "📊 Final Status:"
 FINAL_MODELS=$(docker exec nexaven-ollama ollama list 2>/dev/null | tail -n +2 | awk '{print $1}' | grep -v "^$" || true)
@@ -157,15 +145,12 @@ log_info "  • Admin Panel: https://nexaven.com.tr/zorlu-ecu-admin"
 log_info "  • AI Chat: Go to Admin Panel → AI + LinOLS tab"
 
 echo ""
-log_info "🧪 Test Commands:"
-echo "  # List models:"
-echo "  docker exec nexaven-ollama ollama list"
-echo ""
-echo "  # Test chat:"
-echo "  docker exec nexaven-ollama ollama run llama3.2:1b 'ECU tuning nedir?'"
-echo ""
-echo "  # Check API:"
-echo "  curl http://localhost:11434/api/tags"
+log_info "🧪 Manual Testing Commands (if needed):"
+echo "  # Check containers: docker ps"
+echo "  # Check frontend: curl http://localhost:3000"
+echo "  # Check LinOLS: curl http://localhost:8080/health"
+echo "  # Check Ollama: curl http://localhost:11434/api/tags"
 
 echo ""
-log_success "Ready for AI-powered ECU tuning! 🚗🤖"
+log_success "Ready for CPU-powered ECU tuning! 🚗🤖"
+log_info "💡 Tip: CPU models are slower but work on any server"

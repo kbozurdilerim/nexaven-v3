@@ -19,39 +19,39 @@ RUN mkdir -p /app/data /app/ecu-files /app/templates
 COPY web-interface/ /app/
 
 # Create a simple HTML template
-RUN echo '<!DOCTYPE html>
-<html>
-<head>
-    <title>LinOLS Web Interface</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 40px; background: #1a1a1a; color: white; }
-        .container { max-width: 800px; margin: 0 auto; }
-        .status { padding: 20px; background: #2a2a2a; border-radius: 8px; margin: 20px 0; }
-        .success { border-left: 4px solid #4CAF50; }
-        .info { border-left: 4px solid #2196F3; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>🔧 LinOLS Web Interface</h1>
-        <div class="status success">
-            <h3>✅ LinOLS Service Active</h3>
-            <p>ECU file processing interface is running</p>
-        </div>
-        <div class="status info">
-            <h3>📊 System Status</h3>
-            <p>Version: 2.1.4 (Web Interface)</p>
-            <p>Status: Running</p>
-            <p>API Endpoint: /api/</p>
-        </div>
-        <div class="status info">
-            <h3>🔗 Integration</h3>
-            <p>This interface is integrated with Zorlu ECU Admin Panel</p>
-            <p>Access through: Admin Panel → AI + LinOLS tab</p>
-        </div>
-    </div>
-</body>
-</html>' > /app/templates/index.html
+RUN echo '<!DOCTYPE html>' > /app/templates/index.html && \
+    echo '<html>' >> /app/templates/index.html && \
+    echo '<head>' >> /app/templates/index.html && \
+    echo '    <title>LinOLS Web Interface</title>' >> /app/templates/index.html && \
+    echo '    <style>' >> /app/templates/index.html && \
+    echo '        body { font-family: Arial, sans-serif; margin: 40px; background: #1a1a1a; color: white; }' >> /app/templates/index.html && \
+    echo '        .container { max-width: 800px; margin: 0 auto; }' >> /app/templates/index.html && \
+    echo '        .status { padding: 20px; background: #2a2a2a; border-radius: 8px; margin: 20px 0; }' >> /app/templates/index.html && \
+    echo '        .success { border-left: 4px solid #4CAF50; }' >> /app/templates/index.html && \
+    echo '        .info { border-left: 4px solid #2196F3; }' >> /app/templates/index.html && \
+    echo '    </style>' >> /app/templates/index.html && \
+    echo '</head>' >> /app/templates/index.html && \
+    echo '<body>' >> /app/templates/index.html && \
+    echo '    <div class="container">' >> /app/templates/index.html && \
+    echo '        <h1>🔧 LinOLS Web Interface</h1>' >> /app/templates/index.html && \
+    echo '        <div class="status success">' >> /app/templates/index.html && \
+    echo '            <h3>✅ LinOLS Service Active</h3>' >> /app/templates/index.html && \
+    echo '            <p>ECU file processing interface is running</p>' >> /app/templates/index.html && \
+    echo '        </div>' >> /app/templates/index.html && \
+    echo '        <div class="status info">' >> /app/templates/index.html && \
+    echo '            <h3>📊 System Status</h3>' >> /app/templates/index.html && \
+    echo '            <p>Version: 2.1.4 (Web Interface)</p>' >> /app/templates/index.html && \
+    echo '            <p>Status: Running</p>' >> /app/templates/index.html && \
+    echo '            <p>API Endpoint: /api/</p>' >> /app/templates/index.html && \
+    echo '        </div>' >> /app/templates/index.html && \
+    echo '        <div class="status info">' >> /app/templates/index.html && \
+    echo '            <h3>🔗 Integration</h3>' >> /app/templates/index.html && \
+    echo '            <p>This interface is integrated with Zorlu ECU Admin Panel</p>' >> /app/templates/index.html && \
+    echo '            <p>Access through: Admin Panel → AI + LinOLS tab</p>' >> /app/templates/index.html && \
+    echo '        </div>' >> /app/templates/index.html && \
+    echo '    </div>' >> /app/templates/index.html && \
+    echo '</body>' >> /app/templates/index.html && \
+    echo '</html>' >> /app/templates/index.html
 
 # Expose port
 EXPOSE 8080

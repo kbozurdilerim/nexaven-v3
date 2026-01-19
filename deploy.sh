@@ -38,14 +38,26 @@ docker system prune -f
 log_info "Creating directories..."
 mkdir -p ollama-models ecu-files linols/web-interface/templates
 
-# Build and start services
-log_info "Building and starting services..."
+# Build and start services (CPU-optimized for VPS)
+log_info "Building and starting services (CPU-only mode)..."
 if command -v docker-compose &> /dev/null; then
-    docker-compose build --no-cache
-    docker-compose up -d
+    # Try CPU-optimized deployment first
+    if docker-compose -f docker-compose.cpu.yml build --no-cache 2>/dev/null; then
+        docker-compose -f docker-compose.cpu.yml up -d
+        log_success "Using CPU-optimized configuration"
+    else
+        docker-compose build --no-cache
+        docker-compose up -d
+    fi
 else
-    docker compose build --no-cache
-    docker compose up -d
+    # Try CPU-optimized deployment first
+    if docker compose -f docker-compose.cpu.yml build --no-cache 2>/dev/null; then
+        docker compose -f docker-compose.cpu.yml up -d
+        log_success "Using CPU-optimized configuration"
+    else
+        docker compose build --no-cache
+        docker compose up -d
+    fi
 fi
 
 # Wait for services to be ready
