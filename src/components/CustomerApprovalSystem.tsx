@@ -53,6 +53,43 @@ export default function CustomerApprovalSystem({ service, onApprove, onReject }:
     )
     setPendingCustomers(updated)
     localStorage.setItem(`pendingCustomers_${service}`, JSON.stringify(updated))
+
+    // Also update the user in corporateUsers to approved status
+    const corporateUsers = JSON.parse(localStorage.getItem(`corporateUsers_${service}`) || '[]')
+    const updatedCorporateUsers = corporateUsers.map((u: any) =>
+      u.id === customerId ? { ...u, approved: true } : u
+    )
+    localStorage.setItem(`corporateUsers_${service}`, JSON.stringify(updatedCorporateUsers))
+
+    // Add to approved customers list for management system
+    const approvedCustomer = pendingCustomers.find(c => c.id === customerId)
+    if (approvedCustomer) {
+      const existingCustomers = JSON.parse(localStorage.getItem(`customers_${service}`) || '[]')
+      const newCustomer = {
+        id: approvedCustomer.id,
+        email: approvedCustomer.email,
+        companyName: approvedCustomer.companyName,
+        contactName: approvedCustomer.contactName,
+        phone: approvedCustomer.phone,
+        address: approvedCustomer.address,
+        taxNumber: approvedCustomer.taxNumber,
+        website: approvedCustomer.website,
+        businessType: approvedCustomer.businessType,
+        status: 'active' as const,
+        createdAt: approvedCustomer.createdAt,
+        lastActivity: new Date().toISOString(),
+        totalOrders: 0,
+        totalSpent: 0,
+        creditLimit: 10000,
+        paymentTerms: '30 gün',
+        notes: 'Yeni onaylanmış müşteri',
+        tags: ['New Customer'],
+        priority: 'medium' as const
+      }
+      existingCustomers.push(newCustomer)
+      localStorage.setItem(`customers_${service}`, JSON.stringify(existingCustomers))
+    }
+
     onApprove(customerId)
     setSelectedCustomer(null)
   }
@@ -67,6 +104,12 @@ export default function CustomerApprovalSystem({ service, onApprove, onReject }:
     )
     setPendingCustomers(updated)
     localStorage.setItem(`pendingCustomers_${service}`, JSON.stringify(updated))
+
+    // Also remove from corporateUsers or mark as rejected
+    const corporateUsers = JSON.parse(localStorage.getItem(`corporateUsers_${service}`) || '[]')
+    const updatedCorporateUsers = corporateUsers.filter((u: any) => u.id !== selectedCustomer.id)
+    localStorage.setItem(`corporateUsers_${service}`, JSON.stringify(updatedCorporateUsers))
+
     onReject(selectedCustomer.id, rejectionReason)
     setShowRejectModal(false)
     setRejectionReason('')

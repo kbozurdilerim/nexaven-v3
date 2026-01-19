@@ -56,17 +56,12 @@ export default function AdminDashboardEnhanced() {
   }, [navigate])
 
   const loadData = () => {
-    const savedUsers = localStorage.getItem('nexaven_users') || JSON.stringify([
-      { id: '1', email: 'user1@example.com', name: 'Ahmet Yılmaz', company: 'ABC Ltd', joinDate: '2024-01-15', licenses: ['L1'], status: 'active' },
-      { id: '2', email: 'user2@example.com', name: 'Fatih Demir', company: 'XYZ Corp', joinDate: '2024-02-20', licenses: ['L2'], status: 'active' },
-      { id: '3', email: 'user3@example.com', name: 'Mehmet Kaya', company: '123 Business', joinDate: '2024-03-10', licenses: [], status: 'inactive' }
-    ])
+    // Load real users from corporateUsers - no default test data
+    const savedUsers = localStorage.getItem('nexaven_users') || '[]'
     setUsers(JSON.parse(savedUsers))
 
-    const savedLicenses = localStorage.getItem('nexaven_licenses') || JSON.stringify([
-      { id: 'L1', userId: '1', type: 'pro', purchaseDate: '2024-01-15', expiryDate: '2025-01-15', status: 'active', price: 299, features: ['API Erişimi', 'Email & Chat Destek', '5 Proje', 'Analytics'] },
-      { id: 'L2', userId: '2', type: 'basic', purchaseDate: '2024-02-20', expiryDate: '2024-08-20', status: 'expired', price: 99, features: ['API Erişimi', 'Email Destek', '1 Proje'] }
-    ])
+    // Load real licenses - no default test data
+    const savedLicenses = localStorage.getItem('nexaven_licenses') || '[]'
     setLicenses(JSON.parse(savedLicenses))
   }
 

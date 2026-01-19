@@ -5,7 +5,7 @@ import AssettoCorsaSection from '../sections/AssettoCorsaSection'
 import ZorluEcuSection from '../sections/ZorluEcuSection'
 import AhmetKanarSection from '../sections/AhmetKanarSection'
 import { Sparkles } from '../components/ui/sparkles'
-import { LogIn, X, Mail, Lock, User, Phone, Building2, Eye, EyeOff } from 'lucide-react'
+import { LogIn, X, Mail, Lock, User, Phone, Building2, Eye, EyeOff, MapPin, FileText, Globe, Briefcase, MessageCircle } from 'lucide-react'
 import { getAdminAccounts } from '../utils/testData'
 
 type TabType = 'assetto' | 'zorlu' | 'ahmet'
@@ -31,7 +31,12 @@ export default function ExploreServicePage() {
     confirmPassword: '',
     companyName: '',
     contactName: '',
-    phone: ''
+    phone: '',
+    address: '',
+    taxNumber: '',
+    website: '',
+    businessType: '',
+    message: ''
   })
 
   useEffect(() => {
@@ -80,10 +85,20 @@ export default function ExploreServicePage() {
     
     if (!user) {
       console.log('❌ Kullanıcı bulunamadı')
-      if (existingUsers.length > 0) {
-        alert(`Bu email ile kayıtlı kullanıcı bulunamadı.\n\nKayıtlı email adresleri:\n${existingUsers.map((u: any) => `- ${u.email}`).join('\n')}\n\nŞifrenizi kontrol edin veya yeni kayıt oluşturun.`)
+      // Check if user exists but wrong password
+      const userWithEmail = existingUsers.find((u: any) => u.email === loginData.email)
+      if (userWithEmail) {
+        if (!userWithEmail.approved) {
+          alert('❌ Hesabınız henüz onaylanmamış!\n\n⏳ Yönetici onayını bekliyor.\n📧 Onay durumu email ile bildirilecektir.')
+        } else {
+          alert('❌ Şifre hatalı!\n\n💡 Şifrenizi kontrol edin.')
+        }
       } else {
-        alert('Henüz kayıtlı kullanıcı yok. Lütfen önce kayıt olun.')
+        if (existingUsers.length > 0) {
+          alert('❌ Bu email ile kayıtlı kullanıcı bulunamadı!\n\n📝 Yeni kayıt oluşturun veya email adresinizi kontrol edin.')
+        } else {
+          alert('❌ Henüz kayıtlı kullanıcı yok.\n\n📝 Lütfen önce kayıt olun.')
+        }
       }
       return
     }
@@ -92,7 +107,7 @@ export default function ExploreServicePage() {
     
     if (user.approved !== true) {
       console.log('❌ Hesap onaylanmamış')
-      alert('Hesabınız henüz yönetici tarafından onaylanmamış. Lütfen onay bekleyin.')
+      alert('❌ Hesabınız henüz onaylanmamış!\n\n⏳ Yönetici onayını bekliyor.\n📧 Onay durumu email ile bildirilecektir.')
       return
     }
     
@@ -119,10 +134,46 @@ export default function ExploreServicePage() {
       } else {
         alert('Lütfen geçerli bilgiler girin! Şifreler eşleşmeli ve en az 6 karakter olmalı.')
       }
+    } else if (registerStep === 2) {
+      if (registerData.companyName && registerData.contactName && registerData.phone) {
+        setRegisterStep(3)
+      } else {
+        alert('Lütfen tüm zorunlu alanları doldurun!')
+      }
     } else {
+      // Check if user already exists
       const existingUsers = JSON.parse(localStorage.getItem(`corporateUsers_${service}`) || '[]')
-      const newUser = {
+      const existingPending = JSON.parse(localStorage.getItem(`pendingCustomers_${service}`) || '[]')
+      
+      const emailExists = existingUsers.some((u: any) => u.email === registerData.email) ||
+                         existingPending.some((u: any) => u.email === registerData.email)
+      
+      if (emailExists) {
+        alert('Bu email adresi ile zaten bir başvuru var!')
+        return
+      }
+
+      // Create new pending customer for approval system
+      const newPendingCustomer = {
         id: Date.now().toString(),
+        email: registerData.email,
+        companyName: registerData.companyName,
+        contactName: registerData.contactName,
+        phone: registerData.phone,
+        address: registerData.address || '',
+        taxNumber: registerData.taxNumber || '',
+        website: registerData.website || '',
+        businessType: registerData.businessType || (service === 'zorlu-ecu' ? 'ECU Tuning' : service === 'assetto-corsa' ? 'Sim Racing' : 'Automotive'),
+        requestedServices: service === 'zorlu-ecu' ? ['ECU Tuning'] : service === 'assetto-corsa' ? ['Sim Racing'] : ['Automotive Services'],
+        message: registerData.message || `${service} hizmetlerinden faydalanmak istiyorum.`,
+        documents: [],
+        createdAt: new Date().toISOString(),
+        status: 'pending' as const
+      }
+
+      // Also create user record with password for login system
+      const newUser = {
+        id: newPendingCustomer.id,
         email: registerData.email,
         password: registerData.password,
         companyName: registerData.companyName,
@@ -132,10 +183,15 @@ export default function ExploreServicePage() {
         approved: false,
         createdAt: new Date().toISOString()
       }
+
+      // Save to both systems
+      existingPending.push(newPendingCustomer)
       existingUsers.push(newUser)
+      
+      localStorage.setItem(`pendingCustomers_${service}`, JSON.stringify(existingPending))
       localStorage.setItem(`corporateUsers_${service}`, JSON.stringify(existingUsers))
       
-      alert('Başvurunuz alındı! Yönetici onayından sonra giriş yapabileceksiniz.')
+      alert('✅ Başvurunuz başarıyla alındı!\n\n📋 Başvuru Detayları:\n• Email: ' + registerData.email + '\n• Şirket: ' + registerData.companyName + '\n• İletişim: ' + registerData.contactName + '\n\n⏳ Yönetici onayından sonra giriş yapabileceksiniz.\n📧 Onay durumu email ile bildirilecektir.')
       setShowAuthModal(false)
       setRegisterStep(1)
       setRegisterData({
@@ -144,7 +200,12 @@ export default function ExploreServicePage() {
         confirmPassword: '',
         companyName: '',
         contactName: '',
-        phone: ''
+        phone: '',
+        address: '',
+        taxNumber: '',
+        website: '',
+        businessType: '',
+        message: ''
       })
     }
   }
@@ -337,6 +398,40 @@ export default function ExploreServicePage() {
                   {/* Register Form */}
                   {authMode === 'register' && (
                     <form onSubmit={handleRegister} className="space-y-4">
+                      {/* Progress Indicator */}
+                      <div className="flex items-center justify-center mb-6">
+                        <div className="flex items-center space-x-2">
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
+                            registerStep >= 1 ? `bg-gradient-to-r ${colorTheme.gradient} text-white` : 'bg-white/10 text-white/40'
+                          }`}>
+                            1
+                          </div>
+                          <div className={`w-8 h-1 ${registerStep >= 2 ? `bg-gradient-to-r ${colorTheme.gradient}` : 'bg-white/10'}`} />
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
+                            registerStep >= 2 ? `bg-gradient-to-r ${colorTheme.gradient} text-white` : 'bg-white/10 text-white/40'
+                          }`}>
+                            2
+                          </div>
+                          <div className={`w-8 h-1 ${registerStep >= 3 ? `bg-gradient-to-r ${colorTheme.gradient}` : 'bg-white/10'}`} />
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
+                            registerStep >= 3 ? `bg-gradient-to-r ${colorTheme.gradient} text-white` : 'bg-white/10 text-white/40'
+                          }`}>
+                            3
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Step Labels */}
+                      <div className="text-center mb-4">
+                        <p className="text-white font-semibold">
+                          {registerStep === 1 && 'Hesap Bilgileri'}
+                          {registerStep === 2 && 'İletişim Bilgileri'}
+                          {registerStep === 3 && 'Ek Bilgiler'}
+                        </p>
+                        <p className="text-white/60 text-sm">
+                          Adım {registerStep} / 3
+                        </p>
+                      </div>
                       {registerStep === 1 && (
                         <>
                           <div className="relative">
@@ -397,7 +492,7 @@ export default function ExploreServicePage() {
                             <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
                             <input
                               type="text"
-                              placeholder="Şirket Adı"
+                              placeholder="Şirket Adı *"
                               value={registerData.companyName}
                               onChange={(e) => setRegisterData({ ...registerData, companyName: e.target.value })}
                               className={`w-full pl-12 pr-4 py-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/20 text-white placeholder:text-white/40 ${colorTheme.focus} focus:outline-none`}
@@ -409,7 +504,7 @@ export default function ExploreServicePage() {
                             <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
                             <input
                               type="text"
-                              placeholder="İletişim Kişisi"
+                              placeholder="İletişim Kişisi *"
                               value={registerData.contactName}
                               onChange={(e) => setRegisterData({ ...registerData, contactName: e.target.value })}
                               className={`w-full pl-12 pr-4 py-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/20 text-white placeholder:text-white/40 ${colorTheme.focus} focus:outline-none`}
@@ -421,7 +516,7 @@ export default function ExploreServicePage() {
                             <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
                             <input
                               type="tel"
-                              placeholder="Telefon"
+                              placeholder="Telefon *"
                               value={registerData.phone}
                               onChange={(e) => setRegisterData({ ...registerData, phone: e.target.value })}
                               className={`w-full pl-12 pr-4 py-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/20 text-white placeholder:text-white/40 ${colorTheme.focus} focus:outline-none`}
@@ -441,7 +536,114 @@ export default function ExploreServicePage() {
                               type="submit"
                               className={`flex-1 py-4 bg-gradient-to-r ${colorTheme.gradient} rounded-xl text-white font-bold hover:shadow-lg ${colorTheme.glow} transition-all`}
                             >
-                              Kayıt Ol
+                              Devam
+                            </button>
+                          </div>
+                        </>
+                      )}
+
+                      {registerStep === 3 && (
+                        <>
+                          <div className="text-center mb-4">
+                            <h3 className="text-white font-bold text-lg mb-2">Ek Bilgiler</h3>
+                            <p className="text-white/60 text-sm">Bu bilgiler onay sürecini hızlandırır (opsiyonel)</p>
+                          </div>
+
+                          <div className="relative">
+                            <MapPin className="absolute left-4 top-4 w-5 h-5 text-white/40" />
+                            <textarea
+                              placeholder="Adres (opsiyonel)"
+                              value={registerData.address}
+                              onChange={(e) => setRegisterData({ ...registerData, address: e.target.value })}
+                              className={`w-full pl-12 pr-4 py-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/20 text-white placeholder:text-white/40 ${colorTheme.focus} focus:outline-none resize-none`}
+                              rows={2}
+                            />
+                          </div>
+
+                          <div className="relative">
+                            <FileText className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+                            <input
+                              type="text"
+                              placeholder="Vergi Numarası (opsiyonel)"
+                              value={registerData.taxNumber}
+                              onChange={(e) => setRegisterData({ ...registerData, taxNumber: e.target.value })}
+                              className={`w-full pl-12 pr-4 py-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/20 text-white placeholder:text-white/40 ${colorTheme.focus} focus:outline-none`}
+                            />
+                          </div>
+
+                          <div className="relative">
+                            <Globe className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+                            <input
+                              type="url"
+                              placeholder="Website (opsiyonel)"
+                              value={registerData.website}
+                              onChange={(e) => setRegisterData({ ...registerData, website: e.target.value })}
+                              className={`w-full pl-12 pr-4 py-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/20 text-white placeholder:text-white/40 ${colorTheme.focus} focus:outline-none`}
+                            />
+                          </div>
+
+                          <div className="relative">
+                            <Briefcase className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+                            <select
+                              value={registerData.businessType}
+                              onChange={(e) => setRegisterData({ ...registerData, businessType: e.target.value })}
+                              className={`w-full pl-12 pr-4 py-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/20 text-white ${colorTheme.focus} focus:outline-none`}
+                            >
+                              <option value="">İş Türü Seçin (opsiyonel)</option>
+                              {service === 'zorlu-ecu' && (
+                                <>
+                                  <option value="Oto Servis">Oto Servis</option>
+                                  <option value="ECU Tuning">ECU Tuning</option>
+                                  <option value="Performance Tuning">Performance Tuning</option>
+                                  <option value="Oto Elektrik">Oto Elektrik</option>
+                                  <option value="Motor Tamiri">Motor Tamiri</option>
+                                  <option value="Diğer">Diğer</option>
+                                </>
+                              )}
+                              {service === 'assetto-corsa' && (
+                                <>
+                                  <option value="Sim Racing">Sim Racing</option>
+                                  <option value="Gaming Center">Gaming Center</option>
+                                  <option value="Eğitim">Eğitim</option>
+                                  <option value="Yarış Takımı">Yarış Takımı</option>
+                                  <option value="Diğer">Diğer</option>
+                                </>
+                              )}
+                              {service === 'ahmet-kanar' && (
+                                <>
+                                  <option value="Otomotiv">Otomotiv</option>
+                                  <option value="Teknoloji">Teknoloji</option>
+                                  <option value="Danışmanlık">Danışmanlık</option>
+                                  <option value="Diğer">Diğer</option>
+                                </>
+                              )}
+                            </select>
+                          </div>
+
+                          <div className="relative">
+                            <MessageCircle className="absolute left-4 top-4 w-5 h-5 text-white/40" />
+                            <textarea
+                              placeholder="Mesajınız (opsiyonel) - Hangi hizmetlerden faydalanmak istediğinizi belirtin"
+                              value={registerData.message}
+                              onChange={(e) => setRegisterData({ ...registerData, message: e.target.value })}
+                              className={`w-full pl-12 pr-4 py-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/20 text-white placeholder:text-white/40 ${colorTheme.focus} focus:outline-none resize-none`}
+                              rows={3}
+                            />
+                          </div>
+
+                          <div className="flex gap-2">
+                            <button
+                              type="button"
+                              onClick={() => setRegisterStep(2)}
+                              className="flex-1 py-4 bg-white/5 border border-white/20 rounded-xl text-white font-bold hover:bg-white/10 transition-all"
+                            >
+                              Geri
+                            </button>
+                            <button
+                              type="submit"
+                              className={`flex-1 py-4 bg-gradient-to-r ${colorTheme.gradient} rounded-xl text-white font-bold hover:shadow-lg ${colorTheme.glow} transition-all`}
+                            >
+                              Başvuru Gönder
                             </button>
                           </div>
                         </>
