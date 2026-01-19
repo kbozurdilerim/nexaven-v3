@@ -6,12 +6,17 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:watch": "tsc && vite build --watch",
     "preview": "vite preview",
     "docker:build": "docker compose build",
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f",
-    "deploy": "chmod +x deploy.sh && ./deploy.sh"
+    "deploy": "chmod +x deploy.sh && ./deploy.sh",
+    "dev:docker": "chmod +x dev-update.sh && ./dev-update.sh",
+    "prod:switch": "chmod +x switch-to-production.sh && ./switch-to-production.sh",
+    "dev:logs": "docker logs nexaven-frontend-dev -f",
+    "dev:shell": "docker exec -it nexaven-frontend-dev sh"
   },
   "dependencies": {
     "@tsparticles/react": "^3.0.0",

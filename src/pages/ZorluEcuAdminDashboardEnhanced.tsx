@@ -1,7 +1,187 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { LogOut, Users, MessageCircle, Upload, Check, X, Send, Download, Eye, Trash2, Plus } from 'lucide-react'
+import { LogOut, Users, MessageCircle, Upload, Check, X, Send, Download, Eye, Trash2, Plus, UserCheck } from 'lucide-react'
+import CustomerApprovalSystem from '../components/CustomerApprovalSystem'
+import EnhancedCustomerManagement from '../components/EnhancedCustomerManagement'
+
+// Test data initialization
+const initializeTestData = () => {
+  // Initialize pending customers for approval system
+  const pendingCustomers = [
+    {
+      id: '1',
+      email: 'ahmet@teknikoto.com',
+      companyName: 'Teknik Oto Servis',
+      contactName: 'Ahmet Yılmaz',
+      phone: '+90 532 123 4567',
+      address: 'Atatürk Cad. No:123 Kadıköy/İstanbul',
+      taxNumber: '1234567890',
+      website: 'www.teknikoto.com',
+      businessType: 'Oto Servis',
+      requestedServices: ['ECU Tuning', 'DPF Delete', 'EGR Delete'],
+      message: 'Merhaba, ECU tuning hizmetlerinizden faydalanmak istiyoruz. 15 yıllık tecrübemiz var.',
+      documents: [
+        { name: 'ticaret_sicil.pdf', type: 'application/pdf', size: 245760, uploadedAt: '2026-01-19T10:00:00Z' },
+        { name: 'vergi_levhasi.jpg', type: 'image/jpeg', size: 156432, uploadedAt: '2026-01-19T10:05:00Z' }
+      ],
+      createdAt: '2026-01-19T09:30:00Z',
+      status: 'pending' as const
+    },
+    {
+      id: '2',
+      email: 'fatma@speedgarage.com',
+      companyName: 'Speed Garage',
+      contactName: 'Fatma Demir',
+      phone: '+90 533 987 6543',
+      address: 'Bağdat Cad. No:456 Maltepe/İstanbul',
+      businessType: 'Performance Tuning',
+      requestedServices: ['Stage 1 Tuning', 'Stage 2 Tuning', 'Dyno Test'],
+      message: 'Performance tuning konusunda uzmanlaşmış bir firmayız. Zorlu ECU ile çalışmak istiyoruz.',
+      createdAt: '2026-01-18T14:20:00Z',
+      status: 'pending' as const
+    },
+    {
+      id: '3',
+      email: 'mehmet@autoexpert.com',
+      companyName: 'Auto Expert',
+      contactName: 'Mehmet Kaya',
+      phone: '+90 534 555 7788',
+      address: 'Cumhuriyet Mah. Sanayi Sitesi No:78 Ankara',
+      taxNumber: '9876543210',
+      businessType: 'Oto Elektrik',
+      requestedServices: ['ECU Repair', 'Immobilizer Delete'],
+      message: 'ECU tamiri ve immobilizer silme konularında hizmet veriyoruz.',
+      createdAt: '2026-01-17T11:45:00Z',
+      status: 'pending' as const
+    }
+  ]
+
+  // Initialize approved customers for management system
+  const approvedCustomers = [
+    {
+      id: '4',
+      email: 'ali@protuning.com',
+      companyName: 'Pro Tuning Center',
+      contactName: 'Ali Özkan',
+      phone: '+90 535 111 2233',
+      address: 'Kozyatağı Mah. Teknoloji Cad. No:12 İstanbul',
+      taxNumber: '5555666677',
+      website: 'www.protuning.com',
+      businessType: 'Tuning Center',
+      status: 'active' as const,
+      createdAt: '2026-01-15T08:00:00Z',
+      lastActivity: '2026-01-19T09:00:00Z',
+      totalOrders: 25,
+      totalSpent: 125000,
+      creditLimit: 50000,
+      paymentTerms: '30 gün',
+      notes: 'VIP müşteri, öncelikli hizmet verilmeli',
+      tags: ['VIP', 'Tuning Expert', 'High Volume'],
+      priority: 'vip' as const
+    },
+    {
+      id: '5',
+      email: 'zeynep@motortech.com',
+      companyName: 'Motor Tech Solutions',
+      contactName: 'Zeynep Arslan',
+      phone: '+90 536 444 5566',
+      address: 'Ostim Sanayi Sitesi B Blok No:45 Ankara',
+      businessType: 'Motor Tamiri',
+      status: 'active' as const,
+      createdAt: '2026-01-10T12:30:00Z',
+      lastActivity: '2026-01-18T16:45:00Z',
+      totalOrders: 12,
+      totalSpent: 48000,
+      creditLimit: 20000,
+      paymentTerms: '15 gün',
+      notes: 'Düzenli müşteri, zamanında ödeme yapıyor',
+      tags: ['Regular Customer', 'Motor Repair'],
+      priority: 'high' as const
+    },
+    {
+      id: '6',
+      email: 'can@speedworks.com',
+      companyName: 'Speed Works',
+      contactName: 'Can Yıldız',
+      phone: '+90 537 777 8899',
+      address: 'Atatürk OSB 5. Cad. No:23 Bursa',
+      businessType: 'Performance Shop',
+      status: 'active' as const,
+      createdAt: '2026-01-05T14:15:00Z',
+      lastActivity: '2026-01-16T10:20:00Z',
+      totalOrders: 8,
+      totalSpent: 32000,
+      creditLimit: 15000,
+      paymentTerms: '7 gün',
+      notes: 'Yeni müşteri, potansiyeli yüksek',
+      tags: ['New Customer', 'Performance'],
+      priority: 'medium' as const
+    }
+  ]
+
+  // Save to localStorage
+  if (!localStorage.getItem('pendingCustomers_zorlu-ecu')) {
+    localStorage.setItem('pendingCustomers_zorlu-ecu', JSON.stringify(pendingCustomers))
+  }
+  
+  if (!localStorage.getItem('customers_zorlu-ecu')) {
+    localStorage.setItem('customers_zorlu-ecu', JSON.stringify(approvedCustomers))
+  }
+
+  // Initialize some orders
+  const orders = [
+    {
+      id: 'ORD001',
+      userId: '4',
+      plaka: '34ABC123',
+      marka: 'BMW',
+      model: '320d',
+      yil: 2020,
+      stage: 'Stage 1 ECU Tuning',
+      iptaller: ['DPF Delete', 'EGR Delete'],
+      pCodes: ['P0401', 'P2002'],
+      status: 'completed' as const,
+      createdAt: '2026-01-18T10:00:00Z',
+      price: 8500,
+      paid: 8500
+    },
+    {
+      id: 'ORD002',
+      userId: '5',
+      plaka: '06XYZ789',
+      marka: 'Audi',
+      model: 'A4',
+      yil: 2019,
+      stage: 'Stage 2 ECU Tuning',
+      iptaller: ['Downpipe', 'Cold Air Intake'],
+      pCodes: ['P0171', 'P0174'],
+      status: 'processing' as const,
+      createdAt: '2026-01-19T08:30:00Z',
+      price: 12000,
+      paid: 6000
+    },
+    {
+      id: 'ORD003',
+      userId: '6',
+      plaka: '16DEF456',
+      marka: 'Mercedes',
+      model: 'C220d',
+      yil: 2021,
+      stage: 'DPF Delete',
+      iptaller: ['DPF Delete'],
+      pCodes: ['P2002'],
+      status: 'pending' as const,
+      createdAt: '2026-01-19T11:15:00Z',
+      price: 5500,
+      paid: 0
+    }
+  ]
+
+  if (!localStorage.getItem('orders_zorlu-ecu')) {
+    localStorage.setItem('orders_zorlu-ecu', JSON.stringify(orders))
+  }
+}
 
 interface CorporateUser {
   id: string
@@ -49,7 +229,7 @@ interface UploadedFile {
 export default function ZorluEcuAdminDashboardEnhanced() {
   const navigate = useNavigate()
   const [adminUser, setAdminUser] = useState<any>(null)
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'customers' | 'orders' | 'chat' | 'files'>('dashboard')
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'customers' | 'orders' | 'approvals' | 'management' | 'chat' | 'files'>('dashboard')
   const [selectedCustomer, setSelectedCustomer] = useState<CorporateUser | null>(null)
   const [customers, setCustomers] = useState<CorporateUser[]>([])
   const [orders, setOrders] = useState<Order[]>([])
@@ -74,6 +254,10 @@ export default function ZorluEcuAdminDashboardEnhanced() {
     }
 
     setAdminUser(adminData)
+    
+    // Initialize test data
+    initializeTestData()
+    
     loadCustomers()
     loadOrders()
     loadFiles()
@@ -245,6 +429,8 @@ export default function ZorluEcuAdminDashboardEnhanced() {
               { id: 'dashboard', label: '📊 Kontrol Paneli', icon: '📊' },
               { id: 'customers', label: '👥 Müşteriler', icon: '👥' },
               { id: 'orders', label: '📋 Siparişler', icon: '📋' },
+              { id: 'approvals', label: '✅ Onaylar', icon: '✅' },
+              { id: 'management', label: '🏢 Müşteri Yönetimi', icon: '🏢' },
               { id: 'chat', label: '💬 Mesajlar', icon: '💬' },
               { id: 'files', label: '📄 Dosyalar', icon: '📄' }
             ].map(tab => (
@@ -452,6 +638,25 @@ export default function ZorluEcuAdminDashboardEnhanced() {
               <div className="text-center p-8 text-white/60">Henüz sipariş yok</div>
             )}
           </div>
+        )}
+
+        {/* Approvals Tab */}
+        {activeTab === 'approvals' && (
+          <CustomerApprovalSystem
+            service="zorlu-ecu"
+            onApprove={(customerId) => {
+              handleApproveCustomer(customerId)
+            }}
+            onReject={(customerId, reason) => {
+              console.log('Customer rejected:', customerId, reason)
+              // Handle rejection logic
+            }}
+          />
+        )}
+
+        {/* Management Tab */}
+        {activeTab === 'management' && (
+          <EnhancedCustomerManagement service="zorlu-ecu" />
         )}
 
         {/* Chat Tab */}

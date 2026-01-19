@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
-import { LogOut, Users, Settings, BarChart3, FileText, Shield, Bell, Plus, Trash2, Edit2, Check, X } from 'lucide-react'
+import { LogOut, Users, Settings, BarChart3, FileText, Shield, Bell, Plus, Trash2, Edit2, Check, X, MessageCircle, UserCheck } from 'lucide-react'
+import CustomerApprovalSystem from '../components/CustomerApprovalSystem'
+import EnhancedCustomerManagement from '../components/EnhancedCustomerManagement'
 
 interface License {
   id: string
@@ -27,7 +29,7 @@ interface User {
 export default function AdminDashboardEnhanced() {
   const navigate = useNavigate()
   const [adminData, setAdminData] = useState<any>(null)
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'users' | 'licenses' | 'settings'>('dashboard')
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'users' | 'licenses' | 'approvals' | 'customers' | 'settings'>('dashboard')
   const [users, setUsers] = useState<User[]>([])
   const [licenses, setLicenses] = useState<License[]>([])
   const [showNewLicenseModal, setShowNewLicenseModal] = useState(false)
@@ -158,6 +160,8 @@ export default function AdminDashboardEnhanced() {
               { id: 'dashboard', label: '📊 Kontrol Paneli' },
               { id: 'users', label: '👥 Kullanıcılar' },
               { id: 'licenses', label: '🔐 Lisanslar' },
+              { id: 'approvals', label: '✅ Onaylar' },
+              { id: 'customers', label: '🏢 Müşteriler' },
               { id: 'settings', label: '⚙️ Ayarlar' }
             ].map(tab => (
               <button
@@ -360,6 +364,26 @@ export default function AdminDashboardEnhanced() {
               )
             })}
           </div>
+        )}
+
+        {/* Approvals Tab */}
+        {activeTab === 'approvals' && (
+          <CustomerApprovalSystem
+            service="nexaven-core"
+            onApprove={(customerId) => {
+              console.log('Customer approved:', customerId)
+              // Handle approval logic
+            }}
+            onReject={(customerId, reason) => {
+              console.log('Customer rejected:', customerId, reason)
+              // Handle rejection logic
+            }}
+          />
+        )}
+
+        {/* Customers Tab */}
+        {activeTab === 'customers' && (
+          <EnhancedCustomerManagement service="nexaven-core" />
         )}
 
         {/* Settings Tab */}
