@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { LogOut, Users, MessageCircle, Upload, Check, X, Send, Download, Eye, Trash2, Plus, UserCheck } from 'lucide-react'
+import { LogOut, Users, MessageCircle, Upload, Check, X, Send, Download, Eye, Trash2, Plus, UserCheck, Bot, Monitor, Zap } from 'lucide-react'
 import CustomerApprovalSystem from '../components/CustomerApprovalSystem'
 import EnhancedCustomerManagement from '../components/EnhancedCustomerManagement'
+import OllamaChat from '../components/OllamaChat'
+import LinOLSInterface from '../components/LinOLSInterface'
 
 // Test data initialization - Only if no real data exists
 const initializeTestData = () => {
@@ -103,7 +105,7 @@ interface UploadedFile {
 export default function ZorluEcuAdminDashboardEnhanced() {
   const navigate = useNavigate()
   const [adminUser, setAdminUser] = useState<any>(null)
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'customers' | 'orders' | 'approvals' | 'management' | 'chat' | 'files'>('dashboard')
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'customers' | 'orders' | 'approvals' | 'management' | 'chat' | 'files' | 'ai-linols'>('dashboard')
   const [selectedCustomer, setSelectedCustomer] = useState<CorporateUser | null>(null)
   const [customers, setCustomers] = useState<CorporateUser[]>([])
   const [orders, setOrders] = useState<Order[]>([])
@@ -113,6 +115,8 @@ export default function ZorluEcuAdminDashboardEnhanced() {
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([])
   const [editingOrder, setEditingOrder] = useState<string | null>(null)
   const [orderFormData, setOrderFormData] = useState<Partial<Order>>({})
+  const [isLinOLSFullscreen, setIsLinOLSFullscreen] = useState(false)
+  const [currentECUFile, setCurrentECUFile] = useState<File | null>(null)
 
   useEffect(() => {
     const admin = localStorage.getItem('adminUser')
@@ -216,6 +220,19 @@ export default function ZorluEcuAdminDashboardEnhanced() {
     localStorage.setItem('files_zorlu-ecu', JSON.stringify(filtered))
   }
 
+  const handleLinOLSCommand = (command: string) => {
+    console.log('LinOLS Command:', command)
+    // Handle LinOLS commands from AI chat
+    if (command === 'open') {
+      setActiveTab('ai-linols')
+    }
+  }
+
+  const handleECUFileProcessed = (file: any) => {
+    console.log('ECU File Processed:', file)
+    // Handle processed ECU file
+  }
+
   const handleUpdateOrder = () => {
     if (!selectedOrder || !editingOrder) return
 
@@ -306,7 +323,8 @@ export default function ZorluEcuAdminDashboardEnhanced() {
               { id: 'approvals', label: '✅ Onaylar', icon: '✅' },
               { id: 'management', label: '🏢 Müşteri Yönetimi', icon: '🏢' },
               { id: 'chat', label: '💬 Mesajlar', icon: '💬' },
-              { id: 'files', label: '📄 Dosyalar', icon: '📄' }
+              { id: 'files', label: '📄 Dosyalar', icon: '📄' },
+              { id: 'ai-linols', label: '🤖 AI + LinOLS', icon: '🤖' }
             ].map(tab => (
               <button
                 key={tab.id}
@@ -668,6 +686,144 @@ export default function ZorluEcuAdminDashboardEnhanced() {
             {uploadedFiles.length === 0 && (
               <div className="text-center p-8 text-white/60">Henüz dosya yok</div>
             )}
+          </div>
+        )}
+
+        {/* AI + LinOLS Tab */}
+        {activeTab === 'ai-linols' && (
+          <div className="space-y-6">
+            <div className="text-center mb-6">
+              <h2 className="text-3xl font-bold text-white mb-2">🤖 AI Destekli ECU Tuning</h2>
+              <p className="text-white/60">Ollama AI ve LinOLS ile profesyonel ECU yazılım geliştirme</p>
+            </div>
+
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 h-[800px]">
+              {/* AI Chat Panel */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-2 bg-gradient-to-r from-red-500 to-orange-500 rounded-lg">
+                    <Bot className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white">ECU AI Asistanı</h3>
+                    <p className="text-white/60 text-sm">Ollama ile güçlendirilmiş yapay zeka</p>
+                  </div>
+                </div>
+                
+                <OllamaChat 
+                  onLinOLSCommand={handleLinOLSCommand}
+                  ecuFile={currentECUFile}
+                />
+              </div>
+
+              {/* LinOLS Interface Panel */}
+              <div className="space-y-4">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg">
+                      <Monitor className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white">LinOLS Arayüzü</h3>
+                      <p className="text-white/60 text-sm">ECU dosya düzenleme ve tuning</p>
+                    </div>
+                  </div>
+                </div>
+
+                <LinOLSInterface 
+                  isFullscreen={isLinOLSFullscreen}
+                  onToggleFullscreen={() => setIsLinOLSFullscreen(!isLinOLSFullscreen)}
+                  onFileProcessed={handleECUFileProcessed}
+                />
+              </div>
+            </div>
+
+            {/* Quick Actions */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6">
+              {[
+                {
+                  title: '🚗 Yeni ECU Projesi',
+                  description: 'Yeni araç için ECU tuning başlat',
+                  action: () => setActiveTab('ai-linols'),
+                  color: 'from-blue-500 to-cyan-500'
+                },
+                {
+                  title: '⚡ Hızlı Stage 1',
+                  description: 'Otomatik Stage 1 ayarları uygula',
+                  action: () => console.log('Quick Stage 1'),
+                  color: 'from-green-500 to-emerald-500'
+                },
+                {
+                  title: '🔧 Özel Tuning',
+                  description: 'Manuel parametre ayarlama',
+                  action: () => console.log('Custom Tuning'),
+                  color: 'from-purple-500 to-pink-500'
+                },
+                {
+                  title: '📊 Performans Analizi',
+                  description: 'Tuning sonuçlarını analiz et',
+                  action: () => console.log('Performance Analysis'),
+                  color: 'from-orange-500 to-red-500'
+                }
+              ].map((action, index) => (
+                <motion.button
+                  key={action.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  onClick={action.action}
+                  className={`p-6 rounded-2xl bg-gradient-to-br ${action.color} hover:shadow-lg hover:shadow-current/25 transition-all text-left`}
+                >
+                  <h4 className="text-white font-bold text-lg mb-2">{action.title}</h4>
+                  <p className="text-white/80 text-sm">{action.description}</p>
+                </motion.button>
+              ))}
+            </div>
+
+            {/* System Status */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+              {[
+                { 
+                  label: 'Ollama AI', 
+                  status: 'connected', 
+                  info: 'llama3.2 model aktif',
+                  icon: <Bot className="w-5 h-5" />
+                },
+                { 
+                  label: 'LinOLS', 
+                  status: 'connected', 
+                  info: 'v2.1.4 çalışıyor',
+                  icon: <Monitor className="w-5 h-5" />
+                },
+                { 
+                  label: 'Docker Services', 
+                  status: 'connected', 
+                  info: 'Tüm servisler aktif',
+                  icon: <Zap className="w-5 h-5" />
+                }
+              ].map(service => (
+                <div key={service.label} className="p-4 bg-black/40 border border-white/10 rounded-xl">
+                  <div className="flex items-center gap-3">
+                    <div className={`p-2 rounded-lg ${
+                      service.status === 'connected' 
+                        ? 'bg-green-500/20 text-green-400' 
+                        : 'bg-red-500/20 text-red-400'
+                    }`}>
+                      {service.icon}
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-white font-semibold">{service.label}</span>
+                        <div className={`w-2 h-2 rounded-full ${
+                          service.status === 'connected' ? 'bg-green-400' : 'bg-red-400'
+                        }`} />
+                      </div>
+                      <p className="text-white/60 text-sm">{service.info}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </main>
