@@ -28,6 +28,99 @@ Modern, responsive ve animasyonlu kurumsal web sitesi. React, TypeScript, Tailwi
 ### Lokal Geliştirme
 
 ```bash
+# Projeyi klonla
+git clone https://github.com/kbozurdilerim/nexaven-v3.git
+cd nexaven-v3/nexaven-website
+
+# Bağımlılıkları yükle
+npm install
+
+# Geliştirme sunucusunu başlat
+npm run dev
+```
+
+### Production Deployment
+
+```bash
+# VPS'e deploy et
+chmod +x deploy.sh
+./deploy.sh
+```
+
+## 🌐 Erişim URL'leri
+
+- **Ana Site**: https://nexaven.com.tr
+- **Health Check**: https://nexaven.com.tr/health
+
+## 🛠️ Teknolojiler
+
+- **Frontend**: React 18, TypeScript, Vite
+- **Styling**: Tailwind CSS
+- **Animasyonlar**: Framer Motion
+- **Efektler**: TSParticles
+- **Deployment**: Docker Compose
+- **Web Server**: Nginx
+- **SSL**: Let's Encrypt
+
+## 📁 Proje Yapısı
+
+```
+nexaven-website/
+├── src/
+│   ├── components/     # React bileşenleri
+│   ├── pages/         # Sayfa bileşenleri
+│   ├── hooks/         # Custom hooks
+│   ├── utils/         # Yardımcı fonksiyonlar
+│   └── types/         # TypeScript tipleri
+├── public/            # Statik dosyalar
+├── nginx/             # Nginx konfigürasyonu
+├── docker-compose.yml # Docker servisleri
+├── Dockerfile.frontend # Frontend build
+└── deploy.sh          # Deployment script
+```
+
+## 🔧 Konfigürasyon
+
+### Environment Variables
+```bash
+NODE_ENV=production
+VITE_API_URL=https://nexaven.com.tr/api
+```
+
+### Docker Services
+- **frontend**: React uygulaması (Port 3000)
+- **nginx**: Web server ve reverse proxy (Port 80/443)
+- **certbot**: SSL sertifika yönetimi
+
+## 📊 Monitoring
+
+### Container Durumu
+```bash
+docker ps
+```
+
+### Logları İzleme
+```bash
+docker compose logs -f
+```
+
+### Health Check
+```bash
+curl https://nexaven.com.tr/health
+```
+
+## 🔄 Güncelleme
+
+```bash
+git pull origin main
+./deploy.sh
+```
+
+## 📞 Destek
+
+Teknik destek için:
+- Email: admin@nexaven.com.tr
+- GitHub Issues: [Sorun Bildir](https://github.com/kbozurdilerim/nexaven-v3/issues)
 # Bağımlılıkları yükle
 npm install
 

@@ -19,27 +19,6 @@ services:
       timeout: 10s
       retries: 3
 
-  chiptuning-app:
-    build:
-      context: ../chiptuning-app
-      dockerfile: Dockerfile
-    container_name: chiptuning-calculator
-    ports:
-      - "3001:3000"
-    environment:
-      - NODE_ENV=production
-      - PORT=3000
-    volumes:
-      - ../chiptuning-app/data:/app/data:ro
-    networks:
-      - nexaven-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
 
   nginx:
     image: nginx:alpine
@@ -55,8 +34,6 @@ services:
       - web-root:/var/www/html
     depends_on:
       frontend:
-        condition: service_healthy
-      chiptuning-app:
         condition: service_healthy
     networks:
       - nexaven-network

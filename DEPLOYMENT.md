@@ -46,8 +46,108 @@ apt install git -y
 
 ## 📦 Proje Deployment
 
-### 1. Projeyi Klonlayın
+git clone https://github.com/kbozurdilerim/nexaven-v3.git
+cd nexaven-v3/nexaven-website
+```
+
+### 2. Deploy Script'ini Çalıştırın
 ```bash
+chmod +x deploy.sh
+./deploy.sh
+```
+
+## 🌐 Domain Ayarları
+
+### DNS Kayıtları
+Hostinger DNS panelinden aşağıdaki kayıtları ekleyin:
+
+```
+A Record: nexaven.com.tr -> VPS_IP_ADDRESS
+A Record: www.nexaven.com.tr -> VPS_IP_ADDRESS
+```
+
+## 🔒 SSL Sertifikası
+
+### Let's Encrypt ile SSL
+```bash
+# Certbot ile SSL sertifikası al
+docker exec nexaven-certbot certbot certonly --webroot \
+  --webroot-path=/var/www/html \
+  --email admin@nexaven.com.tr \
+  --agree-tos --no-eff-email \
+  -d nexaven.com.tr -d www.nexaven.com.tr
+
+# Nginx'i yeniden başlat
+docker restart nexaven-nginx
+```
+
+## 📊 Monitoring ve Logs
+
+### Container Durumu
+```bash
+docker ps
+```
+
+### Logları İzleme
+```bash
+# Tüm servislerin logları
+docker compose logs -f
+
+# Sadece frontend logları
+docker logs nexaven-frontend -f
+
+# Sadece nginx logları
+docker logs nexaven-nginx -f
+```
+
+## 🔄 Güncelleme
+
+### Kod Güncellemesi
+```bash
+cd nexaven-v3/nexaven-website
+git pull origin main
+./deploy.sh
+```
+
+## 🛠️ Troubleshooting
+
+### Port Kontrolü
+```bash
+netstat -tlnp | grep :80
+netstat -tlnp | grep :443
+```
+
+### Container Yeniden Başlatma
+```bash
+docker restart nexaven-frontend
+docker restart nexaven-nginx
+```
+
+### Tamamen Yeniden Deploy
+```bash
+docker compose down
+docker system prune -f
+./deploy.sh
+```
+
+## 📱 Erişim URL'leri
+
+- **Ana Site**: https://nexaven.com.tr
+- **Health Check**: https://nexaven.com.tr/health
+
+## 🔧 Konfigürasyon Dosyaları
+
+- `docker-compose.yml` - Docker servisleri
+- `nginx/nginx.conf` - Nginx konfigürasyonu
+- `Dockerfile.frontend` - Frontend build
+- `deploy.sh` - Deployment script
+
+## 📞 Destek
+
+Sorun yaşarsanız:
+1. Logları kontrol edin
+2. Container durumunu kontrol edin
+3. Port çakışması olup olmadığını kontrol edin
 cd /opt
 git clone https://github.com/yourusername/nexaven-website.git
 cd nexaven-website

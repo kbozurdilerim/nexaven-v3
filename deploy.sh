@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Nexaven.com.tr + Force Yazılım Chiptuning Deployment Script
+# Nexaven.com.tr Deployment Script
 set -e
 
-echo "🚀 Nexaven.com.tr + Force Yazılım Deployment"
-echo "============================================="
+echo "🚀 Nexaven.com.tr Deployment"
+echo "============================"
 
 # Colors
 RED='\033[0;31m'
@@ -56,13 +56,6 @@ else
     log_warning "⚠️  Nexaven frontend health check failed"
 fi
 
-# Check Chiptuning app
-if curl -f http://localhost:3001/health > /dev/null 2>&1; then
-    log_success "✅ Force Yazılım chiptuning app is running"
-else
-    log_warning "⚠️  Chiptuning app health check failed"
-fi
-
 # Check nginx
 if curl -f http://localhost/health > /dev/null 2>&1; then
     log_success "✅ Nginx is running"
@@ -74,10 +67,7 @@ fi
 echo ""
 log_success "🌐 Access URLs:"
 log_success "   • Main Site: https://nexaven.com.tr"
-log_success "   • Chiptuning: https://nexaven.com.tr/chiptuning"
-log_success "   • Force App: https://nexaven.com.tr/force"
-log_success "   • Health Check: https://nexaven.com.tr/chiptuning/health"
-log_success "   • CSV Export: https://nexaven.com.tr/chiptuning/api/export/csv"
+log_success "   • Health Check: https://nexaven.com.tr/health"
 
 # Show container status
 log_info "Container status:"
