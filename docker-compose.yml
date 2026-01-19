@@ -33,21 +33,18 @@ services:
     networks:
       - nexaven-network
     restart: unless-stopped
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
+    # Remove GPU requirements for CPU-only deployment
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
       interval: 30s
       timeout: 10s
       retries: 3
 
+  # Simplified LinOLS service using Python Flask
   linols:
-    image: linols/server:latest
+    build:
+      context: ./linols
+      dockerfile: Dockerfile.simple
     container_name: nexaven-linols
     ports:
       - "8080:8080"
@@ -55,13 +52,14 @@ services:
       - linols-data:/app/data
       - ./ecu-files:/app/ecu-files
     environment:
-      - LINOLS_HOST=0.0.0.0
-      - LINOLS_PORT=8080
+      - FLASK_ENV=production
+      - FLASK_HOST=0.0.0.0
+      - FLASK_PORT=8080
     networks:
       - nexaven-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
       interval: 30s
       timeout: 10s
       retries: 3
