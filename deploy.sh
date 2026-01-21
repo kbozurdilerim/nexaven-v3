@@ -38,26 +38,14 @@ docker system prune -f
 log_info "Creating directories..."
 mkdir -p ollama-models ecu-files linols/web-interface/templates
 
-# Build and start services (CPU-optimized for VPS)
-log_info "Building and starting services (CPU-only mode)..."
+# Build and start services (External Ollama - Frontend only)
+log_info "Building and starting services (Frontend + Nginx only)..."
 if command -v docker-compose &> /dev/null; then
-    # Try CPU-optimized deployment first
-    if docker-compose -f docker-compose.cpu.yml build --no-cache 2>/dev/null; then
-        docker-compose -f docker-compose.cpu.yml up -d
-        log_success "Using CPU-optimized configuration"
-    else
-        docker-compose build --no-cache
-        docker-compose up -d
-    fi
+    docker-compose build --no-cache frontend
+    docker-compose up -d frontend nginx
 else
-    # Try CPU-optimized deployment first
-    if docker compose -f docker-compose.cpu.yml build --no-cache 2>/dev/null; then
-        docker compose -f docker-compose.cpu.yml up -d
-        log_success "Using CPU-optimized configuration"
-    else
-        docker compose build --no-cache
-        docker compose up -d
-    fi
+    docker compose build --no-cache frontend
+    docker compose up -d frontend nginx
 fi
 
 # Wait for services to be ready
@@ -81,25 +69,12 @@ else
     log_warning "⚠️  Nginx health check failed"
 fi
 
-# Check Ollama
-if curl -f http://localhost:11434/api/tags > /dev/null 2>&1; then
-    log_success "✅ Ollama AI is running"
-    log_ai "Checking available models..."
-    MODELS=$(curl -s http://localhost:11434/api/tags | grep -o '"name":"[^"]*"' | cut -d'"' -f4 || echo "")
-    if [ -n "$MODELS" ]; then
-        log_ai "Available models: $MODELS"
-    else
-        log_warning "⚠️  No AI models installed. Run setup-ollama.sh to install models."
-    fi
+# Check External Ollama
+if curl -f http://72.62.178.51:32768/api/tags > /dev/null 2>&1; then
+    log_success "✅ External Ollama AI is accessible"
+    log_ai "External Ollama server: http://72.62.178.51:32768"
 else
-    log_warning "⚠️  Ollama AI health check failed"
-fi
-
-# Check LinOLS
-if curl -f http://localhost:8080/health > /dev/null 2>&1; then
-    log_success "✅ LinOLS interface is running"
-else
-    log_warning "⚠️  LinOLS interface health check failed"
+    log_warning "⚠️  External Ollama AI not accessible - check network connection"
 fi
 
 # Display access URLs
@@ -124,27 +99,28 @@ log_ai "     Password: zorlu123"
 
 echo ""
 log_success "🤖 AI ECU Tuning Features:"
-log_success "   ✅ Ollama AI Chat Integration"
-log_success "   ✅ LinOLS ECU File Processing"
-log_success "   ✅ Real-time Parameter Tuning"
-log_success "   ✅ Stage 1/2/3 Presets"
-log_success "   ✅ Custom ECU Modifications"
-log_success "   ✅ Professional Workflow"
+log_success "   ✅ External Ollama AI Integration"
+log_success "   ✅ Real-time ECU Parameter Calculation"
+log_success "   ✅ Stage 1/2/3 Tuning Presets"
+log_success "   ✅ ECU File Upload and Analysis"
+log_success "   ✅ AI-Powered Optimization Suggestions"
+log_success "   ✅ Professional ECU Workflow"
 
 echo ""
 log_ai "🔧 AI Commands Available:"
-log_ai "   • /linols open - Open LinOLS interface"
-log_ai "   • /linols stage1 - Apply Stage 1 tuning"
-log_ai "   • /linols stage2 - Apply Stage 2 tuning"
-log_ai "   • Ask ECU questions in natural language"
+log_ai "   • /ecu analyze - ECU file analysis"
+log_ai "   • /ecu stage1 - Stage 1 tuning parameters"
+log_ai "   • /ecu stage2 - Stage 2 tuning parameters"
+log_ai "   • /ecu optimize - Performance optimization"
+log_ai "   • Natural language ECU questions"
 
 echo ""
 log_info "🚀 Next Steps:"
-log_info "   1. Install AI models: chmod +x setup-ollama.sh && ./setup-ollama.sh"
+log_info "   1. Test external Ollama: chmod +x setup-ollama.sh && ./setup-ollama.sh"
 log_info "   2. Access admin panel: https://nexaven.com.tr/zorlu-ecu-admin"
-log_info "   3. Go to 'AI + LinOLS' tab"
-log_info "   4. Start chatting with AI about ECU tuning"
-log_info "   5. Upload ECU files and begin tuning"
+log_info "   3. Go to 'AI ECU Tuning' tab"
+log_info "   4. Start using AI-powered ECU tuning"
+log_info "   5. Upload ECU files and get AI assistance"
 
 # Show container status
 echo ""
@@ -152,7 +128,7 @@ log_info "Container status:"
 docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
 
 echo ""
-log_success "🎉 AI-Powered ECU Tuning System Deployed!"
+log_success "🎉 External AI-Powered ECU Tuning System Deployed!"
 log_info "📖 Check logs with: docker-compose logs -f"
-log_info "🔄 For development mode: npm run dev:docker"
-log_ai "🤖 Ready for professional ECU tuning with AI assistance!"
+log_info "🔄 For development mode: npm run dev"
+log_ai "🤖 Ready for professional ECU tuning with external AI assistance!"
