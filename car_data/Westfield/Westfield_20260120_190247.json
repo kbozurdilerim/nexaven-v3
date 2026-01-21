@@ -1,0 +1,26 @@
+[
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "63",
+    "brand_name": "Westfield",
+    "model_id": "590",
+    "model_name": "FW300",
+    "generation_id": "921",
+    "generation_name": "2011 &gt;&gt; ...",
+    "engine_id": "4561",
+    "engine_name": "1.6T - 192hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "192 hp",
+      "power_tuned": "210 hp",
+      "power_increase_percent": "+ 9%",
+      "power_difference": "+18 hp",
+      "torque_original": "266 nm",
+      "torque_tuned": "300 nm",
+      "torque_increase_percent": "+ 13%",
+      "torque_difference": "+34 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T19:02:47.407657"
+  }
+]

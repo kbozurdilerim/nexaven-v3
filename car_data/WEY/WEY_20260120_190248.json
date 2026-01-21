@@ -1,0 +1,50 @@
+[
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "110",
+    "brand_name": "WEY",
+    "model_id": "1391",
+    "model_name": "VV5",
+    "generation_id": "2649",
+    "generation_name": "2017 -&gt; ...",
+    "engine_id": "16318",
+    "engine_name": "2.0T - 197hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "197 hp",
+      "power_tuned": "230 hp",
+      "power_increase_percent": "+ 17%",
+      "power_difference": "+33 hp",
+      "torque_original": "335 nm",
+      "torque_tuned": "380 nm",
+      "torque_increase_percent": "+ 13%",
+      "torque_difference": "+45 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T19:02:47.942850"
+  },
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "110",
+    "brand_name": "WEY",
+    "model_id": "1392",
+    "model_name": "VV7",
+    "generation_id": "2650",
+    "generation_name": "2017 -&gt; ...",
+    "engine_id": "15037",
+    "engine_name": "2.0T - 234hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "234 hp",
+      "power_tuned": "265 hp",
+      "power_increase_percent": "+ 13%",
+      "power_difference": "+31 hp",
+      "torque_original": "360 nm",
+      "torque_tuned": "410 nm",
+      "torque_increase_percent": "+ 14%",
+      "torque_difference": "+50 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T19:02:48.281129"
+  }
+]

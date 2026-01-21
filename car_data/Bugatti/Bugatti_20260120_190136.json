@@ -1,0 +1,98 @@
+[
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "7",
+    "brand_name": "Bugatti",
+    "model_id": "861",
+    "model_name": "Chiron",
+    "generation_id": "1519",
+    "generation_name": "2016 -&gt; ...",
+    "engine_id": "8649",
+    "engine_name": "8.0 W16 - 1500hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "1500 hp",
+      "power_tuned": "1750 hp",
+      "power_increase_percent": "+ 17%",
+      "power_difference": "+250 hp",
+      "torque_original": "1600 nm",
+      "torque_tuned": "1800 nm",
+      "torque_increase_percent": "+ 12%",
+      "torque_difference": "+200 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T19:01:35.878704"
+  },
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "7",
+    "brand_name": "Bugatti",
+    "model_id": "861",
+    "model_name": "Chiron",
+    "generation_id": "1519",
+    "generation_name": "2016 -&gt; ...",
+    "engine_id": "11410",
+    "engine_name": "Super Sport 8.0 W16 - 1600hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "1600 hp",
+      "power_tuned": "1750 hp",
+      "power_increase_percent": "+ 9%",
+      "power_difference": "+150 hp",
+      "torque_original": "1600 nm",
+      "torque_tuned": "1800 nm",
+      "torque_increase_percent": "+ 12%",
+      "torque_difference": "+200 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T19:01:36.319192"
+  },
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "7",
+    "brand_name": "Bugatti",
+    "model_id": "92",
+    "model_name": "Veyron",
+    "generation_id": "159",
+    "generation_name": "All Years",
+    "engine_id": "964",
+    "engine_name": "8.0l - 1001hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "1001 hp",
+      "power_tuned": "1200 hp",
+      "power_increase_percent": "+ 20%",
+      "power_difference": "+199 hp",
+      "torque_original": "1250 nm",
+      "torque_tuned": "1400 nm",
+      "torque_increase_percent": "+ 12%",
+      "torque_difference": "+150 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T19:01:36.647830"
+  },
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "7",
+    "brand_name": "Bugatti",
+    "model_id": "92",
+    "model_name": "Veyron",
+    "generation_id": "159",
+    "generation_name": "All Years",
+    "engine_id": "11411",
+    "engine_name": "SS - 8.0L W16 - 1200hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "1200 hp",
+      "power_tuned": "1300 hp",
+      "power_increase_percent": "+ 8%",
+      "power_difference": "+100 hp",
+      "torque_original": "1500 nm",
+      "torque_tuned": "1600 nm",
+      "torque_increase_percent": "+ 7%",
+      "torque_difference": "+100 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T19:01:36.753814"
+  }
+]

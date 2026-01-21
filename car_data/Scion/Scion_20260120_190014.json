@@ -1,0 +1,36 @@
+[
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "52",
+    "brand_name": "Scion",
+    "model_id": "498",
+    "model_name": "FR-S",
+    "generation_id": "758",
+    "generation_name": "2012 -&gt; ...",
+    "engine_id": "3570",
+    "engine_name": "2.0i - 200hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "200 hp",
+      "power_tuned": "215 hp",
+      "power_increase_percent": "+ 8%",
+      "power_difference": "+15 hp",
+      "torque_original": "205 nm",
+      "torque_tuned": "220 nm",
+      "torque_increase_percent": "+ 7%",
+      "torque_difference": "+15 nm"
+    },
+    "stage2": {
+      "stage": "Stage 2",
+      "power_original": "200 hp",
+      "power_tuned": "225 hp",
+      "power_increase_percent": "+ 12%",
+      "power_difference": "+25 hp",
+      "torque_original": "205 nm",
+      "torque_tuned": "230 nm",
+      "torque_increase_percent": "+ 12%",
+      "torque_difference": "+25 nm"
+    },
+    "scraped_at": "2026-01-20T19:00:14.889333"
+  }
+]

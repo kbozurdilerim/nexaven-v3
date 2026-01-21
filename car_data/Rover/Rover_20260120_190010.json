@@ -1,0 +1,50 @@
+[
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "106",
+    "brand_name": "Rover",
+    "model_id": "1311",
+    "model_name": "75",
+    "generation_id": "2507",
+    "generation_name": "All Years",
+    "engine_id": "14182",
+    "engine_name": "2.0 CDTI - 115hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "115 hp",
+      "power_tuned": "142 hp",
+      "power_increase_percent": "+ 23%",
+      "power_difference": "+27 hp",
+      "torque_original": "260 nm",
+      "torque_tuned": "302 nm",
+      "torque_increase_percent": "+ 16%",
+      "torque_difference": "+42 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T19:00:10.493806"
+  },
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "106",
+    "brand_name": "Rover",
+    "model_id": "1311",
+    "model_name": "75",
+    "generation_id": "2507",
+    "generation_name": "All Years",
+    "engine_id": "14183",
+    "engine_name": "2.0 CDTI - 131hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "131 hp",
+      "power_tuned": "160 hp",
+      "power_increase_percent": "+ 22%",
+      "power_difference": "+29 hp",
+      "torque_original": "300 nm",
+      "torque_tuned": "360 nm",
+      "torque_increase_percent": "+ 20%",
+      "torque_difference": "+60 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T19:00:10.602080"
+  }
+]

@@ -1,0 +1,98 @@
+[
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "77",
+    "brand_name": "MAN",
+    "model_id": "954",
+    "model_name": "TGE",
+    "generation_id": "1870",
+    "generation_name": "2017 -&gt; ...",
+    "engine_id": "11022",
+    "engine_name": "2.0 TDI CR - 102hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "102 hp",
+      "power_tuned": "160 hp",
+      "power_increase_percent": "+ 57%",
+      "power_difference": "+58 hp",
+      "torque_original": "300 nm",
+      "torque_tuned": "350 nm",
+      "torque_increase_percent": "+ 17%",
+      "torque_difference": "+50 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T18:58:58.355995"
+  },
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "77",
+    "brand_name": "MAN",
+    "model_id": "954",
+    "model_name": "TGE",
+    "generation_id": "1870",
+    "generation_name": "2017 -&gt; ...",
+    "engine_id": "11023",
+    "engine_name": "2.0 TDI CR - 122hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "122 hp",
+      "power_tuned": "185 hp",
+      "power_increase_percent": "+ 52%",
+      "power_difference": "+63 hp",
+      "torque_original": "340 nm",
+      "torque_tuned": "410 nm",
+      "torque_increase_percent": "+ 21%",
+      "torque_difference": "+70 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T18:58:58.460438"
+  },
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "77",
+    "brand_name": "MAN",
+    "model_id": "954",
+    "model_name": "TGE",
+    "generation_id": "1870",
+    "generation_name": "2017 -&gt; ...",
+    "engine_id": "11024",
+    "engine_name": "2.0 TDI CR - 140hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "140 hp",
+      "power_tuned": "185 hp",
+      "power_increase_percent": "+ 32%",
+      "power_difference": "+45 hp",
+      "torque_original": "340 nm",
+      "torque_tuned": "410 nm",
+      "torque_increase_percent": "+ 21%",
+      "torque_difference": "+70 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T18:58:58.561215"
+  },
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "77",
+    "brand_name": "MAN",
+    "model_id": "954",
+    "model_name": "TGE",
+    "generation_id": "1870",
+    "generation_name": "2017 -&gt; ...",
+    "engine_id": "11025",
+    "engine_name": "2.0 TDI CR - 177hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "177 hp",
+      "power_tuned": "205 hp",
+      "power_increase_percent": "+ 16%",
+      "power_difference": "+28 hp",
+      "torque_original": "400 nm",
+      "torque_tuned": "450 nm",
+      "torque_increase_percent": "+ 12%",
+      "torque_difference": "+50 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T18:58:58.668753"
+  }
+]

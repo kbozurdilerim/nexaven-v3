@@ -1,0 +1,132 @@
+[
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "28",
+    "brand_name": "KTM",
+    "model_id": "282",
+    "model_name": "X-Bow",
+    "generation_id": "420",
+    "generation_name": "2008 -&gt; ...",
+    "engine_id": "1926",
+    "engine_name": "2.0TFSI - 240hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "240 hp",
+      "power_tuned": "260 hp",
+      "power_increase_percent": "+ 8%",
+      "power_difference": "+20 hp",
+      "torque_original": "310 nm",
+      "torque_tuned": "370 nm",
+      "torque_increase_percent": "+ 19%",
+      "torque_difference": "+60 nm"
+    },
+    "stage2": {
+      "stage": "Stage 2",
+      "power_original": "240 hp",
+      "power_tuned": "275 hp",
+      "power_increase_percent": "+ 15%",
+      "power_difference": "+35 hp",
+      "torque_original": "310 nm",
+      "torque_tuned": "400 nm",
+      "torque_increase_percent": "+ 29%",
+      "torque_difference": "+90 nm"
+    },
+    "scraped_at": "2026-01-20T18:59:36.085071"
+  },
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "28",
+    "brand_name": "KTM",
+    "model_id": "282",
+    "model_name": "X-Bow",
+    "generation_id": "421",
+    "generation_name": "2012 -&gt; ...",
+    "engine_id": "1927",
+    "engine_name": "X-Bow R - 300hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "300 hp",
+      "power_tuned": "340 hp",
+      "power_increase_percent": "+ 13%",
+      "power_difference": "+40 hp",
+      "torque_original": "400 nm",
+      "torque_tuned": "460 nm",
+      "torque_increase_percent": "+ 15%",
+      "torque_difference": "+60 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T18:59:36.187306"
+  },
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "28",
+    "brand_name": "KTM",
+    "model_id": "282",
+    "model_name": "X-Bow",
+    "generation_id": "422",
+    "generation_name": "2014 -&gt; ...",
+    "engine_id": "1929",
+    "engine_name": "X-Bow GT - 285hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "285 hp",
+      "power_tuned": "340 hp",
+      "power_increase_percent": "+ 19%",
+      "power_difference": "+55 hp",
+      "torque_original": "420 nm",
+      "torque_tuned": "460 nm",
+      "torque_increase_percent": "+ 10%",
+      "torque_difference": "+40 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T18:59:36.290514"
+  },
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "28",
+    "brand_name": "KTM",
+    "model_id": "282",
+    "model_name": "X-Bow",
+    "generation_id": "422",
+    "generation_name": "2014 -&gt; ...",
+    "engine_id": "1930",
+    "engine_name": "X-Bow R - 300hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "300 hp",
+      "power_tuned": "340 hp",
+      "power_increase_percent": "+ 13%",
+      "power_difference": "+40 hp",
+      "torque_original": "400 nm",
+      "torque_tuned": "460 nm",
+      "torque_increase_percent": "+ 15%",
+      "torque_difference": "+60 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T18:59:36.339125"
+  },
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "28",
+    "brand_name": "KTM",
+    "model_id": "282",
+    "model_name": "X-Bow",
+    "generation_id": "422",
+    "generation_name": "2014 -&gt; ...",
+    "engine_id": "1928",
+    "engine_name": "X-Bow RR - 360hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "360 hp",
+      "power_tuned": "420 hp",
+      "power_increase_percent": "+ 17%",
+      "power_difference": "+60 hp",
+      "torque_original": "450 nm",
+      "torque_tuned": "500 nm",
+      "torque_increase_percent": "+ 11%",
+      "torque_difference": "+50 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T18:59:36.397805"
+  }
+]

@@ -1,0 +1,122 @@
+[
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "50",
+    "brand_name": "Rolls Royce",
+    "model_id": "1309",
+    "model_name": "Cullinan",
+    "generation_id": "2505",
+    "generation_name": "2018 -&gt; ...",
+    "engine_id": "14179",
+    "engine_name": "6.75 V12 - 571hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "571 hp",
+      "power_tuned": "620 hp",
+      "power_increase_percent": "+ 9%",
+      "power_difference": "+49 hp",
+      "torque_original": "850 nm",
+      "torque_tuned": "950 nm",
+      "torque_increase_percent": "+ 12%",
+      "torque_difference": "+100 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T19:00:08.190972"
+  },
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "50",
+    "brand_name": "Rolls Royce",
+    "model_id": "918",
+    "model_name": "Dawn",
+    "generation_id": "1673",
+    "generation_name": "All Years",
+    "engine_id": "9400",
+    "engine_name": "6.6 V12 - 571hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "571 hp",
+      "power_tuned": "700 hp",
+      "power_increase_percent": "+ 23%",
+      "power_difference": "+129 hp",
+      "torque_original": "780 nm",
+      "torque_tuned": "950 nm",
+      "torque_increase_percent": "+ 22%",
+      "torque_difference": "+170 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T19:00:08.535913"
+  },
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "50",
+    "brand_name": "Rolls Royce",
+    "model_id": "1310",
+    "model_name": "Ghost",
+    "generation_id": "2506",
+    "generation_name": "All Years",
+    "engine_id": "14180",
+    "engine_name": "6.6 V12 - 570hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "570 hp",
+      "power_tuned": "700 hp",
+      "power_increase_percent": "+ 23%",
+      "power_difference": "+130 hp",
+      "torque_original": "820 nm",
+      "torque_tuned": "950 nm",
+      "torque_increase_percent": "+ 16%",
+      "torque_difference": "+130 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T19:00:09.193970"
+  },
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "50",
+    "brand_name": "Rolls Royce",
+    "model_id": "1310",
+    "model_name": "Ghost",
+    "generation_id": "2506",
+    "generation_name": "All Years",
+    "engine_id": "14181",
+    "engine_name": "6.6 V12 - 612hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "612 hp",
+      "power_tuned": "700 hp",
+      "power_increase_percent": "+ 14%",
+      "power_difference": "+88 hp",
+      "torque_original": "840 nm",
+      "torque_tuned": "950 nm",
+      "torque_increase_percent": "+ 13%",
+      "torque_difference": "+110 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T19:00:09.302676"
+  },
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "50",
+    "brand_name": "Rolls Royce",
+    "model_id": "494",
+    "model_name": "Wraith",
+    "generation_id": "751",
+    "generation_name": "All Years",
+    "engine_id": "3536",
+    "engine_name": "6.6 V12 - 633hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "633 hp",
+      "power_tuned": "700 hp",
+      "power_increase_percent": "+ 11%",
+      "power_difference": "+67 hp",
+      "torque_original": "795 nm",
+      "torque_tuned": "950 nm",
+      "torque_increase_percent": "+ 19%",
+      "torque_difference": "+155 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T19:00:09.954815"
+  }
+]

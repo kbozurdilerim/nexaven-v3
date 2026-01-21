@@ -1,0 +1,50 @@
+[
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "105",
+    "brand_name": "Roewe",
+    "model_id": "1308",
+    "model_name": "550",
+    "generation_id": "2504",
+    "generation_name": "2008 -&gt; ...",
+    "engine_id": "14178",
+    "engine_name": "1.8i - 130hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "130 hp",
+      "power_tuned": "140 hp",
+      "power_increase_percent": "+ 8%",
+      "power_difference": "+10 hp",
+      "torque_original": "168 nm",
+      "torque_tuned": "185 nm",
+      "torque_increase_percent": "+ 10%",
+      "torque_difference": "+17 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T19:00:07.192032"
+  },
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "105",
+    "brand_name": "Roewe",
+    "model_id": "1308",
+    "model_name": "550",
+    "generation_id": "2504",
+    "generation_name": "2008 -&gt; ...",
+    "engine_id": "14177",
+    "engine_name": "1.8T - 160hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "160 hp",
+      "power_tuned": "190 hp",
+      "power_increase_percent": "+ 19%",
+      "power_difference": "+30 hp",
+      "torque_original": "215 nm",
+      "torque_tuned": "285 nm",
+      "torque_increase_percent": "+ 33%",
+      "torque_difference": "+70 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T19:00:07.307168"
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "113",
+    "brand_name": "Dallara",
+    "model_id": "1400",
+    "model_name": "Stradale",
+    "generation_id": "2658",
+    "generation_name": "2017 -&gt; ...",
+    "engine_id": "15131",
+    "engine_name": "2.3T Ecoboost - 400hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "400 hp",
+      "power_tuned": "422 hp",
+      "power_increase_percent": "+ 6%",
+      "power_difference": "+22 hp",
+      "torque_original": "500 nm",
+      "torque_tuned": "525 nm",
+      "torque_increase_percent": "+ 5%",
+      "torque_difference": "+25 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T18:59:18.330647"
+  }
+]

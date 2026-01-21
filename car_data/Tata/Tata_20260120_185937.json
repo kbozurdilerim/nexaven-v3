@@ -1,0 +1,26 @@
+[
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "59",
+    "brand_name": "Tata",
+    "model_id": "541",
+    "model_name": "Safari/Xenon",
+    "generation_id": "821",
+    "generation_name": "All Years",
+    "engine_id": "3880",
+    "engine_name": "2.2 Dicor - 140hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "140 hp",
+      "power_tuned": "170 hp",
+      "power_increase_percent": "+ 21%",
+      "power_difference": "+30 hp",
+      "torque_original": "320 nm",
+      "torque_tuned": "380 nm",
+      "torque_increase_percent": "+ 19%",
+      "torque_difference": "+60 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T18:59:37.561225"
+  }
+]
