@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { LogOut, Users, MessageCircle, Upload, Check, X, Send, Download, Eye, Trash2, Plus, UserCheck, Bot, Monitor, Zap } from 'lucide-react'
+import { LogOut, Users, MessageCircle, Upload, Check, X, Send, Download, Eye, Trash2, Plus, UserCheck, Bot, Monitor, Zap, Brain } from 'lucide-react'
 import CustomerApprovalSystem from '../components/CustomerApprovalSystem'
 import EnhancedCustomerManagement from '../components/EnhancedCustomerManagement'
 import OllamaChat from '../components/OllamaChat'
+import AITrainingSystem from '../components/AITrainingSystem'
 
 // Test data initialization - Only if no real data exists
 const initializeTestData = () => {
@@ -104,7 +105,7 @@ interface UploadedFile {
 export default function ZorluEcuAdminDashboardEnhanced() {
   const navigate = useNavigate()
   const [adminUser, setAdminUser] = useState<any>(null)
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'customers' | 'orders' | 'approvals' | 'management' | 'chat' | 'files' | 'ai-ecu'>('dashboard')
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'customers' | 'orders' | 'approvals' | 'management' | 'chat' | 'files' | 'ai-ecu' | 'ai-training'>('dashboard')
   const [selectedCustomer, setSelectedCustomer] = useState<CorporateUser | null>(null)
   const [customers, setCustomers] = useState<CorporateUser[]>([])
   const [orders, setOrders] = useState<Order[]>([])
@@ -341,7 +342,8 @@ export default function ZorluEcuAdminDashboardEnhanced() {
               { id: 'management', label: '🏢 Müşteri Yönetimi', icon: '🏢' },
               { id: 'chat', label: '💬 Mesajlar', icon: '💬' },
               { id: 'files', label: '📄 Dosyalar', icon: '📄' },
-              { id: 'ai-ecu', label: '🤖 AI ECU Tuning', icon: '🤖' }
+              { id: 'ai-ecu', label: '🤖 AI ECU Tuning', icon: '🤖' },
+              { id: 'ai-training', label: '🧠 AI Öğretme', icon: '🧠' }
             ].map(tab => (
               <button
                 key={tab.id}
@@ -812,6 +814,18 @@ export default function ZorluEcuAdminDashboardEnhanced() {
                 </div>
               ))}
             </div>
+          </div>
+        )}
+
+        {/* AI Training System Tab */}
+        {activeTab === 'ai-training' && (
+          <div className="space-y-6">
+            <div className="text-center mb-6">
+              <h2 className="text-3xl font-bold text-white mb-2">🧠 AI Öğretme & Modlama Sistemi</h2>
+              <p className="text-white/60">Orijinal ECU dosyalarını yükleyin, AI ile öğretin ve modlayın</p>
+            </div>
+
+            <AITrainingSystem />
           </div>
         )}
       </main>

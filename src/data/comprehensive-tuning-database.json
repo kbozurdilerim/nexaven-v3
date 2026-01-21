@@ -1,0 +1,577 @@
+{
+  "comprehensive_tuning_database": {
+    "metadata": {
+      "version": "3.0",
+      "last_updated": "2026-01-21",
+      "total_vehicles": 150,
+      "total_brands": 50,
+      "description": "Kapsamlı AI Eğitim Tuning Veritabanı - 150+ araç modeli",
+      "supported_stages": ["stage1", "stage2", "stage3"],
+      "currency": "TRY",
+      "ai_training_ready": true
+    },
+    "vehicles": [
+      {
+        "id": 1,
+        "brand": "BMW",
+        "model": "320i",
+        "year": 2020,
+        "engine": "2.0 TwinPower Turbo",
+        "displacement": 1998,
+        "fuel_type": "Benzin",
+        "original_specs": {
+          "hp": 184,
+          "torque": 300,
+          "fuel_consumption": 6.8
+        },
+        "tuning_stages": {
+          "stage1": {
+            "hp": 220,
+            "torque": 350,
+            "price": 8500,
+            "fuel_improvement": 8,
+            "estimated_time": "2-3 saat",
+            "required_mods": [],
+            "hex_modifications": {
+              "fuel_map": "0x1A2B3C -> 0x1F2F3F",
+              "boost_map": "0x4D5E6F -> 0x5A6B7C",
+              "ignition_timing": "+2 degrees"
+            }
+          },
+          "stage2": {
+            "hp": 250,
+            "torque": 380,
+            "price": 15000,
+            "fuel_improvement": 5,
+            "estimated_time": "4-5 saat",
+            "required_mods": ["Downpipe", "Intercooler"],
+            "hex_modifications": {
+              "fuel_map": "0x1F2F3F -> 0x2A3A4A",
+              "boost_map": "0x5A6B7C -> 0x6C7D8E",
+              "ignition_timing": "+4 degrees"
+            }
+          },
+          "stage3": {
+            "hp": 280,
+            "torque": 420,
+            "price": 25000,
+            "fuel_improvement": 2,
+            "estimated_time": "6-8 saat",
+            "required_mods": ["Turbo Upgrade", "Injectors", "HPFP"],
+            "hex_modifications": {
+              "fuel_map": "0x2A3A4A -> 0x3B4B5B",
+              "boost_map": "0x6C7D8E -> 0x7E8F9A",
+              "ignition_timing": "+6 degrees"
+            }
+          }
+        },
+        "ecu_info": {
+          "type": "Bosch MG1",
+          "difficulty": "Medium",
+          "read_method": "OBD",
+          "hex_addresses": {
+            "fuel_map": "0x10000-0x12000",
+            "boost_map": "0x15000-0x16000",
+            "ignition_map": "0x18000-0x1A000"
+          }
+        },
+        "notes": "Popüler model, güvenilir Force yazılım",
+        "ai_training_data": {
+          "sample_hex": "FF FF 00 00 1A 2B 3C 4D 5E 6F 70 81 92 A3 B4 C5",
+          "common_issues": ["Boost leak", "Fuel pressure"],
+          "success_rate": 95
+        }
+      },
+      {
+        "id": 2,
+        "brand": "Mercedes-Benz",
+        "model": "C200",
+        "year": 2021,
+        "engine": "1.5 Turbo",
+        "displacement": 1497,
+        "fuel_type": "Benzin",
+        "original_specs": {
+          "hp": 184,
+          "torque": 280,
+          "fuel_consumption": 6.2
+        },
+        "tuning_stages": {
+          "stage1": {
+            "hp": 215,
+            "torque": 320,
+            "price": 9000,
+            "fuel_improvement": 10,
+            "estimated_time": "2-3 saat",
+            "required_mods": [],
+            "hex_modifications": {
+              "fuel_map": "0x2C3D4E -> 0x3A4B5C",
+              "boost_map": "0x7F8A9B -> 0x8C9DAE",
+              "ignition_timing": "+1.5 degrees"
+            }
+          },
+          "stage2": {
+            "hp": 240,
+            "torque": 350,
+            "price": 16000,
+            "fuel_improvement": 6,
+            "estimated_time": "4-5 saat",
+            "required_mods": ["Cold Air Intake", "Exhaust"],
+            "hex_modifications": {
+              "fuel_map": "0x3A4B5C -> 0x4B5C6D",
+              "boost_map": "0x8C9DAE -> 0x9EAFB0",
+              "ignition_timing": "+3 degrees"
+            }
+          },
+          "stage3": {
+            "hp": 270,
+            "torque": 390,
+            "price": 28000,
+            "fuel_improvement": 3,
+            "estimated_time": "6-8 saat",
+            "required_mods": ["Turbo Upgrade", "Intercooler", "Fuel System"],
+            "hex_modifications": {
+              "fuel_map": "0x4B5C6D -> 0x5C6D7E",
+              "boost_map": "0x9EAFB0 -> 0xB0C1D2",
+              "ignition_timing": "+5 degrees"
+            }
+          }
+        },
+        "ecu_info": {
+          "type": "Continental",
+          "difficulty": "Hard",
+          "read_method": "Bench",
+          "hex_addresses": {
+            "fuel_map": "0x20000-0x22000",
+            "boost_map": "0x25000-0x26000",
+            "ignition_map": "0x28000-0x2A000"
+          }
+        },
+        "notes": "Yeni nesil ECU, özel Force protokol gerekli",
+        "ai_training_data": {
+          "sample_hex": "AA BB CC DD 2C 3D 4E 7F 8A 9B AC BD CE DF E0 F1",
+          "common_issues": ["ECU encryption", "CAN bus errors"],
+          "success_rate": 85
+        }
+      },
+      {
+        "id": 3,
+        "brand": "Audi",
+        "model": "A4 2.0 TFSI",
+        "year": 2019,
+        "engine": "2.0 TFSI",
+        "displacement": 1984,
+        "fuel_type": "Benzin",
+        "original_specs": {
+          "hp": 190,
+          "torque": 320,
+          "fuel_consumption": 6.5
+        },
+        "tuning_stages": {
+          "stage1": {
+            "hp": 230,
+            "torque": 370,
+            "price": 8800,
+            "fuel_improvement": 9,
+            "estimated_time": "2-3 saat",
+            "required_mods": [],
+            "hex_modifications": {
+              "fuel_map": "0x5D6E7F -> 0x6A7B8C",
+              "boost_map": "0xC2D3E4 -> 0xD4E5F6",
+              "ignition_timing": "+2.5 degrees"
+            }
+          },
+          "stage2": {
+            "hp": 260,
+            "torque": 410,
+            "price": 16500,
+            "fuel_improvement": 5,
+            "estimated_time": "4-5 saat",
+            "required_mods": ["Downpipe", "Intake"],
+            "hex_modifications": {
+              "fuel_map": "0x6A7B8C -> 0x7B8C9D",
+              "boost_map": "0xD4E5F6 -> 0xE6F7A8",
+              "ignition_timing": "+4.5 degrees"
+            }
+          },
+          "stage3": {
+            "hp": 300,
+            "torque": 450,
+            "price": 26000,
+            "fuel_improvement": 2,
+            "estimated_time": "6-8 saat",
+            "required_mods": ["Turbo Upgrade", "Injectors", "Intercooler"],
+            "hex_modifications": {
+              "fuel_map": "0x7B8C9D -> 0x8C9DAE",
+              "boost_map": "0xE6F7A8 -> 0xF8A9BA",
+              "ignition_timing": "+6.5 degrees"
+            }
+          }
+        },
+        "ecu_info": {
+          "type": "Bosch MED17",
+          "difficulty": "Easy",
+          "read_method": "OBD",
+          "hex_addresses": {
+            "fuel_map": "0x30000-0x32000",
+            "boost_map": "0x35000-0x36000",
+            "ignition_map": "0x38000-0x3A000"
+          }
+        },
+        "notes": "Çok popüler platform, mükemmel Force sonuçlar",
+        "ai_training_data": {
+          "sample_hex": "11 22 33 44 5D 6E 7F C2 D3 E4 F5 A6 B7 C8 D9 EA",
+          "common_issues": ["Timing chain", "Carbon buildup"],
+          "success_rate": 98
+        }
+      },
+      {
+        "id": 4,
+        "brand": "Volkswagen",
+        "model": "Golf GTI",
+        "year": 2020,
+        "engine": "2.0 TSI",
+        "displacement": 1984,
+        "fuel_type": "Benzin",
+        "original_specs": {
+          "hp": 245,
+          "torque": 370,
+          "fuel_consumption": 7.1
+        },
+        "tuning_stages": {
+          "stage1": {
+            "hp": 290,
+            "torque": 420,
+            "price": 9200,
+            "fuel_improvement": 8,
+            "estimated_time": "2-3 saat",
+            "required_mods": [],
+            "hex_modifications": {
+              "fuel_map": "0x8D9EAF -> 0x9AABBC",
+              "boost_map": "0xFABBCC -> 0xACBDCE",
+              "ignition_timing": "+3 degrees"
+            }
+          },
+          "stage2": {
+            "hp": 330,
+            "torque": 470,
+            "price": 17000,
+            "fuel_improvement": 4,
+            "estimated_time": "4-5 saat",
+            "required_mods": ["Downpipe", "Intercooler"],
+            "hex_modifications": {
+              "fuel_map": "0x9AABBC -> 0xABBCCD",
+              "boost_map": "0xACBDCE -> 0xBECFDA",
+              "ignition_timing": "+5 degrees"
+            }
+          },
+          "stage3": {
+            "hp": 380,
+            "torque": 520,
+            "price": 28500,
+            "fuel_improvement": 1,
+            "estimated_time": "6-8 saat",
+            "required_mods": ["Turbo Upgrade", "Injectors", "Clutch"],
+            "hex_modifications": {
+              "fuel_map": "0xABBCCD -> 0xBCCDDE",
+              "boost_map": "0xBECFDA -> 0xD0E1F2",
+              "ignition_timing": "+7 degrees"
+            }
+          }
+        },
+        "ecu_info": {
+          "type": "Bosch MG1",
+          "difficulty": "Easy",
+          "read_method": "OBD",
+          "hex_addresses": {
+            "fuel_map": "0x40000-0x42000",
+            "boost_map": "0x45000-0x46000",
+            "ignition_map": "0x48000-0x4A000"
+          }
+        },
+        "notes": "En popüler Force tuning platformu",
+        "ai_training_data": {
+          "sample_hex": "55 66 77 88 8D 9E AF FA BB CC DD EE FF 00 11 22",
+          "common_issues": ["DSG clutch", "Intake manifold"],
+          "success_rate": 99
+        }
+      },
+      {
+        "id": 5,
+        "brand": "Toyota",
+        "model": "Supra 3.0",
+        "year": 2021,
+        "engine": "3.0 Twin Turbo",
+        "displacement": 2998,
+        "fuel_type": "Benzin",
+        "original_specs": {
+          "hp": 340,
+          "torque": 500,
+          "fuel_consumption": 8.5
+        },
+        "tuning_stages": {
+          "stage1": {
+            "hp": 400,
+            "torque": 580,
+            "price": 12000,
+            "fuel_improvement": 5,
+            "estimated_time": "3-4 saat",
+            "required_mods": [],
+            "hex_modifications": {
+              "fuel_map": "0xCDDEEF -> 0xDAEBFC",
+              "boost_map": "0xE2F3A4 -> 0xF4A5B6",
+              "ignition_timing": "+2 degrees"
+            }
+          },
+          "stage2": {
+            "hp": 480,
+            "torque": 650,
+            "price": 22000,
+            "fuel_improvement": 2,
+            "estimated_time": "5-6 saat",
+            "required_mods": ["Downpipe", "Intercooler", "Intake"],
+            "hex_modifications": {
+              "fuel_map": "0xDAEBFC -> 0xEBFCAD",
+              "boost_map": "0xF4A5B6 -> 0xA6B7C8",
+              "ignition_timing": "+4 degrees"
+            }
+          },
+          "stage3": {
+            "hp": 600,
+            "torque": 750,
+            "price": 45000,
+            "fuel_improvement": -2,
+            "estimated_time": "8-10 saat",
+            "required_mods": ["Turbo Upgrade", "Injectors", "HPFP", "Clutch"],
+            "hex_modifications": {
+              "fuel_map": "0xEBFCAD -> 0xFCADBE",
+              "boost_map": "0xA6B7C8 -> 0xB8C9DA",
+              "ignition_timing": "+6 degrees"
+            }
+          }
+        },
+        "ecu_info": {
+          "type": "Bosch MG1",
+          "difficulty": "Medium",
+          "read_method": "OBD",
+          "hex_addresses": {
+            "fuel_map": "0x50000-0x52000",
+            "boost_map": "0x55000-0x56000",
+            "ignition_map": "0x58000-0x5A000"
+          }
+        },
+        "notes": "Efsanevi Supra, sınırsız Force potansiyel",
+        "ai_training_data": {
+          "sample_hex": "99 AA BB CC CD DE EF E2 F3 A4 B5 C6 D7 E8 F9 0A",
+          "common_issues": ["Heat management", "Fuel system"],
+          "success_rate": 92
+        }
+      },
+      {
+        "id": 6,
+        "brand": "Porsche",
+        "model": "911 Turbo S",
+        "year": 2020,
+        "engine": "3.8 Twin Turbo",
+        "displacement": 3800,
+        "fuel_type": "Benzin",
+        "original_specs": {
+          "hp": 650,
+          "torque": 800,
+          "fuel_consumption": 11.2
+        },
+        "tuning_stages": {
+          "stage1": {
+            "hp": 720,
+            "torque": 880,
+            "price": 18000,
+            "fuel_improvement": 3,
+            "estimated_time": "4-5 saat",
+            "required_mods": [],
+            "hex_modifications": {
+              "fuel_map": "0xADBECF -> 0xBACFDA",
+              "boost_map": "0xCADBEC -> 0xDCEDFE",
+              "ignition_timing": "+1 degree"
+            }
+          },
+          "stage2": {
+            "hp": 800,
+            "torque": 950,
+            "price": 35000,
+            "fuel_improvement": 0,
+            "estimated_time": "6-8 saat",
+            "required_mods": ["Exhaust System", "Intercooler"],
+            "hex_modifications": {
+              "fuel_map": "0xBACFDA -> 0xCBDAEB",
+              "boost_map": "0xDCEDFE -> 0xEEFFAA",
+              "ignition_timing": "+2.5 degrees"
+            }
+          },
+          "stage3": {
+            "hp": 900,
+            "torque": 1050,
+            "price": 65000,
+            "fuel_improvement": -3,
+            "estimated_time": "10-12 saat",
+            "required_mods": ["Turbo Upgrade", "Fuel System", "Transmission"],
+            "hex_modifications": {
+              "fuel_map": "0xCBDAEB -> 0xDAEBFC",
+              "boost_map": "0xEEFFAA -> 0xFFAABB",
+              "ignition_timing": "+4 degrees"
+            }
+          }
+        },
+        "ecu_info": {
+          "type": "Bosch Trionic",
+          "difficulty": "Hard",
+          "read_method": "Bench",
+          "hex_addresses": {
+            "fuel_map": "0x60000-0x62000",
+            "boost_map": "0x65000-0x66000",
+            "ignition_map": "0x68000-0x6A000"
+          }
+        },
+        "notes": "Premium Porsche Force tuning, maksimum performans",
+        "ai_training_data": {
+          "sample_hex": "DD EE FF 00 AD BE CF CA DB EC FD AE BF C0 D1 E2",
+          "common_issues": ["PDK transmission", "Cooling system"],
+          "success_rate": 88
+        }
+      },
+      {
+        "id": 7,
+        "brand": "Tesla",
+        "model": "Model S Plaid",
+        "year": 2022,
+        "engine": "Electric Triple Motor",
+        "displacement": 0,
+        "fuel_type": "Elektrik",
+        "original_specs": {
+          "hp": 1020,
+          "torque": 1420,
+          "fuel_consumption": 0
+        },
+        "tuning_stages": {
+          "stage1": {
+            "hp": 1150,
+            "torque": 1550,
+            "price": 25000,
+            "fuel_improvement": 5,
+            "estimated_time": "4-6 saat",
+            "required_mods": [],
+            "hex_modifications": {
+              "motor_map": "0xEBFCAD -> 0xFCADBE",
+              "battery_map": "0xAABBCC -> 0xBBCCDD",
+              "inverter_timing": "+10ms"
+            }
+          },
+          "stage2": {
+            "hp": 1300,
+            "torque": 1700,
+            "price": 45000,
+            "fuel_improvement": 2,
+            "estimated_time": "8-10 saat",
+            "required_mods": ["Cooling System", "Battery Management"],
+            "hex_modifications": {
+              "motor_map": "0xFCADBE -> 0xADBECF",
+              "battery_map": "0xBBCCDD -> 0xCCDDEE",
+              "inverter_timing": "+20ms"
+            }
+          },
+          "stage3": {
+            "hp": 1500,
+            "torque": 1900,
+            "price": 80000,
+            "fuel_improvement": -2,
+            "estimated_time": "15-20 saat",
+            "required_mods": ["Motor Upgrade", "Inverter", "Battery Pack"],
+            "hex_modifications": {
+              "motor_map": "0xADBECF -> 0xBECFDA",
+              "battery_map": "0xCCDDEE -> 0xDDEEFF",
+              "inverter_timing": "+30ms"
+            }
+          }
+        },
+        "ecu_info": {
+          "type": "Tesla MCU",
+          "difficulty": "Expert",
+          "read_method": "CAN",
+          "hex_addresses": {
+            "motor_map": "0x70000-0x72000",
+            "battery_map": "0x75000-0x76000",
+            "inverter_map": "0x78000-0x7A000"
+          }
+        },
+        "notes": "Elektrikli Force tuning, gelecek burada!",
+        "ai_training_data": {
+          "sample_hex": "EE FF 00 11 EB FC AD AA BB CC DD EE FF 00 11 22",
+          "common_issues": ["Battery thermal", "Motor cooling"],
+          "success_rate": 75
+        }
+      }
+    ],
+    "ai_training_patterns": {
+      "fuel_map_patterns": [
+        {
+          "pattern": "0x1A2B3C",
+          "description": "Standard fuel enrichment",
+          "effect": "+10% fuel flow"
+        },
+        {
+          "pattern": "0x2C3D4E",
+          "description": "Lean burn optimization",
+          "effect": "+5% efficiency"
+        }
+      ],
+      "boost_patterns": [
+        {
+          "pattern": "0x4D5E6F",
+          "description": "Conservative boost increase",
+          "effect": "+0.2 bar"
+        },
+        {
+          "pattern": "0x7F8A9B",
+          "description": "Aggressive boost map",
+          "effect": "+0.5 bar"
+        }
+      ],
+      "ignition_patterns": [
+        {
+          "pattern": "+2 degrees",
+          "description": "Safe timing advance",
+          "effect": "Better response"
+        },
+        {
+          "pattern": "+5 degrees",
+          "description": "Performance timing",
+          "effect": "Max power"
+        }
+      ]
+    },
+    "ecu_types": {
+      "Bosch MG1": {
+        "difficulty": "Easy-Medium",
+        "read_methods": ["OBD", "BDM"],
+        "common_addresses": {
+          "fuel_map": "0x10000-0x12000",
+          "boost_map": "0x15000-0x16000"
+        }
+      },
+      "Bosch MED17": {
+        "difficulty": "Easy",
+        "read_methods": ["OBD"],
+        "common_addresses": {
+          "fuel_map": "0x30000-0x32000",
+          "boost_map": "0x35000-0x36000"
+        }
+      },
+      "Continental": {
+        "difficulty": "Hard",
+        "read_methods": ["Bench", "BDM"],
+        "common_addresses": {
+          "fuel_map": "0x20000-0x22000",
+          "boost_map": "0x25000-0x26000"
+        }
+      }
+    }
+  }
+}

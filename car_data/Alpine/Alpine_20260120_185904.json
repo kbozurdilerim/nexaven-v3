@@ -1,0 +1,50 @@
+[
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "111",
+    "brand_name": "Alpine",
+    "model_id": "1393",
+    "model_name": "A110",
+    "generation_id": "2651",
+    "generation_name": "2017 -&gt; ...",
+    "engine_id": "15038",
+    "engine_name": "1.8 Turbo - 252hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "252 hp",
+      "power_tuned": "285 hp",
+      "power_increase_percent": "+ 13%",
+      "power_difference": "+33 hp",
+      "torque_original": "320 nm",
+      "torque_tuned": "430 nm",
+      "torque_increase_percent": "+ 34%",
+      "torque_difference": "+110 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T18:59:04.416125"
+  },
+  {
+    "vehicle_type": "Cars-Vans",
+    "brand_id": "111",
+    "brand_name": "Alpine",
+    "model_id": "1393",
+    "model_name": "A110",
+    "generation_id": "2651",
+    "generation_name": "2017 -&gt; ...",
+    "engine_id": "15039",
+    "engine_name": "S 1.8 Turbo - 292hp",
+    "stage1": {
+      "stage": "Stage 1",
+      "power_original": "292 hp",
+      "power_tuned": "310 hp",
+      "power_increase_percent": "+ 6%",
+      "power_difference": "+18 hp",
+      "torque_original": "320 nm",
+      "torque_tuned": "430 nm",
+      "torque_increase_percent": "+ 34%",
+      "torque_difference": "+110 nm"
+    },
+    "stage2": null,
+    "scraped_at": "2026-01-20T18:59:04.518618"
+  }
+]

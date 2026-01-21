@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Send, Bot, User, Loader2, Zap, Code, FileText, Settings, Cpu, HardDrive, Upload, Download } from 'lucide-react'
+import { Send, Bot, User, Loader2, Zap, Code, FileText, Settings, Cpu, HardDrive, Upload, Download, HexagonIcon } from 'lucide-react'
 
 interface ChatMessage {
   id: string
@@ -8,6 +8,11 @@ interface ChatMessage {
   content: string
   timestamp: string
   type?: 'text' | 'code' | 'file' | 'system'
+  file?: {
+    name: string
+    size: number
+    hexPreview?: string
+  }
 }
 
 interface OllamaChatProps {
@@ -25,7 +30,74 @@ export default function OllamaChat({ onECUCommand, ecuFile }: OllamaChatProps) {
   const [isConnected, setIsConnected] = useState(false)
   const [selectedModel, setSelectedModel] = useState('llama3.2')
   const [availableModels, setAvailableModels] = useState<string[]>([])
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null)
+  const [hexData, setHexData] = useState<string>('')
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
+  // Hex dosya okuma fonksiyonu
+  const readHexFile = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const arrayBuffer = e.target?.result as ArrayBuffer;
+        const uint8Array = new Uint8Array(arrayBuffer);
+        const hexString = Array.from(uint8Array)
+          .map(byte => byte.toString(16).padStart(2, '0').toUpperCase())
+          .join(' ');
+        resolve(hexString);
+      };
+      reader.onerror = reject;
+      reader.readAsArrayBuffer(file);
+    });
+  };
+
+  // Dosya yükleme fonksiyonu
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const hex = await readHexFile(file);
+      setUploadedFile(file);
+      setHexData(hex);
+
+      // Dosya yükleme mesajı ekle
+      const fileMessage: ChatMessage = {
+        id: Date.now().toString(),
+        role: 'user',
+        content: `ECU dosyası yüklendi: ${file.name}`,
+        timestamp: new Date().toLocaleTimeString('tr-TR'),
+        type: 'file',
+        file: {
+          name: file.name,
+          size: file.size,
+          hexPreview: hex.substring(0, 200) + '...'
+        }
+      };
+
+      setMessages(prev => [...prev, fileMessage]);
+
+      // Otomatik analiz başlat
+      await sendMessage(`/ecu analyze
+Dosya: ${file.name}
+Boyut: ${file.size} bytes
+Hex Data (ilk 1000 karakter): ${hex.substring(0, 1000)}
+
+Bu ECU dosyasını analiz et ve şunları belirle:
+1. ECU tipi ve üretici
+2. Mevcut yazılım versiyonu
+3. Tuning potansiyeli
+4. Güvenlik kontrolleri (checksums)
+5. Modifikasyon önerileri
+6. Risk değerlendirmesi
+
+Türkçe detaylı analiz raporu ver.`, false);
+
+    } catch (error) {
+      console.error('Dosya okuma hatası:', error);
+    }
+  };
 
   const ollamaModels = [
     { name: 'llama3.2', display: 'Llama 3.2 (Genel)', description: 'Genel amaçlı AI asistan' },
@@ -121,23 +193,27 @@ Hangi konuda yardım istiyorsunuz?`,
     setMessages([welcomeMessage])
   }
 
-  const sendMessage = async () => {
-    if (!input.trim() || isLoading) return
+  const sendMessage = async (messageText?: string, addToMessages = true) => {
+    const messageContent = messageText || input;
+    if (!messageContent.trim() || isLoading) return
 
-    const userMessage: ChatMessage = {
-      id: Date.now().toString(),
-      role: 'user',
-      content: input,
-      timestamp: new Date().toISOString()
+    if (addToMessages) {
+      const userMessage: ChatMessage = {
+        id: Date.now().toString(),
+        role: 'user',
+        content: messageContent,
+        timestamp: new Date().toLocaleTimeString('tr-TR'),
+        type: 'text'
+      }
+      setMessages(prev => [...prev, userMessage])
     }
 
-    setMessages(prev => [...prev, userMessage])
-    setInput('')
+    if (!messageText) setInput('')
     setIsLoading(true)
 
     // Check for ECU commands
-    if (input.startsWith('/ecu')) {
-      handleECUCommand(input)
+    if (messageContent.startsWith('/ecu')) {
+      handleECUCommand(messageContent)
       setIsLoading(false)
       return
     }
@@ -359,6 +435,26 @@ Dosya başarıyla yüklendi. Analiz için \`/ecu analyze\` komutunu kullanabilir
                     </span>
                   </div>
                   <div className="prose prose-invert max-w-none">
+                    {message.type === 'file' && message.file ? (
+                      <div className="bg-blue-500/20 border border-blue-500/30 rounded-lg p-4 mb-3">
+                        <div className="flex items-center gap-3 mb-3">
+                          <FileText className="w-6 h-6 text-blue-400" />
+                          <div>
+                            <div className="font-medium text-blue-300">{message.file.name}</div>
+                            <div className="text-sm text-blue-400">
+                              {(message.file.size / 1024).toFixed(1)} KB
+                            </div>
+                          </div>
+                        </div>
+                        {message.file.hexPreview && (
+                          <div className="bg-black/40 rounded p-3 font-mono text-xs text-green-400">
+                            <div className="text-blue-300 mb-2">Hex Preview:</div>
+                            {message.file.hexPreview}
+                          </div>
+                        )}
+                      </div>
+                    ) : null}
+                    
                     {message.content.split('\n').map((line, idx) => (
                       <p key={idx} className="mb-2 last:mb-0">
                         {line.startsWith('`') && line.endsWith('`') ? (
@@ -398,7 +494,47 @@ Dosya başarıyla yüklendi. Analiz için \`/ecu analyze\` komutunu kullanabilir
 
       {/* Input */}
       <div className="p-4 border-t border-white/10 bg-white/5">
+        {/* File Upload Area */}
+        {uploadedFile && (
+          <div className="mb-4 p-3 bg-blue-500/20 border border-blue-500/30 rounded-lg">
+            <div className="flex items-center gap-3">
+              <HexagonIcon className="w-5 h-5 text-blue-400" />
+              <div className="flex-1">
+                <div className="text-white font-medium">{uploadedFile.name}</div>
+                <div className="text-blue-300 text-sm">
+                  {(uploadedFile.size / 1024).toFixed(1)} KB • Hex data yüklendi
+                </div>
+              </div>
+              <button
+                onClick={() => {
+                  setUploadedFile(null);
+                  setHexData('');
+                }}
+                className="text-blue-300 hover:text-white"
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+        )}
+
         <div className="flex gap-2">
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileUpload}
+            accept=".bin,.hex,.ecu,.ori,.mod"
+            className="hidden"
+          />
+          
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            className="px-4 py-3 bg-blue-600 hover:bg-blue-700 rounded-xl text-white flex items-center gap-2 transition-all"
+            title="ECU dosyası yükle"
+          >
+            <Upload className="w-5 h-5" />
+          </button>
+
           <input
             type="text"
             value={input}
@@ -409,7 +545,7 @@ Dosya başarıyla yüklendi. Analiz için \`/ecu analyze\` komutunu kullanabilir
             disabled={isLoading}
           />
           <button
-            onClick={sendMessage}
+            onClick={() => sendMessage()}
             disabled={isLoading || !input.trim()}
             className="px-6 py-3 bg-gradient-to-r from-red-500 to-orange-500 rounded-xl text-white font-semibold hover:shadow-lg hover:shadow-red-500/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
