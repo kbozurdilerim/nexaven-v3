@@ -10,6 +10,8 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
+    volumes:
+      - ./car_data:/app/car_data:ro
     networks:
       - nexaven-network
     restart: unless-stopped

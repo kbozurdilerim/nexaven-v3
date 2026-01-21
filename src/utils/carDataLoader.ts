@@ -563,30 +563,47 @@ export async function loadAllCarData(onProgress?: LoadingProgressCallback): Prom
   }
 }
 
-// Marka bazında veri yükleme - daha akıllı dosya bulma
+// Marka bazında veri yükleme - gerçek dosya adlarını kullan
 export async function loadBrandData(brandName: string): Promise<ProcessedCarData[]> {
   try {
-    // Olası dosya adları (timestamp'ler farklı olabilir)
-    const possibleFiles = [
-      `${brandName}_20260120_185857.json`,
-      `${brandName}_20260120_190135.json`,
-      `${brandName}_20260120_190124.json`,
-      `${brandName}_20260120_190000.json`, // Generic timestamp
-      `${brandName}.json` // Fallback
+    // Gerçek dosya adı formatı: BrandName_20260120_HHMMSS.json
+    // Önce en yaygın timestamp'leri dene
+    const possibleTimestamps = [
+      '190135', '190124', '190001', '185857', '185912', '185911', '185851', 
+      '185852', '185853', '185854', '185855', '185856', '185903', '185904',
+      '185908', '185917', '185918', '185922', '185923', '185927', '185928',
+      '185929', '185932', '185934', '185935', '185936', '185937', '185938',
+      '185939', '185940', '185947', '185948', '185949', '185957', '185959',
+      '190000', '190003', '190006', '190007', '190009', '190010', '190013',
+      '190014', '190020', '190057', '190102', '190110', '190134', '190136',
+      '190139', '190159', '190246', '190247', '190248', '190250'
     ];
     
-    for (const fileName of possibleFiles) {
+    for (const timestamp of possibleTimestamps) {
       try {
+        const fileName = `${brandName}_20260120_${timestamp}.json`;
         const response = await fetch(`/car_data/${brandName}/${fileName}`);
         if (response.ok) {
           const rawData: CarDataEntry[] = await response.json();
-          console.log(`${brandName}: ${rawData.length} araç yüklendi`);
+          console.log(`${brandName}: ${rawData.length} araç yüklendi (${fileName})`);
           return processCarData(rawData);
         }
       } catch (error) {
         // Bu dosya bulunamadı, bir sonrakini dene
         continue;
       }
+    }
+    
+    // Hiçbir dosya bulunamazsa generic deneme
+    try {
+      const response = await fetch(`/car_data/${brandName}/${brandName}.json`);
+      if (response.ok) {
+        const rawData: CarDataEntry[] = await response.json();
+        console.log(`${brandName}: ${rawData.length} araç yüklendi (generic)`);
+        return processCarData(rawData);
+      }
+    } catch (error) {
+      // Generic de bulunamadı
     }
     
     throw new Error(`${brandName} için hiçbir JSON dosyası bulunamadı`);

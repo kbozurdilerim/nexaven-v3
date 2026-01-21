@@ -20,8 +20,35 @@ interface OllamaChatProps {
   ecuFile?: File | null
 }
 
-// External Ollama server configuration
-const OLLAMA_BASE_URL = 'http://72.62.178.51:32768'
+// External Ollama server configuration - Handle mixed content
+const OLLAMA_BASE_URL = typeof window !== 'undefined' && window.location.protocol === 'https:' 
+  ? 'https://72.62.178.51:32768' // Try HTTPS first
+  : 'http://72.62.178.51:32768'
+
+// Fallback function for mixed content issues
+const fetchWithFallback = async (url: string, options?: RequestInit) => {
+  try {
+    // Try the primary URL first
+    const response = await fetch(url, options)
+    if (response.ok) return response
+    throw new Error('Primary fetch failed')
+  } catch (error) {
+    console.warn('Primary Ollama connection failed, trying fallback:', error)
+    
+    // If HTTPS failed, try HTTP (for development/mixed content scenarios)
+    if (url.startsWith('https://')) {
+      const httpUrl = url.replace('https://', 'http://')
+      try {
+        return await fetch(httpUrl, options)
+      } catch (httpError) {
+        console.error('Both HTTPS and HTTP Ollama connections failed:', httpError)
+        throw new Error('External Ollama connection failed: ' + httpError.message)
+      }
+    }
+    
+    throw error
+  }
+}
 
 export default function OllamaChat({ onECUCommand, ecuFile }: OllamaChatProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([])
@@ -121,8 +148,8 @@ Türkçe detaylı analiz raporu ver.`, false);
 
   const checkOllamaConnection = async () => {
     try {
-      // Use external Ollama server
-      const response = await fetch(`${OLLAMA_BASE_URL}/api/tags`)
+      // Use external Ollama server with fallback
+      const response = await fetchWithFallback(`${OLLAMA_BASE_URL}/api/tags`)
       
       if (response.ok) {
         const data = await response.json()
@@ -219,8 +246,8 @@ Hangi konuda yardım istiyorsunuz?`,
     }
 
     try {
-      // Use external Ollama server
-      const response = await fetch(`${OLLAMA_BASE_URL}/api/generate`, {
+      // Use external Ollama server with fallback
+      const response = await fetchWithFallback(`${OLLAMA_BASE_URL}/api/generate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

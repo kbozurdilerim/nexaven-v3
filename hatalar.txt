@@ -1,0 +1,1419 @@
+carDataLoader.ts:594 BMW verisi yüklenemedi: Error: BMW için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async cm (carDataLoader.ts:513:27)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:516 BMW: 0 araç yüklendi (Toplam: 0)
+
+carDataLoader.ts:594 Mercedes verisi yüklenemedi: Error: Mercedes için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async cm (carDataLoader.ts:513:27)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:516 Mercedes: 0 araç yüklendi (Toplam: 0)
+
+carDataLoader.ts:594 Audi verisi yüklenemedi: Error: Audi için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async cm (carDataLoader.ts:513:27)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:516 Audi: 0 araç yüklendi (Toplam: 0)
+
+carDataLoader.ts:594 Volkswagen verisi yüklenemedi: Error: Volkswagen için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async cm (carDataLoader.ts:513:27)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:516 Volkswagen: 0 araç yüklendi (Toplam: 0)
+
+carDataLoader.ts:594 Ford verisi yüklenemedi: Error: Ford için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async cm (carDataLoader.ts:513:27)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:516 Ford: 0 araç yüklendi (Toplam: 0)
+
+carDataLoader.ts:594 Toyota verisi yüklenemedi: Error: Toyota için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async cm (carDataLoader.ts:513:27)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:516 Toyota: 0 araç yüklendi (Toplam: 0)
+
+carDataLoader.ts:594 Porsche verisi yüklenemedi: Error: Porsche için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async cm (carDataLoader.ts:513:27)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:516 Porsche: 0 araç yüklendi (Toplam: 0)
+
+carDataLoader.ts:594 Ferrari verisi yüklenemedi: Error: Ferrari için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async cm (carDataLoader.ts:513:27)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:516 Ferrari: 0 araç yüklendi (Toplam: 0)
+
+carDataLoader.ts:524 Diğer markalar yükleniyor...
+
+carDataLoader.ts:594 Alpine verisi yüklenemedi: Error: Alpine için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 2)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Alpine: 0 araç yüklendi
+
+carDataLoader.ts:594 Alfa_Romeo verisi yüklenemedi: Error: Alfa_Romeo için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 0)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Alfa_Romeo: 0 araç yüklendi
+
+carDataLoader.ts:594 Alpina verisi yüklenemedi: Error: Alpina için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 1)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Alpina: 0 araç yüklendi
+
+carDataLoader.ts:594 Aston_Martin verisi yüklenemedi: Error: Aston_Martin için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 3)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Aston_Martin: 0 araç yüklendi
+
+carDataLoader.ts:594 Bentley verisi yüklenemedi: Error: Bentley için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 4)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Bentley: 0 araç yüklendi
+
+carDataLoader.ts:550 Batch 1 tamamlandı. Toplam: 0 araç
+
+carDataLoader.ts:594 Chevrolet verisi yüklenemedi: Error: Chevrolet için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 2)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Chevrolet: 0 araç yüklendi
+
+carDataLoader.ts:594 Chrysler verisi yüklenemedi: Error: Chrysler için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 3)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Chrysler: 0 araç yüklendi
+
+carDataLoader.ts:594 Bugatti verisi yüklenemedi: Error: Bugatti için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 0)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Bugatti: 0 araç yüklendi
+
+carDataLoader.ts:594 Cadillac verisi yüklenemedi: Error: Cadillac için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 1)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Cadillac: 0 araç yüklendi
+
+carDataLoader.ts:594 Citroën verisi yüklenemedi: Error: Citroën için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 4)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Citroën: 0 araç yüklendi
+
+carDataLoader.ts:550 Batch 2 tamamlandı. Toplam: 0 araç
+
+carDataLoader.ts:594 Dacia verisi yüklenemedi: Error: Dacia için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 1)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Dacia: 0 araç yüklendi
+
+carDataLoader.ts:594 Dallara verisi yüklenemedi: Error: Dallara için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 3)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Dallara: 0 araç yüklendi
+
+carDataLoader.ts:594 Cupra verisi yüklenemedi: Error: Cupra için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 0)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Cupra: 0 araç yüklendi
+
+carDataLoader.ts:594 Daewoo verisi yüklenemedi: Error: Daewoo için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 2)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Daewoo: 0 araç yüklendi
+
+carDataLoader.ts:594 Dodge verisi yüklenemedi: Error: Dodge için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 4)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Dodge: 0 araç yüklendi
+
+carDataLoader.ts:550 Batch 3 tamamlandı. Toplam: 0 araç
+
+carDataLoader.ts:594 Geely verisi yüklenemedi: Error: Geely için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 2)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Geely: 0 araç yüklendi
+
+carDataLoader.ts:594 Genesis verisi yüklenemedi: Error: Genesis için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 3)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Genesis: 0 araç yüklendi
+
+carDataLoader.ts:594 Fiat verisi yüklenemedi: Error: Fiat için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 1)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Fiat: 0 araç yüklendi
+
+carDataLoader.ts:594 GMC verisi yüklenemedi: Error: GMC için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 4)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 GMC: 0 araç yüklendi
+
+carDataLoader.ts:594 DS verisi yüklenemedi: Error: DS için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 0)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 DS: 0 araç yüklendi
+
+carDataLoader.ts:550 Batch 4 tamamlandı. Toplam: 0 araç
+
+carDataLoader.ts:594 Hyundai verisi yüklenemedi: Error: Hyundai için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 4)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Hyundai: 0 araç yüklendi
+
+carDataLoader.ts:594 GWM verisi yüklenemedi: Error: GWM için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 0)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 GWM: 0 araç yüklendi
+
+carDataLoader.ts:594 Honda verisi yüklenemedi: Error: Honda için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 2)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Honda: 0 araç yüklendi
+
+carDataLoader.ts:594 Holden verisi yüklenemedi: Error: Holden için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 1)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Holden: 0 araç yüklendi
+
+carDataLoader.ts:594 Hummer verisi yüklenemedi: Error: Hummer için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 3)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Hummer: 0 araç yüklendi
+
+carDataLoader.ts:550 Batch 5 tamamlandı. Toplam: 0 araç
+
+carDataLoader.ts:594 Jaguar verisi yüklenemedi: Error: Jaguar için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 3)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Jaguar: 0 araç yüklendi
+
+carDataLoader.ts:594 Isuzu verisi yüklenemedi: Error: Isuzu için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 1)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Isuzu: 0 araç yüklendi
+
+carDataLoader.ts:594 Iveco verisi yüklenemedi: Error: Iveco için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 2)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Iveco: 0 araç yüklendi
+
+carDataLoader.ts:594 Infiniti verisi yüklenemedi: Error: Infiniti için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 0)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Infiniti: 0 araç yüklendi
+
+carDataLoader.ts:594 Jeep verisi yüklenemedi: Error: Jeep için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 4)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Jeep: 0 araç yüklendi
+
+carDataLoader.ts:550 Batch 6 tamamlandı. Toplam: 0 araç
+
+carDataLoader.ts:594 Lamborghini verisi yüklenemedi: Error: Lamborghini için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 2)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Lamborghini: 0 araç yüklendi
+
+carDataLoader.ts:594 Kia verisi yüklenemedi: Error: Kia için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 0)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Kia: 0 araç yüklendi
+
+carDataLoader.ts:594 Lancia verisi yüklenemedi: Error: Lancia için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 3)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Lancia: 0 araç yüklendi
+
+carDataLoader.ts:594 Landrover verisi yüklenemedi: Error: Landrover için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 4)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Landrover: 0 araç yüklendi
+
+carDataLoader.ts:594 KTM verisi yüklenemedi: Error: KTM için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 1)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 KTM: 0 araç yüklendi
+
+carDataLoader.ts:550 Batch 7 tamamlandı. Toplam: 0 araç
+
+carDataLoader.ts:594 Luxgen verisi yüklenemedi: Error: Luxgen için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 3)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Luxgen: 0 araç yüklendi
+
+carDataLoader.ts:594 Lincoln verisi yüklenemedi: Error: Lincoln için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 1)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Lincoln: 0 araç yüklendi
+
+carDataLoader.ts:594 Lexus verisi yüklenemedi: Error: Lexus için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 0)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Lexus: 0 araç yüklendi
+
+carDataLoader.ts:594 Lynk_&_Co verisi yüklenemedi: Error: Lynk_&_Co için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 4)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Lynk_&_Co: 0 araç yüklendi
+
+carDataLoader.ts:594 Lotus verisi yüklenemedi: Error: Lotus için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 2)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Lotus: 0 araç yüklendi
+
+carDataLoader.ts:550 Batch 8 tamamlandı. Toplam: 0 araç
+
+carDataLoader.ts:594 Mazda verisi yüklenemedi: Error: Mazda için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 3)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Mazda: 0 araç yüklendi
+
+carDataLoader.ts:594 McLaren verisi yüklenemedi: Error: McLaren için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 4)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 McLaren: 0 araç yüklendi
+
+carDataLoader.ts:594 Maserati verisi yüklenemedi: Error: Maserati için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 2)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Maserati: 0 araç yüklendi
+
+carDataLoader.ts:594 MAN verisi yüklenemedi: Error: MAN için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 1)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 MAN: 0 araç yüklendi
+
+carDataLoader.ts:594 Mahindra verisi yüklenemedi: Error: Mahindra için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 0)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Mahindra: 0 araç yüklendi
+
+carDataLoader.ts:550 Batch 9 tamamlandı. Toplam: 0 araç
+
+carDataLoader.ts:594 Mercury verisi yüklenemedi: Error: Mercury için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 0)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Mercury: 0 araç yüklendi
+
+carDataLoader.ts:594 Mitsubishi verisi yüklenemedi: Error: Mitsubishi için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 3)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Mitsubishi: 0 araç yüklendi
+
+carDataLoader.ts:594 MG verisi yüklenemedi: Error: MG için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 1)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 MG: 0 araç yüklendi
+
+carDataLoader.ts:594 Mini verisi yüklenemedi: Error: Mini için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 2)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Mini: 0 araç yüklendi
+
+carDataLoader.ts:594 Nissan verisi yüklenemedi: Error: Nissan için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 4)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Nissan: 0 araç yüklendi
+
+carDataLoader.ts:550 Batch 10 tamamlandı. Toplam: 0 araç
+
+carDataLoader.ts:594 PGO verisi yüklenemedi: Error: PGO için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 3)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 PGO: 0 araç yüklendi
+
+carDataLoader.ts:594 Opel verisi yüklenemedi: Error: Opel için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 0)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Opel: 0 araç yüklendi
+
+carDataLoader.ts:594 Pagani verisi yüklenemedi: Error: Pagani için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 1)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Pagani: 0 araç yüklendi
+
+carDataLoader.ts:594 Peugeot verisi yüklenemedi: Error: Peugeot için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 2)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Peugeot: 0 araç yüklendi
+
+carDataLoader.ts:594 Piaggio verisi yüklenemedi: Error: Piaggio için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 4)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Piaggio: 0 araç yüklendi
+
+carDataLoader.ts:550 Batch 11 tamamlandı. Toplam: 0 araç
+
+carDataLoader.ts:594 Rolls_Royce verisi yüklenemedi: Error: Rolls_Royce için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 3)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Rolls_Royce: 0 araç yüklendi
+
+carDataLoader.ts:594 Rover verisi yüklenemedi: Error: Rover için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 4)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Rover: 0 araç yüklendi
+
+carDataLoader.ts:594 Pontiac verisi yüklenemedi: Error: Pontiac için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 0)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Pontiac: 0 araç yüklendi
+
+carDataLoader.ts:594 Roewe verisi yüklenemedi: Error: Roewe için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 2)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Roewe: 0 araç yüklendi
+
+carDataLoader.ts:594 Renault verisi yüklenemedi: Error: Renault için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 1)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Renault: 0 araç yüklendi
+
+carDataLoader.ts:550 Batch 12 tamamlandı. Toplam: 0 araç
+
+carDataLoader.ts:594 Skoda verisi yüklenemedi: Error: Skoda için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 4)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Skoda: 0 araç yüklendi
+
+carDataLoader.ts:594 Scion verisi yüklenemedi: Error: Scion için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 2)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Scion: 0 araç yüklendi
+
+carDataLoader.ts:594 Saab verisi yüklenemedi: Error: Saab için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 0)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Saab: 0 araç yüklendi
+
+carDataLoader.ts:594 Saturn verisi yüklenemedi: Error: Saturn için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 1)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Saturn: 0 araç yüklendi
+
+carDataLoader.ts:594 Seat verisi yüklenemedi: Error: Seat için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 3)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Seat: 0 araç yüklendi
+
+carDataLoader.ts:550 Batch 13 tamamlandı. Toplam: 0 araç
+
+carDataLoader.ts:594 Subaru verisi yüklenemedi: Error: Subaru için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 2)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Subaru: 0 araç yüklendi
+
+carDataLoader.ts:594 SsangYong verisi yüklenemedi: Error: SsangYong için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 1)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 SsangYong: 0 araç yüklendi
+
+carDataLoader.ts:594 Smart verisi yüklenemedi: Error: Smart için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 0)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Smart: 0 araç yüklendi
+
+carDataLoader.ts:594 Tata verisi yüklenemedi: Error: Tata için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 4)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Tata: 0 araç yüklendi
+
+carDataLoader.ts:594 Suzuki verisi yüklenemedi: Error: Suzuki için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 3)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Suzuki: 0 araç yüklendi
+
+carDataLoader.ts:550 Batch 14 tamamlandı. Toplam: 0 araç
+
+carDataLoader.ts:594 Vauxhall verisi yüklenemedi: Error: Vauxhall için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 0)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Vauxhall: 0 araç yüklendi
+
+carDataLoader.ts:594 Volvo verisi yüklenemedi: Error: Volvo için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 1)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Volvo: 0 araç yüklendi
+
+carDataLoader.ts:594 Wiesmann verisi yüklenemedi: Error: Wiesmann için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 4)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Wiesmann: 0 araç yüklendi
+
+carDataLoader.ts:594 Westfield verisi yüklenemedi: Error: Westfield için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 2)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 Westfield: 0 araç yüklendi
+
+carDataLoader.ts:594 WEY verisi yüklenemedi: Error: WEY için hiçbir JSON dosyası bulunamadı
+
+    at Cn (carDataLoader.ts:592:11)
+
+    at async carDataLoader.ts:534:29
+
+    at async Promise.all (index 3)
+
+    at async cm (carDataLoader.ts:543:28)
+
+    at async E (AITrainingSystem.tsx:97:27)
+
+Cn @ carDataLoader.ts:594Understand this warning
+
+carDataLoader.ts:535 WEY: 0 araç yüklendi
+
+carDataLoader.ts:550 Batch 15 tamamlandı. Toplam: 0 araç
+
+carDataLoader.ts:556 ✅ Toplam 0 araç verisi yüklendi
+
+AITrainingSystem.tsx:102 0 araç verisi başarıyla yüklendi
+
+
+
+nexaven.com.tr de bu var
+
+✅ Örnek araç verileri localStorage'a kaydedildi:
+
+Array(3)
+
+index-uOqY3WLP.js:124 === GİRİŞ DEBUGİ ===
+
+index-uOqY3WLP.js:124 Service: zorlu-ecu
+
+index-uOqY3WLP.js:124 Girilen email: admin@zorluecu.com
+
+index-uOqY3WLP.js:124 Girilen şifre: Zolru2026!
+
+index-uOqY3WLP.js:124 Admin hesabı:
+
+Object
+
+index-uOqY3WLP.js:124 Kayıtlı kullanıcı sayısı: 0
+
+index-uOqY3WLP.js:124 Kayıtlı kullanıcılar:
+
+Array(0)
+
+index-uOqY3WLP.js:124 ❌ Kullanıcı bulunamadı
+
+index-uOqY3WLP.js:124 === GİRİŞ DEBUGİ ===
+
+index-uOqY3WLP.js:124 Service: zorlu-ecu
+
+index-uOqY3WLP.js:124 Girilen email: admin@zorluecu.com
+
+index-uOqY3WLP.js:124 Girilen şifre: ZorluECU2026!
+
+index-uOqY3WLP.js:124 Admin hesabı:
+
+Object
+
+index-uOqY3WLP.js:124 ✅ Admin girişi başarılı!
+
+index-uOqY3WLP.js:12 Mixed Content: The page at 'https://nexaven.com.tr/zorlu-ecu/admin/dashboard' was loaded over HTTPS, but requested an insecure resource 'http://72.62.178.51:32768/api/tags'. This request has been blocked; the content must be served over HTTPS.
+
+index-uOqY3WLP.js:12 ❌ External Ollama connection failed: TypeError: Failed to fetch     at T (index-uOqY3WLP.js:12:260284)     at index-uOqY3WLP.js:12:260127
+
+Konteynerlar
+
+nexaven-v3
+
+3 konteyner
+
+Kısmen çalışıyor
+
+Yönet
+
+nexaven-certbot
+
+exited
+
+nexaven-frontend
+
+running
+
+3000:3000
+
+nexaven-nginx
+
+running
+
+80:80443:443
+
+
+
+ollama-vy1l
+
+1 konteyner
+
+Çalışıyor
+
+Yönet
+
+ollama-vy1l-ollama-1
+
+running
+
+32768:11434
