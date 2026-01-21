@@ -104,7 +104,7 @@ interface UploadedFile {
 export default function ZorluEcuAdminDashboardEnhanced() {
   const navigate = useNavigate()
   const [adminUser, setAdminUser] = useState<any>(null)
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'customers' | 'orders' | 'approvals' | 'management' | 'chat' | 'files' | 'ai-linols'>('dashboard')
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'customers' | 'orders' | 'approvals' | 'management' | 'chat' | 'files' | 'ai-ecu'>('dashboard')
   const [selectedCustomer, setSelectedCustomer] = useState<CorporateUser | null>(null)
   const [customers, setCustomers] = useState<CorporateUser[]>([])
   const [orders, setOrders] = useState<Order[]>([])
