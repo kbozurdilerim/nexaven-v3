@@ -351,30 +351,6 @@ Lütfen profesyonel, teknik ve yardımcı bir şekilde yanıtla. Türkçe yanıt
     return 'bg-green-500/20 border-green-500/50 text-green-100 mr-12'
   }
 
-  // File upload handler
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]
-    if (!file) return
-
-    // Simulate file processing
-    const fileMessage: ChatMessage = {
-      id: Date.now().toString(),
-      role: 'assistant',
-      content: `📁 **ECU Dosyası Yüklendi**
-
-**Dosya**: ${file.name}
-**Boyut**: ${(file.size / 1024).toFixed(2)} KB
-**Tür**: ${file.type || 'ECU Binary'}
-
-Dosya başarıyla yüklendi. Analiz için \`/ecu analyze\` komutunu kullanabilirsiniz.`,
-      timestamp: new Date().toISOString(),
-      type: 'system'
-    }
-
-    setMessages(prev => [...prev, fileMessage])
-    onECUCommand?.('upload', { name: file.name, size: file.size })
-  }
-
   return (
     <div className="flex flex-col h-full bg-black/40 border border-white/10 rounded-2xl overflow-hidden">
       {/* Header */}

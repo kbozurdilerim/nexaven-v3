@@ -39,6 +39,7 @@ export interface ProcessedCarData {
   brand: string;
   model: string;
   generation: string;
+  year?: number;
   engine: string;
   displacement?: number;
   fuel_type: string;
@@ -122,6 +123,15 @@ function extractDisplacement(engineName: string): number | undefined {
       return Math.round(value * 1000);
     }
     return value > 10 ? value : Math.round(value * 1000);
+  }
+  return undefined;
+}
+
+// Yıl çıkarma
+function extractYearFromGeneration(generationName: string): number | undefined {
+  const yearMatch = generationName.match(/(\d{4})/);
+  if (yearMatch) {
+    return parseInt(yearMatch[1]);
   }
   return undefined;
 }
@@ -327,6 +337,7 @@ export function processCarData(rawData: CarDataEntry[]): ProcessedCarData[] {
       brand: brand,
       model: entry.model_name,
       generation: entry.generation_name.replace(/&gt;/g, '>').replace(/&lt;/g, '<'),
+      year: extractYearFromGeneration(entry.generation_name),
       engine: entry.engine_name,
       displacement: extractDisplacement(entry.engine_name),
       fuel_type: determineFuelType(entry.engine_name),

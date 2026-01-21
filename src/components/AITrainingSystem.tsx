@@ -421,12 +421,6 @@ Modlanmış hex data ver ve değişiklikleri açıkla.`,
     URL.revokeObjectURL(url);
   };
 
-  const filteredVehicles = vehicleDatabase.filter(vehicle =>
-    vehicle.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    vehicle.model.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    vehicle.engine.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
   return (
     <div className="p-6 bg-gray-900 text-white min-h-screen">
       <div className="max-w-7xl mx-auto">
