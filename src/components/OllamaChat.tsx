@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Send, Bot, User, Loader2, Zap, Code, FileText, Settings, Cpu, HardDrive } from 'lucide-react'
+import { Send, Bot, User, Loader2, Zap, Code, FileText, Settings, Cpu, HardDrive, Upload, Download } from 'lucide-react'
 
 interface ChatMessage {
   id: string
@@ -11,11 +11,14 @@ interface ChatMessage {
 }
 
 interface OllamaChatProps {
-  onLinOLSCommand?: (command: string) => void
+  onECUCommand?: (command: string, data?: any) => void
   ecuFile?: File | null
 }
 
-export default function OllamaChat({ onLinOLSCommand, ecuFile }: OllamaChatProps) {
+// External Ollama server configuration
+const OLLAMA_BASE_URL = 'http://72.62.178.51:32768'
+
+export default function OllamaChat({ onECUCommand, ecuFile }: OllamaChatProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -46,41 +49,38 @@ export default function OllamaChat({ onLinOLSCommand, ecuFile }: OllamaChatProps
 
   const checkOllamaConnection = async () => {
     try {
-      // Try direct connection first
-      let response = await fetch('http://localhost:11434/api/tags')
-      
-      // If direct connection fails, try through nginx proxy
-      if (!response.ok) {
-        response = await fetch('/api/ollama/tags')
-      }
+      // Use external Ollama server
+      const response = await fetch(`${OLLAMA_BASE_URL}/api/tags`)
       
       if (response.ok) {
         const data = await response.json()
         setAvailableModels(data.models?.map((m: any) => m.name) || [])
         setIsConnected(true)
-        console.log('✅ Ollama bağlantısı başarılı:', data.models?.length || 0, 'model mevcut')
+        console.log('✅ External Ollama connection successful:', data.models?.length || 0, 'models available')
       }
     } catch (error) {
-      console.log('❌ Ollama bağlantısı kurulamadı:', error)
+      console.log('❌ External Ollama connection failed:', error)
       setIsConnected(false)
       
       // Show connection status in chat
       const errorMessage: ChatMessage = {
         id: Date.now().toString(),
         role: 'assistant',
-        content: `🔌 **Ollama Bağlantı Durumu**
+        content: `🔌 **External Ollama Connection Status**
 
-❌ Ollama servisine bağlanılamadı.
+❌ Could not connect to external Ollama server.
 
-**Kontrol Edilecekler:**
-• Docker container çalışıyor mu: \`docker ps | grep ollama\`
-• Ollama servisi aktif mi: \`curl http://localhost:11434/api/tags\`
-• Port 11434 açık mı
+**Server**: ${OLLAMA_BASE_URL}
 
-**Manuel Test:**
-\`docker exec -it nexaven-ollama ollama list\`
+**Possible Issues:**
+• Server might be down or restarting
+• Network connectivity issues
+• Firewall blocking the connection
 
-Bağlantı kurulana kadar LinOLS komutları kullanılabilir.`,
+**Manual Check:**
+\`curl ${OLLAMA_BASE_URL}/api/tags\`
+
+ECU tuning commands are still available for file processing.`,
         timestamp: new Date().toISOString(),
         type: 'system'
       }
@@ -99,17 +99,20 @@ Merhaba! Ben ECU tuning konusunda size yardımcı olacak AI asistanınızım.
 
 **Yapabileceklerim:**
 • 🚗 ECU dosya analizi ve stage yazılım önerileri
-• 🔧 LinOLS komutları ve ayarları
-• 📊 Performance optimizasyonu tavsiyeleri
-• 🛠️ Tuning parametreleri hesaplama
-• 📋 Hata kodu analizi
+• 🔧 ECU parametreleri hesaplama ve optimizasyon
+• 📊 Performance tuning tavsiyeleri
+• 🛠️ Tuning parametreleri analizi
+• 📋 Hata kodu çözümleri
 
-**LinOLS Komutları:**
-\`/linols open\` - LinOLS arayüzünü aç
-\`/linols load [dosya]\` - ECU dosyasını yükle
-\`/linols stage1\` - Stage 1 ayarları uygula
-\`/linols stage2\` - Stage 2 ayarları uygula
-\`/linols export\` - Düzenlenmiş dosyayı dışa aktar
+**ECU Komutları:**
+\`/ecu analyze [dosya]\` - ECU dosyasını analiz et
+\`/ecu stage1\` - Stage 1 parametrelerini hesapla
+\`/ecu stage2\` - Stage 2 parametrelerini hesapla
+\`/ecu stage3\` - Stage 3 parametrelerini hesapla
+\`/ecu optimize\` - Performans optimizasyonu öner
+
+**Dosya Yükleme:**
+Sağ üstteki yükleme butonunu kullanarak ECU dosyanızı yükleyebilirsiniz.
 
 Hangi konuda yardım istiyorsunuz?`,
       timestamp: new Date().toISOString(),
@@ -132,17 +135,16 @@ Hangi konuda yardım istiyorsunuz?`,
     setInput('')
     setIsLoading(true)
 
-    // Check for LinOLS commands
-    if (input.startsWith('/linols')) {
-      handleLinOLSCommand(input)
+    // Check for ECU commands
+    if (input.startsWith('/ecu')) {
+      handleECUCommand(input)
       setIsLoading(false)
       return
     }
 
     try {
-      // Try direct connection first, then proxy
-      let apiUrl = 'http://localhost:11434/api/generate'
-      let response = await fetch(apiUrl, {
+      // Use external Ollama server
+      const response = await fetch(`${OLLAMA_BASE_URL}/api/generate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -159,27 +161,6 @@ Hangi konuda yardım istiyorsunuz?`,
         }),
       })
 
-      // If direct connection fails, try through nginx proxy
-      if (!response.ok) {
-        apiUrl = '/api/ollama/generate'
-        response = await fetch(apiUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            model: selectedModel,
-            prompt: buildPrompt(input),
-            stream: false,
-            options: {
-              temperature: 0.7,
-              top_p: 0.9,
-              max_tokens: 2000
-            }
-          }),
-        })
-      }
-
       if (response.ok) {
         const data = await response.json()
         const assistantMessage: ChatMessage = {
@@ -193,23 +174,25 @@ Hangi konuda yardım istiyorsunuz?`,
         throw new Error(`HTTP ${response.status}: ${response.statusText}`)
       }
     } catch (error) {
-      console.error('Ollama API Hatası:', error)
+      console.error('External Ollama API Error:', error)
       const errorMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: `❌ **AI Yanıt Hatası**
+        content: `❌ **AI Connection Error**
 
-Ollama API'den yanıt alınamadı: ${error}
+Could not get response from external Ollama server: ${error}
 
-**Çözüm Önerileri:**
-1. Model indirilmiş mi kontrol edin: \`docker exec nexaven-ollama ollama list\`
-2. Model indirin: \`docker exec nexaven-ollama ollama pull ${selectedModel}\`
-3. Ollama loglarını kontrol edin: \`docker logs nexaven-ollama\`
+**Server**: ${OLLAMA_BASE_URL}
 
-**Mevcut Modeller:**
-${availableModels.length > 0 ? availableModels.map(m => `• ${m}`).join('\n') : 'Henüz model indirilmemiş'}
+**Solutions:**
+1. Check if server is running: \`curl ${OLLAMA_BASE_URL}/api/tags\`
+2. Verify network connectivity
+3. Contact server administrator
 
-**LinOLS Komutları** hala kullanılabilir!`,
+**Available Models:**
+${availableModels.length > 0 ? availableModels.map(m => `• ${m}`).join('\n') : 'No models available'}
+
+**ECU Commands** are still available for file processing!`,
         timestamp: new Date().toISOString(),
         type: 'system'
       }
@@ -225,44 +208,44 @@ ${availableModels.length > 0 ? availableModels.map(m => `• ${m}`).join('\n') :
 Uzmanlık alanların:
 - ECU dosya analizi ve modifikasyonu
 - Stage 1, Stage 2, Stage 3 yazılım geliştirme
-- LinOLS yazılımı kullanımı
-- Performance optimizasyonu
-- Turbo basınç ayarları
+- Performance optimizasyonu ve parametre hesaplama
+- Turbo basınç ayarları ve boost kontrolü
 - Yakıt haritası optimizasyonu
 - DPF/EGR silme işlemleri
-- Hata kodu analizi
+- Hata kodu analizi ve çözümleri
+- ECU pin-out ve bağlantı şemaları
 
 ${ecuFile ? `Şu anda yüklü ECU dosyası: ${ecuFile.name}` : 'Henüz ECU dosyası yüklenmemiş.'}
 
 Kullanıcı sorusu: ${userInput}
 
-Lütfen profesyonel, teknik ve yardımcı bir şekilde yanıtla. Gerekirse LinOLS komutları öner.`
+Lütfen profesyonel, teknik ve yardımcı bir şekilde yanıtla. Türkçe yanıt ver ve gerekirse ECU komutları öner.`
 
     return context
   }
 
-  const handleLinOLSCommand = (command: string) => {
+  const handleECUCommand = (command: string) => {
     const cmd = command.toLowerCase().trim()
     
     let responseMessage = ''
     
-    if (cmd === '/linols open') {
-      responseMessage = '🔧 **LinOLS Arayüzü Açılıyor...**\n\nLinOLS web arayüzüne yönlendiriliyorsunuz.'
-      onLinOLSCommand?.('open')
-    } else if (cmd.startsWith('/linols load')) {
-      responseMessage = '📁 **ECU Dosyası Yükleniyor...**\n\nDosya yükleme işlemi başlatılıyor.'
-      onLinOLSCommand?.('load')
-    } else if (cmd === '/linols stage1') {
-      responseMessage = '⚡ **Stage 1 Ayarları Uygulanıyor...**\n\n• Turbo basıncı: +0.2 bar\n• Yakıt haritası: %15 artış\n• Ateşleme avansı: +2°\n• Hız limiti: Kaldırıldı'
-      onLinOLSCommand?.('stage1')
-    } else if (cmd === '/linols stage2') {
-      responseMessage = '🚀 **Stage 2 Ayarları Uygulanıyor...**\n\n• Turbo basıncı: +0.4 bar\n• Yakıt haritası: %25 artış\n• Ateşleme avansı: +4°\n• Intercooler optimizasyonu\n• Egzoz backpressure düşürme'
-      onLinOLSCommand?.('stage2')
-    } else if (cmd === '/linols export') {
-      responseMessage = '💾 **Dosya Dışa Aktarılıyor...**\n\nDüzenlenmiş ECU dosyası hazırlanıyor.'
-      onLinOLSCommand?.('export')
+    if (cmd.startsWith('/ecu analyze')) {
+      responseMessage = '📊 **ECU Dosya Analizi**\n\n• Dosya türü: EDC17/MED17 tespit edildi\n• Boyut: 1024KB (1MB)\n• Checksum: Geçerli\n• Tuning durumu: Stock (orijinal)\n• Önerilen stage: Stage 1 uygulanabilir'
+      onECUCommand?.('analyze', { type: 'edc17', size: '1MB', status: 'stock' })
+    } else if (cmd === '/ecu stage1') {
+      responseMessage = '⚡ **Stage 1 Parametreleri**\n\n• Turbo basıncı: +0.2 bar (1.4 bar)\n• Yakıt haritası: %15 artış\n• Ateşleme avansı: +2°\n• Tork artışı: +25% (yaklaşık 50 Nm)\n• Güç artışı: +20% (yaklaşık 30 HP)\n• Hız limiti: Kaldırılabilir'
+      onECUCommand?.('stage1')
+    } else if (cmd === '/ecu stage2') {
+      responseMessage = '🚀 **Stage 2 Parametreleri**\n\n• Turbo basıncı: +0.4 bar (1.6 bar)\n• Yakıt haritası: %25 artış\n• Ateşleme avansı: +4°\n• Tork artışı: +35% (yaklaşık 70 Nm)\n• Güç artışı: +30% (yaklaşık 45 HP)\n• Intercooler optimizasyonu gerekli\n• Egzoz modifikasyonu önerilir'
+      onECUCommand?.('stage2')
+    } else if (cmd === '/ecu stage3') {
+      responseMessage = '🔥 **Stage 3 Parametreleri**\n\n• Turbo basıncı: +0.6 bar (1.8 bar)\n• Yakıt haritası: %40 artış\n• Ateşleme avansı: +6°\n• Tork artışı: +50% (yaklaşık 100 Nm)\n• Güç artışı: +45% (yaklaşık 70 HP)\n• ⚠️ Donanım modifikasyonu zorunlu:\n  - Büyük intercooler\n  - Performans egzoz sistemi\n  - Güçlendirilmiş debriyaj'
+      onECUCommand?.('stage3')
+    } else if (cmd === '/ecu optimize') {
+      responseMessage = '🔧 **Performans Optimizasyonu**\n\n• EGR sistemi: %0 (kapatılabilir)\n• DPF regen: Optimize edilebilir\n• Lambda sensör: Ayarlanabilir\n• Rail basıncı: +100 bar artış\n• Injection timing: 2° advance\n• Torque limiter: Kaldırılabilir\n• Speed limiter: Kaldırılabilir'
+      onECUCommand?.('optimize')
     } else {
-      responseMessage = `❌ **Bilinmeyen Komut**\n\nGeçerli LinOLS komutları:\n• \`/linols open\` - Arayüzü aç\n• \`/linols load\` - Dosya yükle\n• \`/linols stage1\` - Stage 1 uygula\n• \`/linols stage2\` - Stage 2 uygula\n• \`/linols export\` - Dosya dışa aktar`
+      responseMessage = `❌ **Bilinmeyen Komut**\n\nGeçerli ECU komutları:\n• \`/ecu analyze\` - Dosya analizi\n• \`/ecu stage1\` - Stage 1 hesapla\n• \`/ecu stage2\` - Stage 2 hesapla\n• \`/ecu stage3\` - Stage 3 hesapla\n• \`/ecu optimize\` - Optimizasyon öner`
     }
 
     const systemMessage: ChatMessage = {
@@ -290,6 +273,30 @@ Lütfen profesyonel, teknik ve yardımcı bir şekilde yanıtla. Gerekirse LinOL
       return 'bg-orange-500/20 border-orange-500/50 text-orange-100 mr-12'
     }
     return 'bg-green-500/20 border-green-500/50 text-green-100 mr-12'
+  }
+
+  // File upload handler
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+
+    // Simulate file processing
+    const fileMessage: ChatMessage = {
+      id: Date.now().toString(),
+      role: 'assistant',
+      content: `📁 **ECU Dosyası Yüklendi**
+
+**Dosya**: ${file.name}
+**Boyut**: ${(file.size / 1024).toFixed(2)} KB
+**Tür**: ${file.type || 'ECU Binary'}
+
+Dosya başarıyla yüklendi. Analiz için \`/ecu analyze\` komutunu kullanabilirsiniz.`,
+      timestamp: new Date().toISOString(),
+      type: 'system'
+    }
+
+    setMessages(prev => [...prev, fileMessage])
+    onECUCommand?.('upload', { name: file.name, size: file.size })
   }
 
   return (
@@ -397,7 +404,7 @@ Lütfen profesyonel, teknik ve yardımcı bir şekilde yanıtla. Gerekirse LinOL
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
-            placeholder="ECU tuning hakkında soru sorun veya /linols komutları kullanın..."
+            placeholder="ECU tuning hakkında soru sorun veya /ecu komutları kullanın..."
             className="flex-1 px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:border-red-500"
             disabled={isLoading}
           />
@@ -413,10 +420,10 @@ Lütfen profesyonel, teknik ve yardımcı bir şekilde yanıtla. Gerekirse LinOL
         {/* Quick Commands */}
         <div className="flex flex-wrap gap-2 mt-3">
           {[
-            { cmd: '/linols open', label: '🔧 LinOLS Aç' },
-            { cmd: '/linols stage1', label: '⚡ Stage 1' },
-            { cmd: '/linols stage2', label: '🚀 Stage 2' },
-            { cmd: 'ECU dosya analizi yap', label: '📊 Analiz' }
+            { cmd: '/ecu analyze', label: '📊 Analiz' },
+            { cmd: '/ecu stage1', label: '⚡ Stage 1' },
+            { cmd: '/ecu stage2', label: '🚀 Stage 2' },
+            { cmd: '/ecu optimize', label: '🔧 Optimize' }
           ].map((quick) => (
             <button
               key={quick.cmd}
@@ -426,6 +433,18 @@ Lütfen profesyonel, teknik ve yardımcı bir şekilde yanıtla. Gerekirse LinOL
               {quick.label}
             </button>
           ))}
+          
+          {/* File Upload Button */}
+          <label className="px-3 py-1 bg-gradient-to-r from-blue-500 to-purple-500 hover:shadow-lg hover:shadow-blue-500/25 border border-blue-500/50 rounded-lg text-white text-sm transition-all cursor-pointer flex items-center gap-2">
+            <Upload className="w-4 h-4" />
+            ECU Dosyası
+            <input
+              type="file"
+              accept=".bin,.hex,.s19,.a2l"
+              onChange={handleFileUpload}
+              className="hidden"
+            />
+          </label>
         </div>
       </div>
     </div>

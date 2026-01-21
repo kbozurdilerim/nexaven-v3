@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Quick Fix for Nexaven AI ECU Deployment Issues
+# Quick Fix for Nexaven AI ECU Deployment
 set -e
 
 echo "🔧 Nexaven AI ECU - Quick Fix Deployment"
@@ -28,14 +28,7 @@ docker system prune -f
 
 # Create necessary directories
 log_info "Creating directories..."
-mkdir -p linols/web-interface/templates ecu-files ollama-models
-
-# Ensure LinOLS Dockerfile exists and is correct
-log_info "Checking LinOLS Dockerfile..."
-if [ ! -f "linols/Dockerfile.simple" ]; then
-    log_error "LinOLS Dockerfile missing!"
-    exit 1
-fi
+mkdir -p ecu-files
 
 # Start with CPU-only configuration
 log_info "Starting services with CPU-only configuration..."
@@ -63,20 +56,11 @@ else
     log_warning "⚠️ Frontend not ready yet"
 fi
 
-# LinOLS
-if curl -f http://localhost:8080/health >/dev/null 2>&1; then
-    log_success "✅ LinOLS is running"
+# External Ollama (if accessible)
+if curl -f http://72.62.178.51:32768/api/tags >/dev/null 2>&1; then
+    log_success "✅ External Ollama is accessible"
 else
-    log_warning "⚠️ LinOLS not ready - checking logs..."
-    docker logs nexaven-linols --tail 10 2>/dev/null || true
-fi
-
-# Ollama
-if curl -f http://localhost:11434/api/tags >/dev/null 2>&1; then
-    log_success "✅ Ollama is running"
-else
-    log_warning "⚠️ Ollama not ready - checking logs..."
-    docker logs nexaven-ollama --tail 10 2>/dev/null || true
+    log_warning "⚠️ External Ollama not accessible - check network connection"
 fi
 
 # Show container status
@@ -85,15 +69,15 @@ log_info "Container Status:"
 docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
 
 echo ""
-log_success "🎉 AI ECU Tuning System Ready!"
+log_success "🎉 AI ECU System Deployed!"
 log_info "Next steps:"
-log_info "1. Setup AI models: ./setup-ollama.sh"
-log_info "2. Access admin panel: https://nexaven.com.tr/zorlu-ecu-admin"
-log_info "3. Use 'AI + LinOLS' tab for ECU tuning"
+log_info "1. Access admin panel: https://nexaven.com.tr/zorlu-ecu-admin"
+log_info "2. Go to 'AI ECU Tuning' tab"
+log_info "3. Start using AI-powered ECU tuning"
 
 echo ""
 log_info "Professional ECU tuning features:"
-log_info "• AI-powered chat assistance"
-log_info "• Real-time parameter adjustment"
+log_info "• External Ollama AI integration (72.62.178.51:32768)"
+log_info "• Real-time ECU parameter calculation"
 log_info "• Stage 1/2/3 tuning presets"
-log_info "• ECU file processing and export"
+log_info "• ECU file upload and analysis"

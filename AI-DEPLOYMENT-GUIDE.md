@@ -1,59 +1,65 @@
-# 🤖 AI + LinOLS ECU Tuning System - Deployment Guide
+# 🤖 AI ECU Tuning System - External Ollama Integration
 
-## 🚀 Production Deployment (No Test Files)
+## 🚀 Production Deployment (External Ollama)
 
-The system is configured for professional ECU tuning without any test components.
+The system now uses an external Ollama server for AI functionality, eliminating the need for local AI installation.
 
-### 1. Deploy AI ECU System
+### External Ollama Server
+- **URL**: `http://72.62.178.51:32768`
+- **Integration**: Direct API connection from React frontend
+- **Benefits**: No local resources needed, faster deployment
+
+### 1. Deploy ECU System
 
 ```bash
 # Make scripts executable
 chmod +x fix-deployment.sh setup-ollama.sh
 
-# Deploy the system
+# Deploy the system (frontend only)
 ./fix-deployment.sh
 ```
 
-### 2. Setup AI Models
+### 2. Test External Ollama Connection
 
 ```bash
-# Install production AI models
+# Test external Ollama connection
 ./setup-ollama.sh
 ```
 
-## 🔧 What Was Fixed
+## 🔧 What Was Updated
 
-### Docker Compose Issues
-- ✅ Fixed LinOLS Docker image reference (was trying to pull non-existent `linols/server`)
-- ✅ Created CPU-only Ollama configuration (removed GPU requirements)
-- ✅ Added proper service dependencies and health checks
-- ✅ Created `docker-compose.cpu.yml` for VPS compatibility
+### External Ollama Integration
+- ✅ Removed local Ollama Docker container
+- ✅ Integrated external Ollama server (`http://72.62.178.51:32768`)
+- ✅ Updated React components to use external API
+- ✅ Simplified deployment (no local AI installation needed)
 
-### AI Model Optimization
-- ✅ Selected CPU-optimized models: `llama3.2:1b`, `qwen2.5:1.5b`, `phi3:mini`
-- ✅ Reduced memory requirements for VPS deployment
-- ✅ Added proper error handling for model downloads
+### LinOLS Removal
+- ✅ Removed LinOLS Docker service and components
+- ✅ Simplified to AI-only ECU tuning interface
+- ✅ Focused on Ollama AI for all ECU operations
+- ✅ Streamlined user interface
 
-### LinOLS Integration
-- ✅ Fixed Dockerfile.simple syntax (removed HTML content causing build failure)
-- ✅ Enhanced Python Flask web interface
-- ✅ Added proper ECU file processing simulation
-- ✅ Integrated with React frontend components
+### System Optimization
+- ✅ Reduced Docker services (frontend + nginx only)
+- ✅ Faster deployment and startup
+- ✅ Lower resource requirements
+- ✅ External AI server handles all processing
 
 ## 🎯 System Architecture
 
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   React Frontend │    │   Ollama AI     │    │   LinOLS API    │
-│   (Port 3000)   │◄──►│   (Port 11434)  │◄──►│   (Port 8080)   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                       │                       │
-         └───────────────────────┼───────────────────────┘
-                                 │
-                    ┌─────────────────┐
-                    │   Nginx Proxy   │
-                    │   (Port 80/443) │
-                    └─────────────────┘
+┌─────────────────┐    ┌─────────────────────────────┐
+│   React Frontend │    │   External Ollama AI        │
+│   (Port 3000)   │◄──►│   (72.62.178.51:32768)     │
+└─────────────────┘    └─────────────────────────────┘
+         │                              
+         └─────────────────┐            
+                           │            
+                ┌─────────────────┐     
+                │   Nginx Proxy   │     
+                │   (Port 80/443) │     
+                └─────────────────┘     
 ```
 
 ## 🔗 Access Points
@@ -61,24 +67,22 @@ chmod +x fix-deployment.sh setup-ollama.sh
 ### Admin Panel
 - **URL**: `https://nexaven.com.tr/zorlu-ecu-admin`
 - **Login**: `admin@zorluecu.com` / `zorlu123`
-- **AI Tab**: Click "AI + LinOLS" tab
+- **AI Tab**: Click "AI ECU Tuning" tab
 
-### Direct APIs
+### Direct Access
 - **Frontend**: `http://localhost:3000`
-- **LinOLS**: `http://localhost:8080`
-- **Ollama**: `http://localhost:11434`
+- **External Ollama**: `http://72.62.178.51:32768`
 
 ## 🤖 AI Features
 
 ### Chat Commands
 ```bash
-# LinOLS Commands (in AI chat)
-/linols open        # Open LinOLS interface
-/linols load        # Load ECU file
-/linols stage1      # Apply Stage 1 tuning
-/linols stage2      # Apply Stage 2 tuning
-/linols stage3      # Apply Stage 3 tuning
-/linols export      # Export modified file
+# ECU Commands (in AI chat)
+/ecu analyze        # Analyze ECU file
+/ecu stage1         # Calculate Stage 1 parameters
+/ecu stage2         # Calculate Stage 2 parameters
+/ecu stage3         # Calculate Stage 3 parameters
+/ecu optimize       # Suggest optimizations
 
 # Natural Language
 "ECU dosya analizi yap"
@@ -88,9 +92,9 @@ chmod +x fix-deployment.sh setup-ollama.sh
 
 ### ECU Processing
 - **File Upload**: Drag & drop .bin, .hex, .s19, .a2l files
-- **Parameter Tuning**: Real-time parameter adjustment
+- **AI Analysis**: Real-time parameter calculation
 - **Stage Presets**: Pre-configured Stage 1/2/3 settings
-- **Export**: Download modified ECU files
+- **Optimization**: AI-powered tuning suggestions
 
 ## 🛠️ Troubleshooting
 

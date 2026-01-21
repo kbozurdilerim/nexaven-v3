@@ -5,7 +5,6 @@ import { LogOut, Users, MessageCircle, Upload, Check, X, Send, Download, Eye, Tr
 import CustomerApprovalSystem from '../components/CustomerApprovalSystem'
 import EnhancedCustomerManagement from '../components/EnhancedCustomerManagement'
 import OllamaChat from '../components/OllamaChat'
-import LinOLSInterface from '../components/LinOLSInterface'
 
 // Test data initialization - Only if no real data exists
 const initializeTestData = () => {
@@ -115,7 +114,6 @@ export default function ZorluEcuAdminDashboardEnhanced() {
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([])
   const [editingOrder, setEditingOrder] = useState<string | null>(null)
   const [orderFormData, setOrderFormData] = useState<Partial<Order>>({})
-  const [isLinOLSFullscreen, setIsLinOLSFullscreen] = useState(false)
   const [currentECUFile, setCurrentECUFile] = useState<File | null>(null)
 
   useEffect(() => {
@@ -220,11 +218,30 @@ export default function ZorluEcuAdminDashboardEnhanced() {
     localStorage.setItem('files_zorlu-ecu', JSON.stringify(filtered))
   }
 
-  const handleLinOLSCommand = (command: string) => {
-    console.log('LinOLS Command:', command)
-    // Handle LinOLS commands from AI chat
-    if (command === 'open') {
-      setActiveTab('ai-linols')
+  const handleECUCommand = (command: string, data?: any) => {
+    console.log('ECU Command:', command, data)
+    // Handle ECU commands from AI chat
+    
+    switch (command) {
+      case 'upload':
+        setCurrentECUFile(data)
+        break
+      case 'analyze':
+        // Handle ECU file analysis
+        console.log('Analyzing ECU file:', currentECUFile)
+        break
+      case 'stage1':
+      case 'stage2':
+      case 'stage3':
+        // Handle stage tuning
+        console.log(`Applying ${command} tuning`)
+        break
+      case 'optimize':
+        // Handle optimization
+        console.log('Optimizing ECU parameters')
+        break
+      default:
+        console.log('Unknown ECU command:', command)
     }
   }
 
@@ -324,7 +341,7 @@ export default function ZorluEcuAdminDashboardEnhanced() {
               { id: 'management', label: '🏢 Müşteri Yönetimi', icon: '🏢' },
               { id: 'chat', label: '💬 Mesajlar', icon: '💬' },
               { id: 'files', label: '📄 Dosyalar', icon: '📄' },
-              { id: 'ai-linols', label: '🤖 AI + LinOLS', icon: '🤖' }
+              { id: 'ai-ecu', label: '🤖 AI ECU Tuning', icon: '🤖' }
             ].map(tab => (
               <button
                 key={tab.id}
@@ -689,53 +706,30 @@ export default function ZorluEcuAdminDashboardEnhanced() {
           </div>
         )}
 
-        {/* AI + LinOLS Tab */}
-        {activeTab === 'ai-linols' && (
+        {/* AI ECU Tuning Tab */}
+        {activeTab === 'ai-ecu' && (
           <div className="space-y-6">
             <div className="text-center mb-6">
               <h2 className="text-3xl font-bold text-white mb-2">🤖 AI Destekli ECU Tuning</h2>
-              <p className="text-white/60">Ollama AI ve LinOLS ile profesyonel ECU yazılım geliştirme</p>
+              <p className="text-white/60">External Ollama AI ile profesyonel ECU yazılım geliştirme</p>
             </div>
 
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 h-[800px]">
-              {/* AI Chat Panel */}
-              <div className="space-y-4">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2 bg-gradient-to-r from-red-500 to-orange-500 rounded-lg">
-                    <Bot className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white">ECU AI Asistanı</h3>
-                    <p className="text-white/60 text-sm">Ollama ile güçlendirilmiş yapay zeka</p>
-                  </div>
+            {/* Single AI Chat Panel - Full Width */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-gradient-to-r from-red-500 to-orange-500 rounded-lg">
+                  <Bot className="w-6 h-6 text-white" />
                 </div>
-                
-                <OllamaChat 
-                  onLinOLSCommand={handleLinOLSCommand}
-                  ecuFile={currentECUFile}
-                />
-              </div>
-
-              {/* LinOLS Interface Panel */}
-              <div className="space-y-4">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg">
-                      <Monitor className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-white">LinOLS Arayüzü</h3>
-                      <p className="text-white/60 text-sm">ECU dosya düzenleme ve tuning</p>
-                    </div>
-                  </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white">ECU AI Asistanı</h3>
+                  <p className="text-white/60 text-sm">External Ollama (72.62.178.51:32768) ile güçlendirilmiş yapay zeka</p>
                 </div>
-
-                <LinOLSInterface 
-                  isFullscreen={isLinOLSFullscreen}
-                  onToggleFullscreen={() => setIsLinOLSFullscreen(!isLinOLSFullscreen)}
-                  onFileProcessed={handleECUFileProcessed}
-                />
               </div>
+              
+              <OllamaChat 
+                onECUCommand={handleECUCommand}
+                ecuFile={currentECUFile}
+              />
             </div>
 
             {/* Quick Actions */}
@@ -744,7 +738,7 @@ export default function ZorluEcuAdminDashboardEnhanced() {
                 {
                   title: '🚗 Yeni ECU Projesi',
                   description: 'Yeni araç için ECU tuning başlat',
-                  action: () => setActiveTab('ai-linols'),
+                  action: () => setActiveTab('ai-ecu'),
                   color: 'from-blue-500 to-cyan-500'
                 },
                 {
@@ -781,24 +775,18 @@ export default function ZorluEcuAdminDashboardEnhanced() {
             </div>
 
             {/* System Status */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
               {[
                 { 
-                  label: 'Ollama AI', 
+                  label: 'External Ollama AI', 
                   status: 'connected', 
-                  info: 'llama3.2 model aktif',
+                  info: 'http://72.62.178.51:32768',
                   icon: <Bot className="w-5 h-5" />
                 },
                 { 
-                  label: 'LinOLS', 
-                  status: 'connected', 
-                  info: 'v2.1.4 çalışıyor',
-                  icon: <Monitor className="w-5 h-5" />
-                },
-                { 
-                  label: 'Docker Services', 
-                  status: 'connected', 
-                  info: 'Tüm servisler aktif',
+                  label: 'ECU Processing', 
+                  status: 'ready', 
+                  info: 'AI-powered tuning ready',
                   icon: <Zap className="w-5 h-5" />
                 }
               ].map(service => (
