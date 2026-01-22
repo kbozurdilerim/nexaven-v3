@@ -20,10 +20,8 @@ interface OllamaChatProps {
   ecuFile?: File | null
 }
 
-// External Ollama server configuration - Handle mixed content
-const OLLAMA_BASE_URL = typeof window !== 'undefined' && window.location.protocol === 'https:' 
-  ? 'https://72.62.178.51:32768' // Try HTTPS first
-  : 'http://72.62.178.51:32768'
+// Ollama configuration - Use local proxy to avoid CORS issues
+const OLLAMA_BASE_URL = '/ollama'  // Local proxy through nginx
 
 // Fallback function for mixed content issues
 const fetchWithFallback = async (url: string, options?: RequestInit) => {

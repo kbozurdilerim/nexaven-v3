@@ -26,16 +26,21 @@ if ! command -v docker &> /dev/null; then
     exit 1
 fi
 
-if ! command -v docker-compose &> /dev/null; then
+# Check for docker compose (new version) or docker-compose (old version)
+if command -v docker &> /dev/null && docker compose version &> /dev/null; then
+    DOCKER_COMPOSE_CMD="docker compose"
+    echo -e "${GREEN}✅ Docker Compose (v2) hazır${NC}"
+elif command -v docker-compose &> /dev/null; then
+    DOCKER_COMPOSE_CMD="docker-compose"
+    echo -e "${GREEN}✅ Docker Compose (v1) hazır${NC}"
+else
     echo -e "${RED}❌ Docker Compose bulunamadı! Lütfen Docker Compose'u kurun.${NC}"
     exit 1
 fi
 
-echo -e "${GREEN}✅ Docker ve Docker Compose hazır${NC}"
-
 # 2. ESKİ CONTAINER'LARI DURDUR
 echo -e "${BLUE}🛑 2/8 - Eski container'lar durduruluyor...${NC}"
-docker-compose down --remove-orphans || true
+$DOCKER_COMPOSE_CMD down --remove-orphans || true
 docker system prune -f || true
 echo -e "${GREEN}✅ Eski container'lar temizlendi${NC}"
 
@@ -109,29 +114,29 @@ echo -e "${GREEN}✅ SSL dizinleri hazır${NC}"
 
 # 8. CONTAINER'LARI BAŞLAT
 echo -e "${BLUE}🚀 8/8 - Container'lar başlatılıyor...${NC}"
-docker-compose up -d --build
+$DOCKER_COMPOSE_CMD up -d --build
 
 # CONTAINER DURUMLARINI KONTROL ET
 echo -e "${BLUE}🔍 Container durumları kontrol ediliyor...${NC}"
 sleep 15
 
 # Frontend container kontrolü
-if docker-compose ps | grep -q "nexaven-frontend.*Up"; then
+if $DOCKER_COMPOSE_CMD ps | grep -q "nexaven-frontend.*Up"; then
     echo -e "${GREEN}✅ Frontend container çalışıyor${NC}"
 else
     echo -e "${RED}❌ Frontend container başlatılamadı!${NC}"
     echo -e "${YELLOW}Frontend logları:${NC}"
-    docker-compose logs frontend
+    $DOCKER_COMPOSE_CMD logs frontend
     exit 1
 fi
 
 # Nginx container kontrolü
-if docker-compose ps | grep -q "nexaven-nginx.*Up"; then
+if $DOCKER_COMPOSE_CMD ps | grep -q "nexaven-nginx.*Up"; then
     echo -e "${GREEN}✅ Nginx container çalışıyor${NC}"
 else
     echo -e "${RED}❌ Nginx container başlatılamadı!${NC}"
     echo -e "${YELLOW}Nginx logları:${NC}"
-    docker-compose logs nginx
+    $DOCKER_COMPOSE_CMD logs nginx
     exit 1
 fi
 
@@ -196,17 +201,17 @@ echo -e "  • Zorlu ECU Admin: ${BLUE}http://localhost/zorlu-ecu/admin${NC}"
 echo -e "  • AI Training: Admin panelinde 'AI Öğretme' sekmesi"
 echo ""
 echo -e "${BLUE}🔧 Yararlı Komutlar:${NC}"
-echo -e "  • Logları görmek için: ${YELLOW}docker-compose logs -f${NC}"
-echo -e "  • Container durumu: ${YELLOW}docker-compose ps${NC}"
-echo -e "  • Yeniden başlatmak için: ${YELLOW}docker-compose restart${NC}"
-echo -e "  • Durdurmak için: ${YELLOW}docker-compose down${NC}"
+echo -e "  • Logları görmek için: ${YELLOW}$DOCKER_COMPOSE_CMD logs -f${NC}"
+echo -e "  • Container durumu: ${YELLOW}$DOCKER_COMPOSE_CMD ps${NC}"
+echo -e "  • Yeniden başlatmak için: ${YELLOW}$DOCKER_COMPOSE_CMD restart${NC}"
+echo -e "  • Durdurmak için: ${YELLOW}$DOCKER_COMPOSE_CMD down${NC}"
 echo ""
 echo -e "${GREEN}✨ Sistem tamamen stabil ve production-ready!${NC}"
 echo -e "${PURPLE}================================================${NC}"
 
 # Son kontrol - container logları
 echo -e "${BLUE}📋 Son 10 satır container logları:${NC}"
-docker-compose logs --tail=10
+$DOCKER_COMPOSE_CMD logs --tail=10
 
 echo ""
 echo -e "${GREEN}🚀 DEPLOYMENT BAŞARIYLA TAMAMLANDI! 🚀${NC}"
