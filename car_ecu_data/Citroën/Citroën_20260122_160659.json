@@ -1,0 +1,57 @@
+[
+  {
+    "make_model": "Citroën C1",
+    "engine": "1.0 e-VTI 69hp",
+    "hardware_nr": "",
+    "software_nr": "008106",
+    "sw_version": "",
+    "ecu": "Bosch",
+    "ecu_type": "ME17.9.52",
+    "page_number": 990,
+    "scraped_at": "2026-01-22T14:30:50.481316"
+  },
+  {
+    "make_model": "Citroën C1",
+    "engine": "1.4 HDi 55hp",
+    "hardware_nr": "5WS40168G-T",
+    "software_nr": "PN37170000000",
+    "sw_version": "",
+    "ecu": "Siemens/Continental",
+    "ecu_type": "SID805",
+    "page_number": 990,
+    "scraped_at": "2026-01-22T14:30:50.481632"
+  },
+  {
+    "make_model": "Citroën C1",
+    "engine": "1.4 HDi 55hp",
+    "hardware_nr": "5WS40168G-T",
+    "software_nr": "",
+    "sw_version": "",
+    "ecu": "Siemens/Continental",
+    "ecu_type": "SID805",
+    "page_number": 990,
+    "scraped_at": "2026-01-22T14:30:50.481649"
+  },
+  {
+    "make_model": "Citroën C2",
+    "engine": "1.6 16v VTS 125hp",
+    "hardware_nr": "0261208376",
+    "software_nr": "371563",
+    "sw_version": "",
+    "ecu": "Bosch",
+    "ecu_type": "Bosch ME7.4.4",
+    "page_number": 991,
+    "scraped_at": "2026-01-22T14:30:56.529313"
+  },
+  {
+    "make_model": "Citroën C2",
+    "engine": "1.4 HDi 68hp",
+    "hardware_nr": "5WS40285C-T",
+    "software_nr": "PN27241000000",
+    "sw_version": "",
+    "ecu": "Siemens/Continental",
+    "ecu_type": "SID806",
+    "page_number": 991,
+    "scraped_at": "2026-01-22T14:30:56.530488"
+  }
+]

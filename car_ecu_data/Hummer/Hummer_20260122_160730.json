@@ -1,0 +1,156 @@
+[
+  {
+    "make_model": "Hummer H2",
+    "engine": "6.2 V8 393hp",
+    "hardware_nr": "12622139",
+    "software_nr": "12609199",
+    "sw_version": "",
+    "ecu": "Delco",
+    "ecu_type": "E38",
+    "page_number": 1390,
+    "scraped_at": "2026-01-22T14:42:23.492200"
+  },
+  {
+    "make_model": "Hummer H2",
+    "engine": "6.2 V8 393hp",
+    "hardware_nr": "12624605",
+    "software_nr": "12631673",
+    "sw_version": "",
+    "ecu": "Delco",
+    "ecu_type": "E38",
+    "page_number": 1390,
+    "scraped_at": "2026-01-22T14:42:23.492219"
+  },
+  {
+    "make_model": "Hummer H2",
+    "engine": "6.0 V8 316hp",
+    "hardware_nr": "12576636",
+    "software_nr": "12571205",
+    "sw_version": "",
+    "ecu": "Delphi",
+    "ecu_type": "E3",
+    "page_number": 1390,
+    "scraped_at": "2026-01-22T14:42:23.492237"
+  },
+  {
+    "make_model": "Hummer H2",
+    "engine": "6.2 V8 393hp",
+    "hardware_nr": "",
+    "software_nr": "86YRJCK17234D6RG",
+    "sw_version": "",
+    "ecu": "Delco",
+    "ecu_type": "E38",
+    "page_number": 1390,
+    "scraped_at": "2026-01-22T14:42:23.492255"
+  },
+  {
+    "make_model": "Hummer H2",
+    "engine": "6.2 V8 393hp",
+    "hardware_nr": "6T1G2N",
+    "software_nr": "4783414",
+    "sw_version": "",
+    "ecu": "Delco",
+    "ecu_type": "E38",
+    "page_number": 1390,
+    "scraped_at": "2026-01-22T14:42:23.492273"
+  },
+  {
+    "make_model": "Hummer H3",
+    "engine": "3.7 242hp",
+    "hardware_nr": "",
+    "software_nr": "12630377",
+    "sw_version": "",
+    "ecu": "Delco",
+    "ecu_type": "E67",
+    "page_number": 1390,
+    "scraped_at": "2026-01-22T14:42:23.492292"
+  },
+  {
+    "make_model": "Hummer H3",
+    "engine": "5.3 V8 300hp",
+    "hardware_nr": "",
+    "software_nr": "12625997",
+    "sw_version": "",
+    "ecu": "Delco",
+    "ecu_type": "E67",
+    "page_number": 1390,
+    "scraped_at": "2026-01-22T14:42:23.492310"
+  },
+  {
+    "make_model": "Hummer H3",
+    "engine": "3.7 242hp",
+    "hardware_nr": "12618196",
+    "software_nr": "12605811",
+    "sw_version": "",
+    "ecu": "Delco",
+    "ecu_type": "E67",
+    "page_number": 1390,
+    "scraped_at": "2026-01-22T14:42:23.492328"
+  },
+  {
+    "make_model": "Hummer H3",
+    "engine": "5.3 V8 300hp",
+    "hardware_nr": "12619152",
+    "software_nr": "12618588",
+    "sw_version": "",
+    "ecu": "Delco",
+    "ecu_type": "E38",
+    "page_number": 1390,
+    "scraped_at": "2026-01-22T14:42:23.492346"
+  },
+  {
+    "make_model": "Hummer H3",
+    "engine": "3.7 242hp",
+    "hardware_nr": "",
+    "software_nr": "12630209",
+    "sw_version": "",
+    "ecu": "Delco",
+    "ecu_type": "E67",
+    "page_number": 1390,
+    "scraped_at": "2026-01-22T14:42:23.492363"
+  },
+  {
+    "make_model": "Hummer H3",
+    "engine": "3.7 242hp",
+    "hardware_nr": "12617344AK",
+    "software_nr": "12613142AB",
+    "sw_version": "",
+    "ecu": "Delco",
+    "ecu_type": "E67",
+    "page_number": 1390,
+    "scraped_at": "2026-01-22T14:42:23.492381"
+  },
+  {
+    "make_model": "Hummer H3",
+    "engine": "3.7 242hp",
+    "hardware_nr": "12619150",
+    "software_nr": "12619152",
+    "sw_version": "",
+    "ecu": "Delco",
+    "ecu_type": "E67",
+    "page_number": 1390,
+    "scraped_at": "2026-01-22T14:42:23.492398"
+  },
+  {
+    "make_model": "Hummer H3",
+    "engine": "5.3 V8 300hp",
+    "hardware_nr": "12630542",
+    "software_nr": "12630221",
+    "sw_version": "",
+    "ecu": "Delco",
+    "ecu_type": "E67",
+    "page_number": 1390,
+    "scraped_at": "2026-01-22T14:42:23.492415"
+  },
+  {
+    "make_model": "Hummer H3",
+    "engine": "3.7 242hp",
+    "hardware_nr": "",
+    "software_nr": "YT74364229ADMDN13E074364229",
+    "sw_version": "",
+    "ecu": "Delphi",
+    "ecu_type": "P12B",
+    "page_number": 1390,
+    "scraped_at": "2026-01-22T14:42:23.492433"
+  }
+]
