@@ -1,3 +1,16 @@
+// Car ECU Data Entry - Gerçek ECU veritabanı formatı
+export interface CarECUDataEntry {
+  make_model: string;
+  engine: string;
+  hardware_nr: string;
+  software_nr: string;
+  sw_version: string;
+  ecu: string;
+  ecu_type: string;
+  page_number: number;
+  scraped_at: string;
+}
+
 // Car Data Loader - Tüm car_data klasöründeki JSON dosyalarını yükler
 export interface CarDataEntry {
   vehicle_type: string;
@@ -62,6 +75,8 @@ export interface ProcessedCarData {
     sample_hex?: string;
     common_issues: string[];
     success_rate: number;
+    ecu_data?: CarECUDataEntry[]; // Gerçek ECU veritabanı
+    logo_url?: string; // Marka logosu
   };
 }
 
@@ -78,6 +93,80 @@ export interface TuningStage {
     ignition_timing?: string;
   };
 }
+
+// Logo mapping - marka adından logo dosya adına çeviri
+const BRAND_LOGO_MAP: Record<string, string> = {
+  'BMW': 'bmw.svg',
+  'Mercedes': 'mercedes.svg',
+  'Audi': 'audi.svg',
+  'Volkswagen': 'vw.svg',
+  'Ford': 'ford.svg',
+  'Toyota': 'toyota.svg',
+  'Porsche': 'porsche.svg',
+  'Ferrari': 'ferrari.svg',
+  'Lamborghini': 'lamborghini.svg',
+  'Alfa_Romeo': 'alfa-romeo.svg',
+  'Aston_Martin': 'aston-martin.svg',
+  'Bentley': 'bentley.svg',
+  'Bugatti': 'bugatti.svg',
+  'Cadillac': 'cadillac.svg',
+  'Chevrolet': 'chevrolet.svg',
+  'Chrysler': 'chrysler.svg',
+  'Citroën': 'citroen.svg',
+  'Cupra': 'cupra.svg',
+  'Dacia': 'dacia.svg',
+  'Dodge': 'dodge.svg',
+  'Fiat': 'fiat.svg',
+  'Honda': 'honda.svg',
+  'Hyundai': 'hyundai.svg',
+  'Infiniti': 'infiniti.svg',
+  'Isuzu': 'isuzu.svg',
+  'Iveco': 'iveco.svg',
+  'Jaguar': 'jaguar.svg',
+  'Jeep': 'jeep.svg',
+  'Kia': 'kia.svg',
+  'Lancia': 'lancia.svg',
+  'Landrover': 'land rover.svg',
+  'Lexus': 'lexus.svg',
+  'Lincoln': 'lincoln.svg',
+  'MAN': 'man.svg',
+  'Maserati': 'maserati.svg',
+  'Mazda': 'mazda-png.svg',
+  'McLaren': 'mclaren.svg',
+  'MG': 'mg-png.svg',
+  'Mini': 'mini-cooper.svg',
+  'Mitsubishi': 'mitsubishi.svg',
+  'Nissan': 'nissan.svg',
+  'Opel': 'opel.svg',
+  'Peugeot': 'peugot.svg',
+  'Renault': 'renault.svg',
+  'Rolls_Royce': 'rolls-royce.svg',
+  'Rover': 'rover.svg',
+  'Saab': 'saab.svg',
+  'Seat': 'seat.svg',
+  'Skoda': 'škoda.svg',
+  'Smart': 'smart.svg',
+  'SsangYong': 'ssangyong.svg',
+  'Subaru': 'subaru-png.svg',
+  'Suzuki': 'suzuki.svg',
+  'Tesla': 'tesla.svg',
+  'Volvo': 'volvo.svg'
+};
+
+// Logo URL oluşturma fonksiyonu
+function getLogoUrl(brandName: string): string {
+  const logoFile = BRAND_LOGO_MAP[brandName] || 'other-car.svg';
+  return `/car_logo/${logoFile}`;
+}
+
+// Car ECU Data Brands - car_ecu_data klasöründeki markalar
+export const CAR_ECU_BRANDS = [
+  'Alfa', 'Alpina', 'Aston', 'Audi', 'Bentley', 'Bmw', 'Citroen', 'Citroën', 
+  'Dacia', 'Daf', 'Deutz', 'Dodge', 'Fiat', 'Ford', 'Honda', 'Hummer', 
+  'Hyundai', 'Iveco', 'Jaguar', 'Jeep', 'Kia', 'Ktm', 'Lamborghini', 'Lancia', 
+  'Land', 'Maserati', 'Massey', 'Mazda', 'Mb', 'Nissan', 'Opel', 'Peugeot', 
+  'Porsche', 'Renault', 'Seat', 'Toyota', 'Valtra', 'Volvo'
+];
 
 // Tüm marka listesi
 export const CAR_BRANDS = [
@@ -311,7 +400,8 @@ function generateFallbackData(): ProcessedCarData[] {
         notes: `${brand} tuning data (fallback)`,
         ai_training_data: {
           common_issues: generateCommonIssues(brand, `${(1.0 + Math.random() * 3).toFixed(1)} Engine`),
-          success_rate: calculateSuccessRate(brand, 'Medium')
+          success_rate: calculateSuccessRate(brand, 'Medium'),
+          logo_url: getLogoUrl(brand)
         }
       });
     }
@@ -354,7 +444,8 @@ export function processCarData(rawData: CarDataEntry[]): ProcessedCarData[] {
       notes: `${brand} ${entry.model_name} - ${entry.engine_name}`,
       ai_training_data: {
         common_issues: generateCommonIssues(brand, entry.engine_name),
-        success_rate: calculateSuccessRate(brand, difficulty)
+        success_rate: calculateSuccessRate(brand, difficulty),
+        logo_url: getLogoUrl(brand)
       }
     };
     
@@ -493,6 +584,37 @@ function generateRequiredMods(brand: string, stage: number): string[] {
 // Progress callback type
 export type LoadingProgressCallback = (loaded: number, total: number, currentBrand: string) => void;
 
+// Car ECU Data yükleme fonksiyonu
+export async function loadCarECUData(brandName: string): Promise<CarECUDataEntry[]> {
+  try {
+    // Olası timestamp'ler
+    const possibleTimestamps = [
+      '160651', '160652', '160654', '160655', '160656', '160657', '160658', 
+      '160659', '160700', '160726', '160727', '160729', '160730', '160731'
+    ];
+    
+    for (const timestamp of possibleTimestamps) {
+      try {
+        const fileName = `${brandName}_20260122_${timestamp}.json`;
+        const response = await fetch(`/car_ecu_data/${brandName}/${fileName}`);
+        if (response.ok) {
+          const ecuData: CarECUDataEntry[] = await response.json();
+          console.log(`${brandName} ECU data: ${ecuData.length} kayıt yüklendi`);
+          return ecuData;
+        }
+      } catch (error) {
+        continue;
+      }
+    }
+    
+    console.warn(`${brandName} için ECU data bulunamadı`);
+    return [];
+  } catch (error) {
+    console.warn(`${brandName} ECU data yükleme hatası:`, error);
+    return [];
+  }
+}
+
 // Tüm car_data'yı yükleme - progresif yükleme ile ve progress callback
 export async function loadAllCarData(onProgress?: LoadingProgressCallback): Promise<ProcessedCarData[]> {
   const allProcessedData: ProcessedCarData[] = [];
@@ -511,6 +633,18 @@ export async function loadAllCarData(onProgress?: LoadingProgressCallback): Prom
       try {
         onProgress?.(loadedBrands, totalBrands, brand);
         const brandData = await loadBrandData(brand);
+        
+        // ECU data da yükle
+        const ecuData = await loadCarECUData(brand);
+        brandData.forEach(car => {
+          if (car.ai_training_data) {
+            car.ai_training_data.ecu_data = ecuData.filter(ecu => 
+              ecu.make_model.toLowerCase().includes(car.brand.toLowerCase()) ||
+              ecu.make_model.toLowerCase().includes(car.model.toLowerCase())
+            );
+          }
+        });
+        
         allProcessedData.push(...brandData);
         loadedBrands++;
         console.log(`${brand}: ${brandData.length} araç yüklendi (Toplam: ${allProcessedData.length})`);

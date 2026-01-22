@@ -1,0 +1,19 @@
+# SSH DEPLOYMENT COMMAND
+# Bu komutu SSH panelinde çalıştırın:
+
+cd /path/to/nexaven-website && chmod +x deploy-all-in-one.sh && ./deploy-all-in-one.sh
+
+# Alternatif olarak tek satırda:
+cd /path/to/nexaven-website; chmod +x deploy-all-in-one.sh; ./deploy-all-in-one.sh
+
+# Eğer path'i bilmiyorsanız önce şunu çalıştırın:
+find / -name "nexaven-website" -type d 2>/dev/null
+
+# Deployment sonrası kontrol komutları:
+docker-compose ps                    # Container durumları
+docker-compose logs -f              # Canlı loglar
+curl http://localhost/health         # Health check
+curl http://localhost/car_ecu_data/Bmw/Bmw_20260122_160652.json  # ECU data test
+
+# Sorun olursa:
+docker-compose down && docker-compose up -d --build

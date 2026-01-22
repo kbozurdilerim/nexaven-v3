@@ -456,11 +456,11 @@ export default function AdminDashboardEnhanced() {
                 <select
                   value={selectedUser}
                   onChange={(e) => setSelectedUser(e.target.value)}
-                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white focus:border-blue-500 focus:outline-none"
+                  className="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-600 text-white focus:border-blue-500 focus:outline-none"
                 >
-                  <option value="">Seçiniz...</option>
+                  <option value="" className="bg-gray-800 text-white">Seçiniz...</option>
                   {users.map(u => (
-                    <option key={u.id} value={u.id}>
+                    <option key={u.id} value={u.id} className="bg-gray-800 text-white">
                       {u.name} ({u.email})
                     </option>
                   ))}

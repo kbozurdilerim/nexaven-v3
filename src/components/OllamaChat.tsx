@@ -402,10 +402,10 @@ Lütfen profesyonel, teknik ve yardımcı bir şekilde yanıtla. Türkçe yanıt
           <select
             value={selectedModel}
             onChange={(e) => setSelectedModel(e.target.value)}
-            className="px-3 py-1 bg-white/10 border border-white/20 rounded-lg text-white text-sm focus:outline-none focus:border-red-500"
+            className="px-3 py-1 bg-gray-800 border border-gray-600 rounded-lg text-white text-sm focus:outline-none focus:border-red-500"
           >
             {ollamaModels.map(model => (
-              <option key={model.name} value={model.name} className="bg-gray-800">
+              <option key={model.name} value={model.name} className="bg-gray-800 text-white">
                 {model.display}
               </option>
             ))}

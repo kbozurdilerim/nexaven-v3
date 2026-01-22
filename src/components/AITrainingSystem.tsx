@@ -618,37 +618,51 @@ Modlanmış hex data ver ve değişiklikleri açıkla.`,
               <select
                 value={selectedBrand}
                 onChange={(e) => setSelectedBrand(e.target.value)}
-                className="bg-gray-700 border border-gray-600 rounded-lg px-3 py-2"
+                className="bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-white"
               >
-                <option value="">Tüm Markalar</option>
+                <option value="" className="bg-gray-800 text-white">Tüm Markalar</option>
                 {CAR_BRANDS.map(brand => (
-                  <option key={brand} value={brand}>{brand.replace('_', ' ')}</option>
+                  <option key={brand} value={brand} className="bg-gray-800 text-white">{brand.replace('_', ' ')}</option>
                 ))}
               </select>
               <select
                 value={selectedFuelType}
                 onChange={(e) => setSelectedFuelType(e.target.value)}
-                className="bg-gray-700 border border-gray-600 rounded-lg px-3 py-2"
+                className="bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-white"
               >
-                <option value="">Tüm Yakıtlar</option>
-                <option value="Benzin">Benzin</option>
-                <option value="Dizel">Dizel</option>
-                <option value="Hibrit">Hibrit</option>
-                <option value="Elektrik">Elektrik</option>
+                <option value="" className="bg-gray-800 text-white">Tüm Yakıtlar</option>
+                <option value="Benzin" className="bg-gray-800 text-white">Benzin</option>
+                <option value="Dizel" className="bg-gray-800 text-white">Dizel</option>
+                <option value="Hibrit" className="bg-gray-800 text-white">Hibrit</option>
+                <option value="Elektrik" className="bg-gray-800 text-white">Elektrik</option>
               </select>
             </div>
 
             <div className="space-y-3 max-h-96 overflow-y-auto">
               {filteredVehicles.map(vehicle => (
                 <div key={vehicle.id} className="bg-gray-700 rounded-lg p-3">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Car size={16} className="text-blue-400" />
-                    <span className="font-medium">
-                      {vehicle.brand} {vehicle.model}
-                    </span>
-                    <span className="text-sm text-gray-400">
-                      {vehicle.year}
-                    </span>
+                  <div className="flex items-center gap-3 mb-2">
+                    {vehicle.ai_training_data?.logo_url && (
+                      <img 
+                        src={vehicle.ai_training_data.logo_url} 
+                        alt={vehicle.brand}
+                        className="w-8 h-8 object-contain"
+                        onError={(e) => {
+                          e.currentTarget.src = '/car_logo/other-car.svg';
+                        }}
+                      />
+                    )}
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2">
+                        <Car size={16} className="text-blue-400" />
+                        <span className="font-medium">
+                          {vehicle.brand} {vehicle.model}
+                        </span>
+                        <span className="text-sm text-gray-400">
+                          {vehicle.year}
+                        </span>
+                      </div>
+                    </div>
                   </div>
                   
                   <div className="text-sm text-gray-300 mb-2">

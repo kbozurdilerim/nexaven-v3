@@ -255,25 +255,25 @@ export default function EnhancedCustomerManagement({ service }: EnhancedCustomer
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value as any)}
-              className="px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white focus:border-blue-500 focus:outline-none"
+              className="px-3 py-2 rounded-lg bg-gray-800 border border-gray-600 text-white focus:border-blue-500 focus:outline-none"
             >
-              <option value="all">Tüm Durumlar</option>
-              <option value="active">Aktif</option>
-              <option value="inactive">İnaktif</option>
-              <option value="suspended">Askıya Alınmış</option>
-              <option value="pending">Bekleyen</option>
+              <option value="all" className="bg-gray-800 text-white">Tüm Durumlar</option>
+              <option value="active" className="bg-gray-800 text-white">Aktif</option>
+              <option value="inactive" className="bg-gray-800 text-white">İnaktif</option>
+              <option value="suspended" className="bg-gray-800 text-white">Askıya Alınmış</option>
+              <option value="pending" className="bg-gray-800 text-white">Bekleyen</option>
             </select>
 
             <select
               value={priorityFilter}
               onChange={(e) => setPriorityFilter(e.target.value as any)}
-              className="px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white focus:border-blue-500 focus:outline-none"
+              className="px-3 py-2 rounded-lg bg-gray-800 border border-gray-600 text-white focus:border-blue-500 focus:outline-none"
             >
-              <option value="all">Tüm Öncelikler</option>
-              <option value="vip">VIP</option>
-              <option value="high">Yüksek</option>
-              <option value="medium">Orta</option>
-              <option value="low">Düşük</option>
+              <option value="all" className="bg-gray-800 text-white">Tüm Öncelikler</option>
+              <option value="vip" className="bg-gray-800 text-white">VIP</option>
+              <option value="high" className="bg-gray-800 text-white">Yüksek</option>
+              <option value="medium" className="bg-gray-800 text-white">Orta</option>
+              <option value="low" className="bg-gray-800 text-white">Düşük</option>
             </select>
 
             <select
@@ -283,11 +283,11 @@ export default function EnhancedCustomerManagement({ service }: EnhancedCustomer
                 setSortBy(field as any)
                 setSortOrder(order as any)
               }}
-              className="px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white focus:border-blue-500 focus:outline-none"
+              className="px-3 py-2 rounded-lg bg-gray-800 border border-gray-600 text-white focus:border-blue-500 focus:outline-none"
             >
-              <option value="name-asc">İsim A-Z</option>
-              <option value="name-desc">İsim Z-A</option>
-              <option value="company-asc">Şirket A-Z</option>
+              <option value="name-asc" className="bg-gray-800 text-white">İsim A-Z</option>
+              <option value="name-desc" className="bg-gray-800 text-white">İsim Z-A</option>
+              <option value="company-asc" className="bg-gray-800 text-white">Şirket A-Z</option>
               <option value="company-desc">Şirket Z-A</option>
               <option value="created-desc">En Yeni</option>
               <option value="created-asc">En Eski</option>

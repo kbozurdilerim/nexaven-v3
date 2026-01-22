@@ -41,16 +41,16 @@ echo -e "${GREEN}✅ Eski container'lar temizlendi${NC}"
 
 # 3. NGINX CONFIG GÜNCELLEMESİ
 echo -e "${BLUE}🔧 3/8 - Nginx konfigürasyonu güncelleniyor...${NC}"
-if [ -f "nginx-production-fixed.conf" ]; then
-    cp nginx-production-fixed.conf nginx/nginx.conf
-    echo -e "${GREEN}✅ Nginx config güncellendi (car_data + Ollama mixed content fix)${NC}"
+if [ -f "nginx-production-complete.conf" ]; then
+    cp nginx-production-complete.conf nginx/nginx.conf
+    echo -e "${GREEN}✅ Nginx config güncellendi (car_data + car_ecu_data + car_logo + Ollama mixed content fix)${NC}"
 else
-    echo -e "${RED}❌ nginx-production-fixed.conf bulunamadı!${NC}"
+    echo -e "${RED}❌ nginx-production-complete.conf bulunamadı!${NC}"
     exit 1
 fi
 
-# 4. CAR DATA KONTROLÜ
-echo -e "${BLUE}📁 4/8 - Car data dizini kontrol ediliyor...${NC}"
+# 4. CAR DATA, ECU DATA VE LOGO KONTROLÜ
+echo -e "${BLUE}📁 4/8 - Car data, ECU data ve logo dizinleri kontrol ediliyor...${NC}"
 if [ -d "car_data" ]; then
     json_count=$(find car_data -name "*.json" | wc -l)
     echo -e "${GREEN}✅ Car data dizini mevcut (${json_count} JSON dosyası)${NC}"
@@ -59,12 +59,28 @@ else
     exit 1
 fi
 
+if [ -d "car_ecu_data" ]; then
+    ecu_json_count=$(find car_ecu_data -name "*.json" | wc -l)
+    echo -e "${GREEN}✅ Car ECU data dizini mevcut (${ecu_json_count} JSON dosyası)${NC}"
+else
+    echo -e "${RED}❌ Car ECU data dizini bulunamadı!${NC}"
+    exit 1
+fi
+
+if [ -d "car_logo" ]; then
+    logo_count=$(find car_logo -name "*.svg" | wc -l)
+    echo -e "${GREEN}✅ Car logo dizini mevcut (${logo_count} SVG dosyası)${NC}"
+else
+    echo -e "${RED}❌ Car logo dizini bulunamadı!${NC}"
+    exit 1
+fi
+
 # 5. DOCKER COMPOSE KONTROLÜ
 echo -e "${BLUE}🐳 5/8 - Docker Compose konfigürasyonu kontrol ediliyor...${NC}"
-if grep -q "car_data:/app/car_data:ro" docker-compose.yml; then
-    echo -e "${GREEN}✅ Car data volume mount konfigürasyonu mevcut${NC}"
+if grep -q "car_data:/app/car_data:ro" docker-compose.yml && grep -q "car_ecu_data:/app/car_ecu_data:ro" docker-compose.yml && grep -q "car_logo:/app/car_logo:ro" docker-compose.yml; then
+    echo -e "${GREEN}✅ Car data, ECU data ve logo volume mount konfigürasyonu mevcut${NC}"
 else
-    echo -e "${RED}❌ Car data volume mount eksik!${NC}"
+    echo -e "${RED}❌ Car data, ECU data veya logo volume mount eksik!${NC}"
     exit 1
 fi
 
@@ -130,12 +146,24 @@ else
     echo -e "${YELLOW}⚠️  HTTP health check başarısız (normal olabilir)${NC}"
 fi
 
-# Car data endpoint kontrolü
-echo -e "${BLUE}📊 Car data endpoint kontrolü...${NC}"
+# Car data, ECU data ve logo endpoint kontrolü
+echo -e "${BLUE}📊 Car data, ECU data ve logo endpoint kontrolü...${NC}"
 if curl -f http://localhost/car_data/BMW/BMW_20260120_190135.json > /dev/null 2>&1; then
     echo -e "${GREEN}✅ Car data endpoint çalışıyor${NC}"
 else
     echo -e "${YELLOW}⚠️  Car data endpoint test edilemedi${NC}"
+fi
+
+if curl -f http://localhost/car_ecu_data/Bmw/Bmw_20260122_160652.json > /dev/null 2>&1; then
+    echo -e "${GREEN}✅ Car ECU data endpoint çalışıyor${NC}"
+else
+    echo -e "${YELLOW}⚠️  Car ECU data endpoint test edilemedi${NC}"
+fi
+
+if curl -f http://localhost/car_logo/bmw.svg > /dev/null 2>&1; then
+    echo -e "${GREEN}✅ Car logo endpoint çalışıyor${NC}"
+else
+    echo -e "${YELLOW}⚠️  Car logo endpoint test edilemedi${NC}"
 fi
 
 # Ollama bağlantı testi
@@ -155,8 +183,11 @@ echo -e "${BLUE}📊 Deployment Özeti:${NC}"
 echo -e "  • Frontend: ${GREEN}✅ Çalışıyor${NC}"
 echo -e "  • Nginx: ${GREEN}✅ Çalışıyor${NC}"
 echo -e "  • Car Data: ${GREEN}✅ Mount edildi${NC}"
+echo -e "  • Car ECU Data: ${GREEN}✅ Mount edildi${NC}"
+echo -e "  • Car Logos: ${GREEN}✅ Mount edildi${NC}"
 echo -e "  • Ollama: ${GREEN}✅ External server${NC}"
 echo -e "  • Mixed Content: ${GREEN}✅ Çözüldü${NC}"
+echo -e "  • Modal Renkleri: ${GREEN}✅ Düzeltildi${NC}"
 echo ""
 echo -e "${YELLOW}🌐 Erişim URL'leri:${NC}"
 echo -e "  • Ana Site: ${BLUE}http://localhost${NC}"

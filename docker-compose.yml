@@ -12,6 +12,8 @@ services:
       - NODE_ENV=production
     volumes:
       - ./car_data:/app/car_data:ro
+      - ./car_ecu_data:/app/car_ecu_data:ro
+      - ./car_logo:/app/car_logo:ro
     networks:
       - nexaven-network
     restart: unless-stopped

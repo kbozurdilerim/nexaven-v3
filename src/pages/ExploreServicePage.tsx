@@ -587,17 +587,17 @@ export default function ExploreServicePage() {
                             <select
                               value={registerData.businessType}
                               onChange={(e) => setRegisterData({ ...registerData, businessType: e.target.value })}
-                              className={`w-full pl-12 pr-4 py-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/20 text-white ${colorTheme.focus} focus:outline-none`}
+                              className={`w-full pl-12 pr-4 py-3 rounded-xl bg-gray-800 backdrop-blur-sm border border-gray-600 text-white ${colorTheme.focus} focus:outline-none`}
                             >
-                              <option value="">İş Türü Seçin (opsiyonel)</option>
+                              <option value="" className="bg-gray-800 text-white">İş Türü Seçin (opsiyonel)</option>
                               {service === 'zorlu-ecu' && (
                                 <>
-                                  <option value="Oto Servis">Oto Servis</option>
-                                  <option value="ECU Tuning">ECU Tuning</option>
-                                  <option value="Performance Tuning">Performance Tuning</option>
-                                  <option value="Oto Elektrik">Oto Elektrik</option>
-                                  <option value="Motor Tamiri">Motor Tamiri</option>
-                                  <option value="Diğer">Diğer</option>
+                                  <option value="Oto Servis" className="bg-gray-800 text-white">Oto Servis</option>
+                                  <option value="ECU Tuning" className="bg-gray-800 text-white">ECU Tuning</option>
+                                  <option value="Performance Tuning" className="bg-gray-800 text-white">Performance Tuning</option>
+                                  <option value="Oto Elektrik" className="bg-gray-800 text-white">Oto Elektrik</option>
+                                  <option value="Motor Tamiri" className="bg-gray-800 text-white">Motor Tamiri</option>
+                                  <option value="Diğer" className="bg-gray-800 text-white">Diğer</option>
                                 </>
                               )}
                               {service === 'assetto-corsa' && (

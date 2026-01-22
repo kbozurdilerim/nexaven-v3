@@ -494,10 +494,12 @@ export default function ZorluEcuAdminDashboardEnhanced() {
                     <select
                       value={orderFormData.status || order.status}
                       onChange={(e) => setOrderFormData({ ...orderFormData, status: e.target.value as any })}
-                      className="w-full px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white"
+                      className="w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-600 text-white"
                     >
-                      <option value="pending">⏳ Beklemede</option>
-                      <option value="processing">🔄 İşleniyor</option>
+                      <option value="pending" className="bg-gray-800 text-white">⏳ Beklemede</option>
+                      <option value="processing" className="bg-gray-800 text-white">🔄 İşleniyor</option>
+                      <option value="completed" className="bg-gray-800 text-white">✅ Tamamlandı</option>
+                    </select>
                       <option value="completed">✅ Tamamlandı</option>
                     </select>
                     <input

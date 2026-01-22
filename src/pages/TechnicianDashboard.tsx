@@ -4,6 +4,33 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { LogOut, Plus, Edit2, Trash2, DollarSign, AlertCircle, CheckCircle, Clock, Search, X } from 'lucide-react'
 import { getDefaultVehicles } from '../utils/testData'
 
+// Logo mapping utility
+const getCarLogoUrl = (brandName: string): string => {
+  const brandMap: Record<string, string> = {
+    'BMW': 'bmw.svg',
+    'Mercedes': 'mercedes.svg',
+    'Audi': 'audi.svg',
+    'Volkswagen': 'vw.svg',
+    'Ford': 'ford.svg',
+    'Toyota': 'toyota.svg',
+    'Porsche': 'porsche.svg',
+    'Ferrari': 'ferrari.svg',
+    'Lamborghini': 'lamborghini.svg',
+    'Renault': 'renault.svg',
+    'Peugeot': 'peugot.svg',
+    'Citroën': 'citroen.svg',
+    'Opel': 'opel.svg',
+    'Fiat': 'fiat.svg',
+    'Honda': 'honda.svg',
+    'Nissan': 'nissan.svg',
+    'Hyundai': 'hyundai.svg',
+    'Kia': 'kia.svg'
+  };
+  
+  const logoFile = brandMap[brandName] || 'other-car.svg';
+  return `/car_logo/${logoFile}`;
+};
+
 interface Vehicle {
   id: string
   plate: string
@@ -222,12 +249,22 @@ export default function TechnicianDashboard() {
                   className="p-6 rounded-2xl bg-black/40 border border-white/10 hover:border-red-500/50 transition-all"
                 >
                   <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <p className="text-2xl font-bold text-white mb-1">
-                        {vehicle.brand} {vehicle.model} ({vehicle.year})
-                      </p>
-                      <p className="text-red-400 font-bold text-lg">{vehicle.plate}</p>
-                      <p className="text-white/70 mt-1">Motor: {vehicle.engine}</p>
+                    <div className="flex items-center gap-4">
+                      <img 
+                        src={getCarLogoUrl(vehicle.brand)} 
+                        alt={vehicle.brand}
+                        className="w-12 h-12 object-contain bg-white/10 rounded-lg p-2"
+                        onError={(e) => {
+                          e.currentTarget.src = '/car_logo/other-car.svg';
+                        }}
+                      />
+                      <div>
+                        <p className="text-2xl font-bold text-white mb-1">
+                          {vehicle.brand} {vehicle.model} ({vehicle.year})
+                        </p>
+                        <p className="text-red-400 font-bold text-lg">{vehicle.plate}</p>
+                        <p className="text-white/70 mt-1">Motor: {vehicle.engine}</p>
+                      </div>
                     </div>
                     <div className="flex gap-2">
                       <button
@@ -401,11 +438,11 @@ export default function TechnicianDashboard() {
               <select
                 value={formData.status || 'pending'}
                 onChange={(e) => setFormData({ ...formData, status: e.target.value as any })}
-                className="px-4 py-3 rounded-lg bg-white/5 border border-white/20 text-white focus:border-red-500 focus:outline-none"
+                className="px-4 py-3 rounded-lg bg-gray-800 border border-gray-600 text-white focus:border-red-500 focus:outline-none"
               >
-                <option value="pending">Beklemede</option>
-                <option value="processing">İşleniyor</option>
-                <option value="completed">Tamamlandı</option>
+                <option value="pending" className="bg-gray-800 text-white">Beklemede</option>
+                <option value="processing" className="bg-gray-800 text-white">İşleniyor</option>
+                <option value="completed" className="bg-gray-800 text-white">Tamamlandı</option>
               </select>
               <textarea
                 placeholder="Notlar"
@@ -497,11 +534,11 @@ function EditVehicleForm({
         <select
           value={formData.status}
           onChange={(e) => setFormData({ ...formData, status: e.target.value as any })}
-          className="px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white focus:border-red-500 focus:outline-none text-sm"
+          className="px-3 py-2 rounded-lg bg-gray-800 border border-gray-600 text-white focus:border-red-500 focus:outline-none text-sm"
         >
-          <option value="pending">Beklemede</option>
-          <option value="processing">İşleniyor</option>
-          <option value="completed">Tamamlandı</option>
+          <option value="pending" className="bg-gray-800 text-white">Beklemede</option>
+          <option value="processing" className="bg-gray-800 text-white">İşleniyor</option>
+          <option value="completed" className="bg-gray-800 text-white">Tamamlandı</option>
         </select>
       </div>
       <div className="flex gap-2">

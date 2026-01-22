@@ -3,6 +3,33 @@ import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { Search, AlertCircle, CheckCircle, Clock, ArrowLeft } from 'lucide-react'
 
+// Logo mapping utility
+const getCarLogoUrl = (brandName: string): string => {
+  const brandMap: Record<string, string> = {
+    'BMW': 'bmw.svg',
+    'Mercedes': 'mercedes.svg',
+    'Audi': 'audi.svg',
+    'Volkswagen': 'vw.svg',
+    'Ford': 'ford.svg',
+    'Toyota': 'toyota.svg',
+    'Porsche': 'porsche.svg',
+    'Ferrari': 'ferrari.svg',
+    'Lamborghini': 'lamborghini.svg',
+    'Renault': 'renault.svg',
+    'Peugeot': 'peugot.svg',
+    'Citroën': 'citroen.svg',
+    'Opel': 'opel.svg',
+    'Fiat': 'fiat.svg',
+    'Honda': 'honda.svg',
+    'Nissan': 'nissan.svg',
+    'Hyundai': 'hyundai.svg',
+    'Kia': 'kia.svg'
+  };
+  
+  const logoFile = brandMap[brandName] || 'other-car.svg';
+  return `/car_logo/${logoFile}`;
+};
+
 interface Vehicle {
   id: string
   plate: string
@@ -270,10 +297,20 @@ export default function VehicleQueryPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Left side - Vehicle info */}
                   <div>
-                    <div className="mb-4">
-                      <p className="text-red-400 text-3xl font-bold">{vehicle.plate}</p>
-                      <p className="text-white text-2xl font-bold mt-1">{vehicle.brand} {vehicle.model}</p>
-                      <p className="text-white/60">Motor: {vehicle.engine} | Yıl: {vehicle.year}</p>
+                    <div className="mb-4 flex items-center gap-4">
+                      <img 
+                        src={getCarLogoUrl(vehicle.brand)} 
+                        alt={vehicle.brand}
+                        className="w-16 h-16 object-contain bg-white/10 rounded-lg p-2"
+                        onError={(e) => {
+                          e.currentTarget.src = '/car_logo/other-car.svg';
+                        }}
+                      />
+                      <div>
+                        <p className="text-red-400 text-3xl font-bold">{vehicle.plate}</p>
+                        <p className="text-white text-2xl font-bold mt-1">{vehicle.brand} {vehicle.model}</p>
+                        <p className="text-white/60">Motor: {vehicle.engine} | Yıl: {vehicle.year}</p>
+                      </div>
                     </div>
 
                     <div className="space-y-2">
