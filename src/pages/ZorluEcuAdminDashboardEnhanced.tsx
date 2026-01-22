@@ -500,8 +500,6 @@ export default function ZorluEcuAdminDashboardEnhanced() {
                       <option value="processing" className="bg-gray-800 text-white">🔄 İşleniyor</option>
                       <option value="completed" className="bg-gray-800 text-white">✅ Tamamlandı</option>
                     </select>
-                      <option value="completed">✅ Tamamlandı</option>
-                    </select>
                     <input
                       type="number"
                       placeholder="Fiyat"
